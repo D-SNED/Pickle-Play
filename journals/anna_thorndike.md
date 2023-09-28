@@ -30,9 +30,7 @@
 ### Plan for next week
 
 -
--
-
----
+- ***
 
 ## Week 2
 
@@ -54,9 +52,7 @@
 ### Plan for next week
 
 -
--
-
----
+- ***
 
 ## Week 3
 
@@ -78,9 +74,7 @@
 ### Plan for next week
 
 -
--
-
----
+- ***
 
 ## Week 4
 
@@ -102,9 +96,7 @@
 ### Plan for next week
 
 -
--
-
----
+- ***
 
 ## Week 5
 
@@ -126,6 +118,4 @@
 ### Plan for next week
 
 -
--
-
----
+- ***

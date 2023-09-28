@@ -1,8 +1,12 @@
 from fastapi import FastAPI
+from routers import players
 from fastapi.middleware.cors import CORSMiddleware
 import os
 
-app = FastAPI()
+app = FastAPI()  # This app variable contains our FastAPI application
+
+app.include_router(players.router)
+# this references the router variable within routers/players.py
 
 app.add_middleware(
     CORSMiddleware,
