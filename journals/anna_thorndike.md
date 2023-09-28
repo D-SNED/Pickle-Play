@@ -31,15 +31,10 @@
 
 ### Plan for next week
 
-<<<<<<< HEAD
 - Get started!
 - Work on migration tables and FastAPI endpoints
 
 ---
-=======
--
-- ***
->>>>>>> 995f53001d6d50d6af574f3e5a7d16b2cc15db19
 
 ## Week 2
 
@@ -63,14 +58,8 @@
 
 ### Plan for next week
 
-<<<<<<< HEAD
-- Roll up sleeves and get to the meat of the project!!!!
-
----
-=======
 -
-- ***
->>>>>>> 995f53001d6d50d6af574f3e5a7d16b2cc15db19
+-
 
 ## Week 3
 
