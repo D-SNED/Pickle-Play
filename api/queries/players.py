@@ -1,7 +1,8 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, SecretStr, HttpUrl
 from queries.pool import pool
 from typing import List, Union, Optional
 from datetime import datetime
+# from jwtdown_fastapi.authentication import Token
 
 
 class DuplicateUserError(ValueError):
@@ -14,12 +15,29 @@ class Error(BaseModel):
 
 class PlayerIn(BaseModel):
     username: str
-    password: str
+    password: SecretStr
     email: str
     first_name: Optional[str]
     last_name: Optional[str]
     phone_number: Optional[str]
     profile_picture: Optional[str]
+    birthdate: Optional[datetime]
+    gender: Optional[str]
+    skill_level_singles: Optional[float]
+    skill_level_doubles: Optional[float]
+    is_admin: Optional[bool]
+    emergency_contact_fullname: Optional[str]
+    emergency_contact_phone_number: Optional[str]
+
+
+class PlayerUpdate(BaseModel):
+    username: Optional[str]
+    password: Optional[SecretStr]
+    email: Optional[str]
+    first_name: Optional[str]
+    last_name: Optional[str]
+    phone_number: Optional[str]
+    profile_picture: Optional[Union[HttpUrl, None]]
     birthdate: Optional[datetime]
     gender: Optional[str]
     skill_level_singles: Optional[float]
@@ -32,7 +50,6 @@ class PlayerIn(BaseModel):
 class PlayerOut(BaseModel):
     id: int
     username: str
-    password: str
     email: str
     first_name: Optional[str]
     last_name: Optional[str]
@@ -45,6 +62,49 @@ class PlayerOut(BaseModel):
     is_admin: Optional[bool]
     emergency_contact_fullname: Optional[str]
     emergency_contact_phone_number: Optional[str]
+    verified: bool
+
+
+class PlayerOutWithPassword(PlayerOut):
+    hashed_password: str
+
+
+# class PlayerAuthorizedViewOut(BaseModel):
+#     id :int
+#     username: str
+#     email: str
+#     first_name: Optional[str]
+#     last_name: Optional[str]
+#     phone_number: Optional[str]
+#     profile_picture: Optional[str]
+#     birthdate: Optional[datetime]
+#     gender: Optional[str]
+#     skill_level_singles: Optional[float]
+#     skill_level_doubles: Optional[float]
+#     is_admin: Optional[bool]
+#     emergency_contact_fullname: Optional[str]
+#     emergency_contact_phone_number: Optional[str]
+#     verified: bool
+
+
+# class PlayerViewOut(BaseModel):
+#     id:int
+#     username: str
+#     email: str
+#     profile_picture: Optional[str]
+#     skill_level_singles: Optional[float]
+#     skill_level_doubles: Optional[float]
+
+
+class PlayerListOut(BaseModel):
+    players: list[PlayerOut]
+
+
+# class HttpError(BaseModel):
+#     detail:str
+
+# class AccountToken(Token):
+#     account: PlayerOut
 
 
 class PlayerRepository:
