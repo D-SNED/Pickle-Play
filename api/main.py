@@ -7,6 +7,8 @@ app = FastAPI()  # This app variable contains our FastAPI application
 
 app.include_router(players.router)
 # this references the router variable within routers/players.py
+app.include_router(locations.router)
+# CMB - this references the router variable in routers/locations.py
 
 app.add_middleware(
     CORSMiddleware,
