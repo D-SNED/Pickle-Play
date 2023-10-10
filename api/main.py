@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from routers import players
+from routers import players, locations
 from fastapi.middleware.cors import CORSMiddleware
 import os
 
