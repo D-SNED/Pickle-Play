@@ -47,7 +47,7 @@ class LocationOut(BaseModel):
 class LocationRepository:
     def get_all(self) -> Union[Error, List[LocationOut]]:
         try:
-            with pool.connections() as conn:
+            with pool.connection() as conn:
                 with conn.cursor() as db:
                     db.execute(
                         """

@@ -1,9 +1,74 @@
-from fastapi import APIRouter, Depends
+from fastapi import (
+    APIRouter,
+    Depends,
+    HTTPException,
+    status,
+    Response,
+    Request,
+)
+from jwtdown_fastapi.authentication import Token
+from authenticator import authenticator
+
+from pydantic import BaseModel
 from typing import List, Union
-from queries.players import PlayerRepository, PlayerOut, Error
+
+from queries.players import (
+    PlayerIn,
+    PlayerOut,
+    PlayerRepository,
+    DuplicateAccountError,
+    Error,
+)
+
+
+class PlayerForm(BaseModel):
+    username: str
+    password: str
+
+
+class PlayerToken(Token):
+    account: PlayerOut
+
+
+class HttpError(BaseModel):
+    detail: str
 
 
 router = APIRouter()  # we hook up our router to the main.py
+
+
+@router.get("/token", response_model=PlayerToken | None)
+async def get_token(
+    request: Request,
+    account: PlayerOut = Depends(authenticator.try_get_current_account_data),
+) -> PlayerToken | None:
+    if account and authenticator.cookie_name in request.cookies:
+        return {
+            "access_token": request.cookies[authenticator.cookie_name],
+            "type": "Bearer",
+            "account": account,
+        }
+
+
+@router.post("/api/players", response_model=PlayerToken | HttpError)
+async def create_player(
+    info: PlayerIn,
+    request: Request,
+    response: Response,
+    repo: PlayerRepository = Depends(),
+):
+    hashed_password = authenticator.hash_password(info.password)
+
+    try:
+        account = repo.create(info, hashed_password)
+    except DuplicateAccountError:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Cannot create an account with those credentials",
+        )
+    form = PlayerForm(username=info.username, password=info.password)
+    token = await authenticator.login(response, request, form, repo)
+    return PlayerToken(account=account, **token.dict())
 
 
 @router.get("/api/players/", response_model=Union[List[PlayerOut], Error])
