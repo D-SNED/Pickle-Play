@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from routers import players, locations
+from routers import players, locations, teams
 from fastapi.middleware.cors import CORSMiddleware
 import os
 
@@ -9,6 +9,8 @@ app.include_router(players.router)
 # this references the router variable within routers/players.py
 app.include_router(locations.router)
 # CMB - this references the router variable in routers/locations.py
+app.include_router(teams.router)
+# JG - this references router variable in routers/teams.py
 
 app.add_middleware(
     CORSMiddleware,
