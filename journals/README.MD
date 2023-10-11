@@ -1,27 +1,38 @@
 # PicklePlay
 
-<img src="https://media2.giphy.com/media/katn3lojUTjdkj5KOb/200w.webp?cid=ecf05e47dh7t773v3kat38ecd6yageyeih2axacvaku6q678&ep=v1_gifs_related&rid=200w.webp&ct=g" width="250">
+<div style="text-align: center;">
+    <img src="https://media2.giphy.com/media/katn3lojUTjdkj5KOb/200w.webp?cid=ecf05e47dh7t773v3kat38ecd6yageyeih2axacvaku6q678&ep=v1_gifs_related&rid=200w.webp&ct=g" width="250">
+</div>
 
-## Team Members:
+## Description
 
-- Amanda Taing
-- Anna Thorndike
-- Christopher Bush
-- Derek Snediker
-- John Gordon
+Pickleball is one of the fastest growing sports in America, with over 4.8 million players and counting. However, it can be difficult for enthusiasts to find fellow players and exciting tournaments. That's why we created PicklePlay - a small online community for pickleball players. PicklePlay makes it easy to connect with fellow players in your area, organize and join teams and tournaments, and even scout out new courts!
 
-<img src="https://media1.giphy.com/media/uQUaS3kX0AVyy6djto/200w.webp?cid=ecf05e477d4bqoiixhlb8wi57b1k87mv3awyvnl9vj7vewj3&ep=v1_gifs_search&rid=200w.webp&ct=g" width="250">
+## Team Members
+
+<div style="text-align: center;">
+    Amanda Taing    ⭐    Anna Thorndike    ⭐    Christopher Bush    ⭐    Derek Snediker    ⭐    John Gordon
+  <br/>
+  <br/>
+  <img src="https://media1.giphy.com/media/uQUaS3kX0AVyy6djto/200w.webp?cid=ecf05e477d4bqoiixhlb8wi57b1k87mv3awyvnl9vj7vewj3&ep=v1_gifs_search&rid=200w.webp&ct=g" width="250">
+</div>
 
 ---
 
 ## Table of Contents
 
-1. First item (Design)
-2. Second item (Installation)
-3. Third item
+1. First item (Description)
+2. Second item (Team Members)
+3. Third item (Overview)
    1. Indented item
    2. Indented item
-4. Fourth item
+4. Fourth item (Design)
+5. Fifth item (Installation)
+6. Sixth item ()
+7. Seventh item ()
+8. Eight item ()
+9. Ninth item ()
+10. Tenth item ()
 
 ---
 
@@ -106,6 +117,7 @@ docker image prune # Answer Y
 7. Run the following to build your repo. This will take a few minutes as it needs to download some dependencies.
 
 ```
+docker volume create postres-data
 docker-compose build
 docker-compose up
 ```
@@ -183,13 +195,17 @@ Project is deployed to Caprover (BE, DB) & GitLab-pages (FE)
 
 # Thank You!
 
+<div style="text-align: center;">
+
 📣 Shout out to our amazing Hack Reactor Instructors, SEIRs, and Cohort Lead! 🎉
 
 We want to extend a huge thank you to everyone at Hack Reactor for their unwavering dedication and support throughout our learning journey. Your tireless efforts in providing us with cutting-edge curriculum, mentorship, and genuine care for our success have empowered us to embark on exciting careers in the tech industry.
 
-Keep shining and inspiring future developers as you have done for us. You truly are the backbone of our success! ❤️
+❤️ Keep shining and inspiring future developers as you have done for us. You truly are the backbone of our success! ❤️
 
 <img src="https://media0.giphy.com/media/59kVG52Jij2U2S04BV/200w.webp?cid=ecf05e477d4bqoiixhlb8wi57b1k87mv3awyvnl9vj7vewj3&ep=v1_gifs_search&rid=200w.webp&ct=g" width="250">
+
+</div>
 
 ---
 
