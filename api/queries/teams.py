@@ -21,7 +21,7 @@ class TeamIn(BaseModel):
     tournament_id: Optional[int]
 
 
-class TeamOut(BaseModel):
+class AllTeamsOut(BaseModel):
     id: int
     category: str
     age_bracket: str
@@ -30,6 +30,17 @@ class TeamOut(BaseModel):
     # player_id_1: int
     # player_id_2: Optional[int]
     # tournament_id: Optional[int]
+
+
+class TeamOut(BaseModel):
+    id: int
+    category: str
+    age_bracket: str
+    team_name: str
+    number_of_players: int
+    player_id_1: int
+    player_id_2: Optional[int]
+    tournament_id: Optional[int]
 
 
 class TeamRepository:
@@ -60,3 +71,45 @@ class TeamRepository:
 
         except Exception:
             return {"message": "Could not get all Teams"}
+
+    def create_team(self, team: TeamIn) -> TeamOut:
+        # connect to the database
+        with pool.connection() as conn:
+            # get a cursor (something to run SQL with)
+            with conn.cursor() as db:
+                # Run our INSERT statement
+                result = db.execute(
+                    """
+                    INSERT INTO teams
+                        (
+                            category,
+                            age_bracket,
+                            team_name,
+                            number_of_players,
+                            player_id_1,
+                            player_id_2,
+                            tournament_id
+                        )
+                    VALUES
+                    (%s, %s, %s, %s, %s, %s, %s)
+                    RETURNING id;
+                    """,
+                    [
+                        team.category,
+                        team.age_bracket,
+                        team.team_name,
+                        team.number_of_players,
+                        team.player_id_1,
+                        team.player_id_2,
+                        team.tournament_id
+                    ]
+                )
+                id = result.fetchone()[0]
+                # Return new data
+                old_data = team.dict()
+                return TeamOut(id=id, **old_data)
+                # above line looks like:
+                # `return TeamOut(
+                #           id=id, category=old_data["category"],
+                #           age_bracket=old_data["age_bracket"], ...
+                #           )`
