@@ -2,6 +2,9 @@ from pydantic import BaseModel
 from queries.pool import pool
 from typing import Optional, List, Union
 
+# from jwtdown_fastapi.authentication import Token
+# from datetime import date
+
 
 class DuplicateUserError(ValueError):
     pass
@@ -26,10 +29,13 @@ class AllTeamsOut(BaseModel):
     category: str
     age_bracket: str
     team_name: str
-    # number_of_players: int
-    # player_id_1: int
-    # player_id_2: Optional[int]
-    # tournament_id: Optional[int]
+
+# ADDING PlayerInfo Class to TeamOut to get proper shape
+# class PlayerOut(BaseModel):
+#     id: int
+#     first_name: str
+#     last_name: str
+#     birthdate: date
 
 
 class TeamOut(BaseModel):
@@ -68,48 +74,80 @@ class TeamRepository:
                         )
                         for record in db
                     ]
-
         except Exception:
             return {"message": "Could not get all Teams"}
 
     def create_team(self, team: TeamIn) -> TeamOut:
-        # connect to the database
-        with pool.connection() as conn:
-            # get a cursor (something to run SQL with)
-            with conn.cursor() as db:
-                # Run our INSERT statement
-                result = db.execute(
-                    """
-                    INSERT INTO teams
-                        (
-                            category,
-                            age_bracket,
-                            team_name,
-                            number_of_players,
-                            player_id_1,
-                            player_id_2,
-                            tournament_id
-                        )
-                    VALUES
-                    (%s, %s, %s, %s, %s, %s, %s)
-                    RETURNING id;
-                    """,
-                    [
-                        team.category,
-                        team.age_bracket,
-                        team.team_name,
-                        team.number_of_players,
-                        team.player_id_1,
-                        team.player_id_2,
-                        team.tournament_id,
-                    ],
-                )
-                id = result.fetchone()[0]
-                # Return new data
-                old_data = team.dict()
-                return TeamOut(id=id, **old_data)
-                # above line looks like:
-                # `return TeamOut(
-                #           id=id, category=old_data["category"],
-                #           age_bracket=old_data["age_bracket"], ...
-                #           )`
+        try:
+            # connect to the database
+            with pool.connection() as conn:
+                # get a cursor (something to run SQL with)
+                with conn.cursor() as db:
+                    # Run our INSERT statement
+                    result = db.execute(
+                        """
+                        INSERT INTO teams
+                            (
+                                category,
+                                age_bracket,
+                                team_name,
+                                number_of_players,
+                                player_id_1,
+                                player_id_2,
+                                tournament_id
+                            )
+                        VALUES
+                        (%s, %s, %s, %s, %s, %s, %s)
+                        RETURNING id;
+                        """,
+                        [
+                            team.category,
+                            team.age_bracket,
+                            team.team_name,
+                            team.number_of_players,
+                            team.player_id_1,
+                            team.player_id_2,
+                            team.tournament_id,
+                        ],
+                    )
+                    id = result.fetchone()[0]
+                    return self.team_in_to_out(id, team)
+        except Exception:
+            return {"message": "Create did not work"}
+
+    def update_team(self, team_id: int, team: TeamIn) -> Union[TeamOut, Error]:
+        try:
+            # connect the database
+            with pool.connection() as conn:
+                # get a cursor (something to run SQL with)
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        UPDATE teams
+                        SET category = %s
+                        , age_bracket = %s
+                        , team_name = %s
+                        , number_of_players = %s
+                        , player_id_1 = %s
+                        , player_id_2 = %s
+                        , tournament_id = %s
+                        WHERE id = %s
+                        """,
+                        [
+                            team.category,
+                            team.age_bracket,
+                            team.team_name,
+                            team.number_of_players,
+                            team.player_id_1,
+                            team.player_id_2,
+                            team.tournament_id,
+                            team_id
+                        ]
+                    )
+                return self.team_in_to_out(team_id, team)
+        except Exception:
+            return {"message": "Could not update that team"}
+
+    def team_in_to_out(self, id: int, team: TeamIn):
+        old_data = team.dict()
+        return TeamOut(id=id, **old_data)

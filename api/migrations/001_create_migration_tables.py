@@ -89,7 +89,6 @@ steps = [
             FOREIGN KEY (player_id_1) REFERENCES players(id) ON DELETE RESTRICT,
             FOREIGN KEY (player_id_2) REFERENCES players(id) ON DELETE RESTRICT,
             FOREIGN KEY (tournament_id) REFERENCES tournaments(id) ON DELETE RESTRICT
-
         );
         """,
         # "Down" SQL statement
