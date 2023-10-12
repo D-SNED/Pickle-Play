@@ -16,8 +16,5 @@ def get_all(
 
 # POST (create) a team
 @router.post("/api/teams/")
-def create_team(
-    team: TeamIn,
-    repo: TeamRepository = Depends()
-):
+def create_team(team: TeamIn, repo: TeamRepository = Depends()):
     return repo.create_team(team)

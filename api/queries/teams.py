@@ -101,8 +101,8 @@ class TeamRepository:
                         team.number_of_players,
                         team.player_id_1,
                         team.player_id_2,
-                        team.tournament_id
-                    ]
+                        team.tournament_id,
+                    ],
                 )
                 id = result.fetchone()[0]
                 # Return new data
