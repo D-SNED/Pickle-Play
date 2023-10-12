@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends
-from typing import Union
+from typing import Union, List
 from queries.tournaments import (
     TournamentIn,
     TournamentOut,
@@ -17,3 +17,12 @@ def create_tournament(
     repo: TournamentRepository = Depends(),
 ):
     return repo.create(tournament)
+
+
+@router.get(
+    "/api/tournaments", response_model=Union[List[TournamentOut], Error]
+)
+def get_all(
+    repo: TournamentRepository = Depends(),
+):
+    return repo.get_all()

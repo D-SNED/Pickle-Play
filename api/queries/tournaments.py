@@ -1,6 +1,8 @@
 from pydantic import BaseModel
 from datetime import date
 from queries.pool import pool
+from fastapi.responses import JSONResponse
+from typing import List, Union
 
 
 class TournamentIn(BaseModel):
@@ -31,6 +33,39 @@ class Error(BaseModel):
 
 
 class TournamentRepository:
+    def get_all(self) -> Union[List[TournamentOut], Error]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        SELECT * FROM tournaments
+                        ORDER BY id;
+                        """
+                    )
+                    return [
+                        TournamentOut(
+                            id=record[0],
+                            name=record[1],
+                            start_date=record[2],
+                            end_date=record[3],
+                            category=record[4],
+                            location_id=record[5],
+                            description=record[6],
+                            max_teams=record[7],
+                            reached_max=record[8],
+                        )
+                        for record in db
+                    ]
+
+        except Exception as e:
+            print(e)
+            response = JSONResponse(
+                status_code=400,
+                content={"message": "could not return tournaments"},
+            )
+            return response
+
     def create(self, tournament: TournamentIn) -> TournamentOut:
         try:
             with pool.connection() as conn:
@@ -67,4 +102,8 @@ class TournamentRepository:
                     old_data = tournament.dict()
                     return TournamentOut(id=id, **old_data)
         except Exception:
-            return {"message": "invalid input!"}
+            response = JSONResponse(
+                status_code=400,
+                content={"message": "could not create tournament"},
+            )
+            return response
