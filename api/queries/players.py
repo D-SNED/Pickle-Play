@@ -171,10 +171,21 @@ class PlayerRepository:
                                 username,
                                 hashed_password,
                                 email,
-                                birthdate
+                                birthdate,
+                                first_name,
+                                last_name,
+                                phone_number,
+                                profile_picture,
+                                gender,
+                                skill_level_singles,
+                                skill_level_doubles,
+                                is_admin,
+                                emergency_contact_fullname,
+                                emergency_contact_phone_number
                             )
                         VALUES
-                            (%s, %s, %s, %s)
+                            (%s, %s, %s, %s, %s, %s, %s,
+                            %s, %s, %s, %s, %s, %s, %s)
                         RETURNING id;
                         """,
                         [
@@ -182,6 +193,16 @@ class PlayerRepository:
                             hashed_password,
                             info.email,
                             info.birthdate,
+                            info.first_name,
+                            info.last_name,
+                            info.phone_number,
+                            info.profile_picture,
+                            info.gender,
+                            info.skill_level_singles,
+                            info.skill_level_doubles,
+                            info.is_admin,
+                            info.emergency_contact_fullname,
+                            info.emergency_contact_phone_number
                         ],
                     )
                     id = result.fetchone()[0]
