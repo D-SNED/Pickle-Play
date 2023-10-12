@@ -50,6 +50,24 @@ async def get_token(
         }
 
 
+@router.put("/api/players/{player_id}", response_model=PlayerOut | HttpError)
+async def update_player(
+    player_id: int,
+    player: PlayerIn,
+    repo: PlayerRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+) -> PlayerOut:
+    if account_data["id"] != player_id:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Cannot update that user"
+        )
+    hashed_password = authenticator.hash_password(player.password)
+    updated_player = repo.update_player(player_id, player, hashed_password)
+
+    return updated_player
+
+
 @router.post("/api/players", response_model=PlayerToken | HttpError)
 async def create_player(
     info: PlayerIn,

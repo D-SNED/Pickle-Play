@@ -1,4 +1,4 @@
-from pydantic import BaseModel, HttpUrl
+from pydantic import BaseModel
 from queries.pool import pool
 from typing import List, Union, Optional
 
@@ -31,23 +31,6 @@ class PlayerIn(BaseModel):
     emergency_contact_phone_number: Optional[str]
 
 
-class PlayerUpdate(BaseModel):
-    username: Optional[str]
-    password: Optional[str]
-    email: Optional[str]
-    birthdate: Optional[date]
-    first_name: Optional[str]
-    last_name: Optional[str]
-    phone_number: Optional[str]
-    profile_picture: Optional[Union[HttpUrl, None]]
-    gender: Optional[str]
-    skill_level_singles: Optional[float]
-    skill_level_doubles: Optional[float]
-    is_admin: Optional[bool]
-    emergency_contact_fullname: Optional[str]
-    emergency_contact_phone_number: Optional[str]
-
-
 class PlayerOut(BaseModel):
     id: int
     username: str
@@ -70,6 +53,75 @@ class PlayerOutWithPassword(PlayerOut):
 
 
 class PlayerRepository:
+    def update_player(
+            self,
+            player_id: int,
+            player: PlayerIn,
+            hashed_password: str
+    ) -> Union[PlayerOutWithPassword, Error]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        UPDATE players
+                        SET username = %s
+                            , hashed_password = %s
+                            , email = %s
+                            , birthdate = %s
+                            , first_name = %s
+                            , last_name = %s
+                            , phone_number = %s
+                            , profile_picture = %s
+                            , gender = %s
+                            , skill_level_singles = %s
+                            , skill_level_doubles = %s
+                            , is_admin = %s
+                            , emergency_contact_fullname = %s
+                            , emergency_contact_phone_number = %s
+                        WHERE id = %s
+                        RETURNING *
+                        """,
+                        [
+                            player.username,
+                            hashed_password,
+                            player.email,
+                            player.birthdate,
+                            player.first_name,
+                            player.last_name,
+                            player.phone_number,
+                            player.profile_picture,
+                            player.gender,
+                            player.skill_level_singles,
+                            player.skill_level_doubles,
+                            player.is_admin,
+                            player.emergency_contact_fullname,
+                            player.emergency_contact_phone_number,
+                            player_id
+                        ]
+                    )
+                    updated_player = db.fetchone()
+                    return PlayerOut(
+                        id=updated_player[0],
+                        username=updated_player[1],
+                        hashed_password=updated_player[2],
+                        email=updated_player[3],
+                        birthdate=str(updated_player[4]),
+                        first_name=updated_player[5],
+                        last_name=updated_player[6],
+                        phone_number=updated_player[7],
+                        profile_picture=updated_player[8],
+                        gender=updated_player[9],
+                        skill_level_singles=updated_player[10],
+                        skill_level_doubles=updated_player[11],
+                        is_admin=updated_player[12],
+                        emergency_contact_fullname=updated_player[13],
+                        emergency_contact_phone_number=updated_player[14]
+                    )
+        except Exception as e:
+            print(e)
+            return {"message": "Could not update player"}
+
     def get(self, username: str) -> PlayerOutWithPassword:
         try:
             with pool.connection() as conn:
