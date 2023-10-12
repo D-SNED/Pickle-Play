@@ -52,12 +52,117 @@ class PlayerOutWithPassword(PlayerOut):
     hashed_password: str
 
 
+class PlayerOutOther(BaseModel):
+    id: int
+    username: str
+    email: str
+    first_name: Optional[str]
+    last_name: Optional[str]
+    profile_picture: Optional[str]
+    gender: Optional[str]
+    skill_level_singles: Optional[str]
+    skill_level_doubles: Optional[str]
+
+
+class PlayerOutSelf(BaseModel):
+    id: int
+    username: str
+    email: str
+    birthdate: str
+    first_name: Optional[str]
+    last_name: Optional[str]
+    phone_number: Optional[str]
+    profile_picture: Optional[str]
+    gender: Optional[str]
+    skill_level_singles: Optional[float]
+    skill_level_doubles: Optional[float]
+    emergency_contact_fullname: Optional[str]
+    emergency_contact_phone_number: Optional[str]
+
+
 class PlayerRepository:
+    def get_one_self(self, player_id: int) -> Optional[PlayerOutSelf]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT id
+                            , username
+                            , email
+                            , birthdate
+                            , first_name
+                            , last_name
+                            , phone_number
+                            , profile_picture
+                            , gender
+                            , skill_level_singles
+                            , skill_level_doubles
+                            , emergency_contact_fullname
+                            , emergency_contact_phone_number
+                        FROM players
+                        WHERE id = %s
+                        """,
+                        [player_id],
+                    )
+                    player = result.fetchone()
+                    return PlayerOutSelf(
+                        id=player[0],
+                        username=player[1],
+                        email=player[2],
+                        birthdate=str(player[3]),
+                        first_name=player[4],
+                        last_name=player[5],
+                        phone_number=player[6],
+                        profile_picture=player[7],
+                        gender=player[8],
+                        skill_level_singles=player[9],
+                        skill_level_doubles=player[10],
+                        emergency_contact_fullname=player[11],
+                        emergency_contact_phone_number=player[12],
+                    )
+        except Exception as e:
+            print(e)
+            return {"message": "Could not get player information"}
+
+    def get_one(self, player_id: int) -> Optional[PlayerOutOther]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT id
+                            , username
+                            , email
+                            , first_name
+                            , last_name
+                            , profile_picture
+                            , gender
+                            , skill_level_singles
+                            , skill_level_doubles
+                        FROM players
+                        WHERE id = %s
+                        """,
+                        [player_id],
+                    )
+                    player = result.fetchone()
+                    return PlayerOutOther(
+                        id=player[0],
+                        username=player[1],
+                        email=player[2],
+                        first_name=player[3],
+                        last_name=player[4],
+                        profile_picture=player[5],
+                        gender=player[6],
+                        skill_level_singles=player[7],
+                        skill_level_doubles=player[8],
+                    )
+        except Exception as e:
+            print(e)
+            return {"message": "Could not get that player"}
+
     def update_player(
-            self,
-            player_id: int,
-            player: PlayerIn,
-            hashed_password: str
+        self, player_id: int, player: PlayerIn, hashed_password: str
     ) -> Union[PlayerOutWithPassword, Error]:
         try:
             with pool.connection() as conn:
@@ -97,8 +202,8 @@ class PlayerRepository:
                             player.is_admin,
                             player.emergency_contact_fullname,
                             player.emergency_contact_phone_number,
-                            player_id
-                        ]
+                            player_id,
+                        ],
                     )
                     updated_player = db.fetchone()
                     return PlayerOut(
@@ -116,7 +221,7 @@ class PlayerRepository:
                         skill_level_doubles=updated_player[11],
                         is_admin=updated_player[12],
                         emergency_contact_fullname=updated_player[13],
-                        emergency_contact_phone_number=updated_player[14]
+                        emergency_contact_phone_number=updated_player[14],
                     )
         except Exception as e:
             print(e)
@@ -202,7 +307,7 @@ class PlayerRepository:
                             info.skill_level_doubles,
                             info.is_admin,
                             info.emergency_contact_fullname,
-                            info.emergency_contact_phone_number
+                            info.emergency_contact_phone_number,
                         ],
                     )
                     id = result.fetchone()[0]

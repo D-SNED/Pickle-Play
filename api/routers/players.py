@@ -15,6 +15,8 @@ from typing import List, Union
 from queries.players import (
     PlayerIn,
     PlayerOut,
+    PlayerOutOther,
+    PlayerOutSelf,
     PlayerRepository,
     DuplicateAccountError,
     Error,
@@ -50,6 +52,27 @@ async def get_token(
         }
 
 
+@router.get(
+    "/api/players/{player_id}",
+    response_model=PlayerOutSelf | PlayerOutOther | HttpError,
+)
+async def get_one(
+    player_id: int,
+    repo: PlayerRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+) -> PlayerOutSelf | PlayerOutOther:
+    if player_id == account_data["id"]:
+        player = repo.get_one_self(player_id)
+    elif player_id != account_data["id"]:
+        player = repo.get_one(player_id)
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_404_BAD_REQUEST,
+            detail="Player does not exist",
+        )
+    return player
+
+
 @router.put("/api/players/{player_id}", response_model=PlayerOut | HttpError)
 async def update_player(
     player_id: int,
@@ -60,7 +83,7 @@ async def update_player(
     if account_data["id"] != player_id:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Cannot update that user"
+            detail="Cannot update that user",
         )
     hashed_password = authenticator.hash_password(player.password)
     updated_player = repo.update_player(player_id, player, hashed_password)
