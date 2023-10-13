@@ -133,6 +133,7 @@ class TeamRepository:
                         , player_id_2 = %s
                         , tournament_id = %s
                         WHERE id = %s
+                        RETURNING *
                         """,
                         [
                             team.category,
@@ -145,10 +146,58 @@ class TeamRepository:
                             team_id,
                         ],
                     )
-                return self.team_in_to_out(team_id, team)
+                    updated_team = db.fetchone()
+                    return TeamOut(
+                        id=updated_team[0],
+                        category=updated_team[1],
+                        age_bracket=updated_team[2],
+                        team_name=updated_team[3],
+                        number_of_players=updated_team[4],
+                        player_id_1=updated_team[5],
+                        player_id_2=updated_team[6],
+                        tournament_id=updated_team[7]
+                    )
         except Exception:
             return {"message": "Could not update that team"}
 
     def team_in_to_out(self, id: int, team: TeamIn):
         old_data = team.dict()
         return TeamOut(id=id, **old_data)
+
+    def get_one(self, team_id: int) -> Optional[TeamOut]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT id
+                            , category
+                            , age_bracket
+                            , team_name
+                            , number_of_players
+                            , player_id_1
+                            , player_id_2
+                            , tournament_id
+                            FROM teams
+                            WHERE id = %s
+                            """,
+                        [team_id]
+                    )
+                    record = result.fetchone()
+                    if record is None:
+                        return None
+                    return self.record_to_team_out(record)
+        except Exception:
+            return {"message": "Could not get that specific team"}
+
+    def record_to_team_out(self, record):
+        return TeamOut(
+            id=record[0],
+            category=record[1],
+            age_bracket=record[2],
+            team_name=record[3],
+            number_of_players=record[4],
+            player_id_1=record[5],
+            player_id_2=record[6],
+            tournament_id=record[7],
+        )

@@ -1,6 +1,11 @@
-from fastapi import APIRouter, Depends, Response
+from fastapi import APIRouter, Depends, Response, HTTPException, status
 from queries.teams import TeamRepository, Error, TeamIn, AllTeamsOut, TeamOut
 from typing import List, Union
+from pydantic import BaseModel
+
+
+class HttpError(BaseModel):
+    detail: str
 
 
 router = APIRouter()
@@ -38,5 +43,21 @@ def update_team(
 
 # WILL NEED TO CREATE AN IF STATEMENT like below:
 # if player_id_2 is not null
-# player_id: int,
-#
+    # player_id: int,
+    #
+
+
+# GET specific team
+@router.get("/api/teams/{team_id}", response_model=TeamOut | HttpError)
+def get_one_team(
+    team_id: int,
+    response: Response,
+    repo: TeamRepository = Depends(),
+) -> TeamOut:
+    team = repo.get_one(team_id)
+    if team is None:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Cannot get that team"
+        )
+    return team
