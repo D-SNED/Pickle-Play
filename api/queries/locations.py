@@ -140,3 +140,6 @@ class LocationRepository:
                 id = result.fetchone()[0]
                 old_data = location.dict()
                 return LocationOut(id=id, **old_data)
+
+
+# I hope this works
