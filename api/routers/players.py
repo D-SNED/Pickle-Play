@@ -52,6 +52,21 @@ async def get_token(
         }
 
 
+@router.delete("/api/players/{player_id}")
+def delete_player(
+    player_id: int,
+    repo: PlayerRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data)
+) -> bool:
+    if player_id == account_data["id"]:
+        return repo.delete(player_id)
+    elif player_id != account_data["id"]:
+        raise HTTPException(
+            status_code=status.HTTP_405_METHOD_NOT_ALLOWED,
+            detail="Cannot delete that user",
+        )
+
+
 @router.get(
     "/api/players/{player_id}",
     response_model=PlayerOutSelf | PlayerOutOther | HttpError,

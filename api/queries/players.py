@@ -79,6 +79,22 @@ class PlayerOutSelf(BaseModel):
 
 
 class PlayerRepository:
+    def delete(self, player_id: int) -> bool:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        DELETE FROM players
+                        WHERE id = %s
+                        """,
+                        [player_id]
+                    )
+                    return True
+        except Exception as e:
+            print(e)
+            return False
+
     def get_one_self(self, player_id: int) -> Optional[PlayerOutSelf]:
         try:
             with pool.connection() as conn:
