@@ -185,3 +185,54 @@ class TournamentRepository:
     def tournament_in_to_out(self, id: int, tournament: TournamentIn):
         old_data = tournament.dict()
         return TournamentOut(id=id, **old_data)
+
+    def get_specific(
+        self, tournament_id: int
+    ) -> Union[TournamentOutWithLocation, Error]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT
+                        t.id,
+                        t.name,
+                        t.start_date,
+                        t.end_date,
+                        t.category,
+                        t.location_id,
+                        t.description,
+                        t.max_teams,
+                        t.reached_max,
+                        l.name
+                        FROM tournaments as t
+                        INNER JOIN locations as l
+                        ON t.location_id = l.id
+                        WHERE t.id = %s
+                        ORDER BY t.id;
+                        """,
+                        [tournament_id],
+                    )
+                    record = result.fetchone()
+                    print(record)
+                    return TournamentOutWithLocation(
+                        id=record[0],
+                        name=record[1],
+                        start_date=record[2],
+                        end_date=record[3],
+                        category=record[4],
+                        location=LocationOut(
+                            id=record[5],
+                            name=record[9],
+                        ),
+                        description=record[6],
+                        max_teams=record[7],
+                        reached_max=record[8],
+                    )
+        except Exception as e:
+            print(e)
+            response = JSONResponse(
+                status_code=400,
+                content={"message": "could not find tournament"},
+            )
+            return response

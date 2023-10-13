@@ -40,3 +40,14 @@ def update_tournament(
     repo: TournamentRepository = Depends(),
 ) -> Union[TournamentOut, Error]:
     return repo.update(tournament_id, tournament)
+
+
+@router.get(
+    "/api/tournaments/{tournament_id}",
+    response_model=Union[TournamentOutWithLocation, Error],
+)
+def get_specific_tournament(
+    tournament_id: int,
+    repo: TournamentRepository = Depends(),
+) -> TournamentOutWithLocation:
+    return repo.get_specific(tournament_id)
