@@ -1,8 +1,6 @@
 from pydantic import BaseModel
 from queries.pool import pool
 from typing import List, Union, Optional
-
-# from jwtdown_fastapi.authentication import Token
 from datetime import date
 
 

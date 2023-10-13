@@ -27,6 +27,23 @@ class LocationIn(BaseModel):
     wheelchair_accessible: bool
 
 
+class AllLocationsOut(BaseModel):
+    id: int
+    name: str
+    address: str
+    phone_number: str
+    description: str
+    number_indoor_courts: int
+    number_outdoor_courts: int
+    surface: str
+    picture_url: str
+    locker_rooms: bool
+    restrooms: bool
+    water: bool
+    lighted_courts: bool
+    wheelchair_accessible: bool
+
+
 class LocationOut(BaseModel):
     id: int
     name: str
@@ -77,3 +94,49 @@ class LocationRepository:
                     ]
         except Exception:
             return {"message": "Could not get all Locations"}
+
+    def create_location(self, location: LocationIn) -> LocationOut:
+        # connect to database
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                result = db.execute(
+                    """
+                    INSERT INTO locations
+                        (
+                            name,
+                            address,
+                            phone_number,
+                            description,
+                            number_indoor_courts,
+                            number_outdoor_courts,
+                            surface,
+                            picture_url,
+                            locker_rooms,
+                            restrooms,
+                            water,
+                            lighted_courts,
+                            wheelchair_accessible
+                        )
+                    VALUES
+                        (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                    RETURNING id;
+                    """,
+                    [
+                        location.name,
+                        location.address,
+                        location.phone_number,
+                        location.description,
+                        location.number_indoor_courts,
+                        location.number_outdoor_courts,
+                        location.surface,
+                        location.picture_url,
+                        location.locker_rooms,
+                        location.restrooms,
+                        location.water,
+                        location.lighted_courts,
+                        location.wheelchair_accessible,
+                    ],
+                )
+                id = result.fetchone()[0]
+                old_data = location.dict()
+                return LocationOut(id=id, **old_data)

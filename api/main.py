@@ -15,7 +15,6 @@ app.include_router(locations.router)
 app.include_router(teams.router)
 # JG - this references router variable in routers/teams.py
 
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[os.environ.get("CORS_HOST", "http://localhost:3000")],
