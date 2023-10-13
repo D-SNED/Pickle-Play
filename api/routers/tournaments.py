@@ -3,6 +3,7 @@ from typing import Union, List
 from queries.tournaments import (
     TournamentIn,
     TournamentOut,
+    TournamentOutWithLocation,
     TournamentRepository,
     Error,
 )
@@ -20,9 +21,22 @@ def create_tournament(
 
 
 @router.get(
-    "/api/tournaments", response_model=Union[List[TournamentOut], Error]
+    "/api/tournaments",
+    response_model=Union[List[TournamentOutWithLocation], Error],
 )
 def get_all(
     repo: TournamentRepository = Depends(),
 ):
     return repo.get_all()
+
+
+@router.put(
+    "/api/tournaments/{tournament_id}",
+    response_model=Union[TournamentOut, Error],
+)
+def update_tournament(
+    tournament_id: int,
+    tournament: TournamentIn,
+    repo: TournamentRepository = Depends(),
+) -> Union[TournamentOut, Error]:
+    return repo.update(tournament_id, tournament)

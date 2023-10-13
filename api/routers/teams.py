@@ -17,9 +17,7 @@ def get_all(
 # POST (create) a team
 @router.post("/api/teams/", response_model=Union[TeamOut, Error])
 def create_team(
-    team: TeamIn,
-    response: Response,
-    repo: TeamRepository = Depends()
+    team: TeamIn, response: Response, repo: TeamRepository = Depends()
 ):
     # COMMENTED OUT 'response.status_code = 400 BELOW BUT
     # CAN ADD FOR STATUS CODE IF NEEDED
@@ -36,7 +34,9 @@ def update_team(
     repo: TeamRepository = Depends(),
 ) -> Union[TeamOut, Error]:
     return repo.update_team(team_id, team)
+
+
 # WILL NEED TO CREATE AN IF STATEMENT like below:
 # if player_id_2 is not null
-    # player_id: int,
-    #
+# player_id: int,
+#

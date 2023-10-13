@@ -30,6 +30,7 @@ class AllTeamsOut(BaseModel):
     age_bracket: str
     team_name: str
 
+
 # ADDING PlayerInfo Class to TeamOut to get proper shape
 # class PlayerOut(BaseModel):
 #     id: int
@@ -141,8 +142,8 @@ class TeamRepository:
                             team.player_id_1,
                             team.player_id_2,
                             team.tournament_id,
-                            team_id
-                        ]
+                            team_id,
+                        ],
                     )
                 return self.team_in_to_out(team_id, team)
         except Exception:
