@@ -5,13 +5,13 @@ steps = [
         CREATE TABLE players (
             id SERIAL PRIMARY KEY NOT NULL,
             username VARCHAR(100) NOT NULL UNIQUE,
-            password VARCHAR(100) NOT NULL,
+            hashed_password VARCHAR(100) NOT NULL,
             email VARCHAR(100) NOT NULL UNIQUE,
+            birthdate DATE NOT NULL,
             first_name VARCHAR(100),
             last_name VARCHAR(100),
             phone_number VARCHAR(100),
             profile_picture VARCHAR(300),
-            birthdate DATE NOT NULL,
             gender VARCHAR(50),
             skill_level_singles FLOAT,
             skill_level_doubles FLOAT,
@@ -89,7 +89,6 @@ steps = [
             FOREIGN KEY (player_id_1) REFERENCES players(id) ON DELETE RESTRICT,
             FOREIGN KEY (player_id_2) REFERENCES players(id) ON DELETE RESTRICT,
             FOREIGN KEY (tournament_id) REFERENCES tournaments(id) ON DELETE RESTRICT
-
         );
         """,
         # "Down" SQL statement
