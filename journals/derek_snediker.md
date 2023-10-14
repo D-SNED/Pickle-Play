@@ -100,6 +100,40 @@ Working on update tournament endpoint. Will definitely finish that. Really hopin
 
 ## [Learn fastAPI videos](https://learn-2.galvanize.com/cohorts/3733/blocks/1893/content_files/build/02-rest-fastapi/10-fast-api-videos.md)
 
+## 10/12/23
+
+### Today I worked on:
+
+I refactored the GET_all_tournaments method. Finished the update tournament endpoint as well as the get_specific_tournament endpoint.
+
+**AH-HA!💡**
+We realized that our response shape was incorrect for our GET all tournaments endpoint. I was able to change the shapes of the pydantic model but couldn't figure out how to get the data into the table and then retrieve the table. With Jordan's and Cory's help I was able to write a sql statement that joined the tournament and location tables and I was able to format the return to access the info in each column while iterating through the database. Felt good being able to implement that
+
+**🎉 Celebrations 🎉**
+Figuring out the Get all players endpoint
+
+### Bugs encountered 🐛🐞🐜 :
+
+🪲
+
+**\~Solution~**
+
+### References Used Today:
+
+## [Learn fastAPI videos](https://learn-2.galvanize.com/cohorts/3733/blocks/1893/content_files/build/02-rest-fastapi/10-fast-api-videos.md)
+
+### Any Blockers:
+
+Not really a blocker but I think for the get specific tournament I'll need to add more fields in pydantic model for location to show more location details on the frontend.
+
+### Tomorrow I'm working on:
+
+Get specific tournament finished and merged and delete tournament
+
+### References for Tomorrow:
+
+[Learn fastAPI videos](https://learn-2.galvanize.com/cohorts/3733/blocks/1893/content_files/build/02-rest-fastapi/10-fast-api-videos.md)
+
 - ***
 
 ## Week 4
