@@ -62,6 +62,69 @@ class LocationOut(BaseModel):
 
 
 class LocationRepository:
+    def update_location(
+        self, location_id: int, location: LocationIn
+    ) -> Union[LocationOut, Error]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        UPDATE locations
+                        SET name = %s
+                            , address = %s
+                            , phone_number = %s
+                            , description = %s
+                            , number_indoor_courts = %s
+                            , number_outdoor_courts = %s
+                            , surface = %s
+                            , picture_url = %s
+                            , locker_rooms = %s
+                            , restrooms = %s
+                            , water = %s
+                            , lighted_courts = %s
+                            , wheelchair_accessible = %s
+                        WHERE id = %s
+                        RETURNING *
+                        """,
+                        [
+                            location.name,
+                            location.address,
+                            location.phone_number,
+                            location.description,
+                            location.number_indoor_courts,
+                            location.number_outdoor_courts,
+                            location.surface,
+                            location.picture_url,
+                            location.locker_rooms,
+                            location.restrooms,
+                            location.water,
+                            location.lighted_courts,
+                            location.wheelchair_accessible,
+                            location_id,
+                        ],
+                    )
+                    updated_location = db.fetchone()
+                    return LocationOut(
+                        id=updated_location[0],
+                        name=updated_location[1],
+                        address=updated_location[2],
+                        phone_number=updated_location[3],
+                        description=updated_location[4],
+                        number_indoor_courts=updated_location[5],
+                        number_outdoor_courts=updated_location[6],
+                        surface=updated_location[7],
+                        picture_url=updated_location[8],
+                        locker_rooms=updated_location[9],
+                        restrooms=updated_location[10],
+                        water=updated_location[11],
+                        lighted_courts=updated_location[12],
+                        wheelchair_accessible=updated_location[13]
+                    )
+        except Exception as e:
+            print(e)
+            return {"message": "Could not update that location"}
+
     def get_all(self) -> Union[Error, List[LocationOut]]:
         try:
             with pool.connection() as conn:
@@ -94,6 +157,10 @@ class LocationRepository:
                     ]
         except Exception:
             return {"message": "Could not get all Locations"}
+
+    def location_in_to_out(self, id: int, location: LocationIn):
+        old_data = location.dict()
+        return LocationOut(id=id, **old_data)
 
     def create_location(self, location: LocationIn) -> LocationOut:
         # connect to database
