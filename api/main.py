@@ -24,6 +24,12 @@ app.add_middleware(
 )
 
 
+# JG - for CI/CD setup
+@app.get("/")
+def root():
+    return {"message": "You hit the root path!"}
+
+
 @app.get("/api/launch-details")
 def launch_details():
     return {
