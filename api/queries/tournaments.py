@@ -68,6 +68,7 @@ class TournamentRepository:
                          , max_teams = %s
                          , reached_max = %s
                         WHERE id = %s
+                        RETURNING *
                         """,
                         [
                             tournament.name,
@@ -236,3 +237,19 @@ class TournamentRepository:
                 content={"message": "could not find tournament"},
             )
             return response
+
+    def delete_tournament(self, tournament_id: int) -> bool:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        DELETE FROM tournaments
+                        WHERE id = %s
+                        """,
+                        [tournament_id],
+                    )
+                    return True
+        except Exception as e:
+            print(e)
+            return False

@@ -51,3 +51,14 @@ def get_specific_tournament(
     repo: TournamentRepository = Depends(),
 ) -> TournamentOutWithLocation:
     return repo.get_specific(tournament_id)
+
+
+@router.delete(
+    "/api/tournaments/{tournament_id}",
+    response_model=bool,
+)
+def delete_tournament(
+    tournament_id: int,
+    repo: TournamentRepository = Depends(),
+) -> bool:
+    return repo.delete_tournament(tournament_id)
