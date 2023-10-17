@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from queries.pool import pool
-from typing import List, Union
+from typing import List, Union, Optional
 
 
 class DuplicateLocationError(ValueError):
@@ -163,7 +163,6 @@ class LocationRepository:
         return LocationOut(id=id, **old_data)
 
     def create_location(self, location: LocationIn) -> LocationOut:
-        # connect to database
         with pool.connection() as conn:
             with conn.cursor() as db:
                 result = db.execute(
@@ -223,3 +222,54 @@ class LocationRepository:
         except Exception as e:
             print(e)
             return False
+
+    def get_singular(self, location_id: int) -> Optional[LocationOut]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT id
+                            , name
+                            , address
+                            , phone_number
+                            , description
+                            , number_indoor_courts
+                            , number_outdoor_courts
+                            , surface
+                            , picture_url
+                            , locker_rooms
+                            , restrooms
+                            , water
+                            , lighted_courts
+                            , wheelchair_accessible
+                        FROM locations
+                        WHERE id = %s
+                        """,
+                        [location_id],
+                    )
+                    record = result.fetchone()
+                    if record is None:
+                        return None
+                    return self.record_to_location_out(record)
+        except Exception as e:
+            print(e)
+            return {"message": "Location Unavailable"}
+
+    def record_to_location_out(self, record):
+        return LocationOut(
+            id=record[0],
+            name=record[1],
+            address=record[2],
+            phone_number=record[3],
+            description=record[4],
+            number_indoor_courts=record[5],
+            number_outdoor_courts=record[6],
+            surface=record[7],
+            picture_url=record[8],
+            locker_rooms=record[9],
+            restrooms=record[10],
+            water=record[11],
+            lighted_courts=record[12],
+            wheelchair_accessible=record[13],
+        )

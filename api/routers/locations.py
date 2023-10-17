@@ -1,5 +1,5 @@
-from fastapi import APIRouter, Depends
-from typing import List, Union
+from fastapi import APIRouter, Depends, Response
+from typing import List, Union, Optional
 from queries.locations import (
     LocationIn,
     LocationOut,
@@ -54,3 +54,17 @@ def delete_location(
     repo: LocationRepository = Depends(),
 ) -> bool:
     return repo.delete_location(location_id)
+
+
+@router.get(
+    "/api/locations/{location_id}", response_model=Optional[LocationOut]
+)
+def get_location_singular(
+    location_id: int,
+    response: Response,
+    repo: LocationRepository = Depends(),
+) -> LocationOut:
+    location = repo.get_singular(location_id)
+    if location is None:
+        response.status_code = 404
+    return location
