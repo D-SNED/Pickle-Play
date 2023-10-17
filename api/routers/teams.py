@@ -61,3 +61,18 @@ def get_one_team(
             detail="Cannot get that team"
         )
     return team
+
+
+# DELETE specific team
+@router.delete("/api/teams/{team_id}", response_model=bool | HttpError)
+def delete_team(
+    team_id: int,
+    repo: TeamRepository = Depends(),
+) -> bool:
+    team = repo.get_one(team_id)
+    if team is None:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Team not found"
+        )
+    return repo.delete(team_id)

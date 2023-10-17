@@ -201,3 +201,19 @@ class TeamRepository:
             player_id_2=record[6],
             tournament_id=record[7],
         )
+
+    def delete(self, team_id: int) -> bool:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        DELETE FROM teams
+                        WHERE id =%s
+                        """,
+                        [team_id]
+                    )
+                    return True
+        except Exception:
+            return False
+    # deleting something that is not there is good
