@@ -138,24 +138,44 @@ Get specific tournament finished and merged and delete tournament
 
 ## Week 4
 
-### Goals
+## 10/16/23
 
--
--
+### Today I worked on:
 
-### Accomplishments
+Worked on the delete tournament endpoint as well as fixing the bug in update tournament endpoint with Amanda.
 
--
--
+**AH-HA!💡**
+For the update tournament endpoint we were getting a bug that would return a 200 response rather than an error message when a tournament was updated with a tournament_id that did not exist. To fix this we specified the values we wanted after our fetchone() function to be the values at specific indexes of the query. It the id exists it will update the tournament and if the id does not exist it will skip to the except block and throw the specified error.
 
-### Challenges
+**🎉 Celebrations 🎉**
+At this point the backend for tournaments has been completed and I can move on to either unit tests or the frontend for the tournaments section.
 
--
--
+### Bugs encountered 🐛🐞🐜 :
 
-### Plan for next week
+See AH-HA!
+🪲
 
--
+**\~Solution~**
+See AH-HA!
+
+### References Used Today:
+
+[Learn fastAPI videos](https://learn-2.galvanize.com/cohorts/3733/blocks/1893/content_files/build/02-rest-fastapi/10-fast-api-videos.md)
+
+### Any Blockers:
+
+None at the moment
+
+### Tomorrow I'm working on:
+
+Most likely frontend for tournaments, possibly unit testing
+
+### References for Tomorrow:
+
+[Learn React vids](https://learn-2.galvanize.com/cohorts/3733/blocks/1897/content_files/build/04-react-hooks-router/01-react-hooks.md)
+
+## [Learn Unit Test Videos](https://learn-2.galvanize.com/cohorts/3733/blocks/1906/content_files/build/04-unit-tests/01-unit-tests.md)
+
 - ***
 
 ## Week 5
