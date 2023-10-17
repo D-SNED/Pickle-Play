@@ -82,7 +82,18 @@ class TournamentRepository:
                             tournament_id,
                         ],
                     )
-                    return self.tournament_in_to_out(tournament_id, tournament)
+                    updated_tour = db.fetchone()
+                    return TournamentOut(
+                        id=updated_tour[0],
+                        name=updated_tour[1],
+                        start_date=updated_tour[2],
+                        end_date=updated_tour[3],
+                        category=updated_tour[4],
+                        location_id=updated_tour[5],
+                        description=updated_tour[6],
+                        max_teams=updated_tour[7],
+                        reached_max=updated_tour[8],
+                    )
         except Exception as e:
             print(e)
             response = JSONResponse(
