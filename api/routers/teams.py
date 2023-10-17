@@ -1,5 +1,12 @@
 from fastapi import APIRouter, Depends, Response, HTTPException, status
-from queries.teams import TeamRepository, Error, TeamIn, AllTeamsOut, TeamOut
+from queries.teams import (
+    TeamRepository,
+    Error,
+    TeamIn,
+    AllTeamsOut,
+    TeamOut,
+    SpecificTeamOut
+)
 from typing import List, Union
 from pydantic import BaseModel
 
@@ -48,12 +55,12 @@ def update_team(
 
 
 # GET specific team
-@router.get("/api/teams/{team_id}", response_model=TeamOut | HttpError)
+@router.get("/api/teams/{team_id}", response_model=SpecificTeamOut | HttpError)
 def get_one_team(
     team_id: int,
     response: Response,
     repo: TeamRepository = Depends(),
-) -> TeamOut:
+) -> SpecificTeamOut:
     team = repo.get_one(team_id)
     if team is None:
         raise HTTPException(
