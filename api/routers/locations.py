@@ -46,3 +46,11 @@ def update_location(
 
     updated_location = repo.update_location(location_id, location)
     return updated_location
+
+
+@router.delete("/api/locations/{location_id}", response_model=bool)
+def delete_location(
+    location_id: int,
+    repo: LocationRepository = Depends(),
+) -> bool:
+    return repo.delete_location(location_id)

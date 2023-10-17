@@ -207,3 +207,19 @@ class LocationRepository:
                 id = result.fetchone()[0]
                 old_data = location.dict()
                 return LocationOut(id=id, **old_data)
+
+    def delete_location(self, location_id: int) -> bool:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        DELETE FROM locations
+                        WHERE id = %s
+                        """,
+                        [location_id],
+                    )
+                    return True
+        except Exception as e:
+            print(e)
+            return False
