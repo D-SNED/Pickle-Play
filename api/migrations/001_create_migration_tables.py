@@ -64,7 +64,7 @@ steps = [
             description TEXT NOT NULL,
             max_teams INT NOT NULL,
             reached_max BOOLEAN NOT NULL,
-            FOREIGN KEY (location_id) REFERENCES locations(id) ON DELETE RESTRICT
+            FOREIGN KEY (location_id) REFERENCES locations(id) ON DELETE CASCADE
 
         );
         """,
@@ -75,7 +75,6 @@ steps = [
     ],
     [
         # "Up" SQL statement
-        # Category/Age id?
         """
         CREATE TABLE teams (
             id SERIAL PRIMARY KEY NOT NULL,
@@ -86,9 +85,9 @@ steps = [
             player_id_1 INT NOT NULL,
             player_id_2 INT,
             tournament_id BIGINT,
-            FOREIGN KEY (player_id_1) REFERENCES players(id) ON DELETE RESTRICT,
-            FOREIGN KEY (player_id_2) REFERENCES players(id) ON DELETE RESTRICT,
-            FOREIGN KEY (tournament_id) REFERENCES tournaments(id) ON DELETE RESTRICT
+            FOREIGN KEY (player_id_1) REFERENCES players(id) ON DELETE CASCADE,
+            FOREIGN KEY (player_id_2) REFERENCES players(id) ON DELETE CASCADE,
+            FOREIGN KEY (tournament_id) REFERENCES tournaments(id) ON DELETE CASCADE
         );
         """,
         # "Down" SQL statement
