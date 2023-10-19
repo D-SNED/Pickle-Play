@@ -8,6 +8,7 @@ import LoginForm from "./accounts/Login";
 import SignupForm from "./accounts/Signup";
 import Home from "./pages/Home";
 import ProfilePage from "./accounts/Profile";
+import TournamentList from "./components/tournaments/list_tournaments";
 
 // import { Navbar } from "./components";
 // import NotFoundPage from "./NotFoundPage.js";
@@ -47,10 +48,13 @@ function App() {
                 {/* <Navbar /> */}
                 {/* <ErrorNotification error={error} /> */}
                 <Routes>
-                  <Route path="/" element={<Home/>}></Route>
-                  <Route path="/login" element={<LoginForm/>}></Route>
-                  <Route path="/signup" element={<SignupForm/>}></Route>
-                  <Route path="/profile" element={<ProfilePage/>}></Route>
+                  <Route path="/" element={<Home />}></Route>
+                  <Route path="/login" element={<LoginForm />}></Route>
+                  <Route path="/signup" element={<SignupForm />}></Route>
+                  <Route path="/profile" element={<ProfilePage />}></Route>
+                  <Route path="/tournaments">
+                    <Route index element={<TournamentList />} />
+                  </Route>
                   {/* <Route
                     path="/error"
                     element={<ErrorNotification error={error} />}
