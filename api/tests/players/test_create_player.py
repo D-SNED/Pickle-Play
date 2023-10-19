@@ -1,5 +1,0 @@
-# Arrange
-
-# Act
-
-# Assert
