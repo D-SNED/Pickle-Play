@@ -1,3 +1,5 @@
+import { pickleplaypaddles } from "../assets";
+
 export const navLinks = [
   {
     name: "Home",
@@ -8,27 +10,28 @@ export const navLinks = [
     url: "/about",
   },
   {
-    name: "Players",
-    url: "/players",
-  },
-  {
-    name: "Teams",
-    url: "/teams",
-  },
-  {
-    name: "Teams",
-    url: "/players",
-  },
-  {
-    name: "Tournaments",
-    url: "/tournaments",
-  },
-  {
-    name: "Locations",
-    url: "/locations",
-  },
-  {
     name: "Contact",
     url: "/contact",
   },
 ];
+
+const services = [
+  {
+    title: "Players",
+    icon: pickleplaypaddles,
+  },
+  {
+    title: "Teams",
+    icon: pickleplaypaddles,
+  },
+  {
+    title: "Tournaments",
+    icon: pickleplaypaddles,
+  },
+  {
+    title: "Locations",
+    icon: pickleplaypaddles,
+  },
+];
+
+export { services };
