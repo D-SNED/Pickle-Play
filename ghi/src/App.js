@@ -9,6 +9,7 @@ import SignupForm from "./accounts/Signup";
 import Home from "./pages/Home";
 import ProfilePage from "./accounts/Profile";
 import TournamentList from "./components/tournaments/list_tournaments";
+import LocationList from "./components/locations/LocationList";
 
 // import { Navbar } from "./components";
 // import NotFoundPage from "./NotFoundPage.js";
@@ -54,6 +55,9 @@ function App() {
                   <Route path="/profile" element={<ProfilePage />}></Route>
                   <Route path="/tournaments">
                     <Route index element={<TournamentList />} />
+                  </Route>
+                  <Route path="/locations">
+                    <Route index element={<LocationList />} />
                   </Route>
                   {/* <Route
                     path="/error"
