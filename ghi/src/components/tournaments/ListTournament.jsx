@@ -21,7 +21,7 @@ export default function TournamentList() {
     <>
       <div className="container mx-auto">
         <h1 className="text-3xl text-center text-white">Tournaments</h1>
-        <div className="px-4 columns-3">
+        <div className="px-4 lg:grid lg:grid-cols-3">
           {tournaments.map((tournament) => (
             <TournamentCard tournament={tournament} key={tournament.id} />
           ))}
