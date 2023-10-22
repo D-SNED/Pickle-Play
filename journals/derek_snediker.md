@@ -174,9 +174,130 @@ Most likely frontend for tournaments, possibly unit testing
 
 [Learn React vids](https://learn-2.galvanize.com/cohorts/3733/blocks/1897/content_files/build/04-react-hooks-router/01-react-hooks.md)
 
-## [Learn Unit Test Videos](https://learn-2.galvanize.com/cohorts/3733/blocks/1906/content_files/build/04-unit-tests/01-unit-tests.md)
+[Learn Unit Test Videos](https://learn-2.galvanize.com/cohorts/3733/blocks/1906/content_files/build/04-unit-tests/01-unit-tests.md)
 
 - ***
+
+## 10/17/23
+
+### Today I worked on:
+
+Mostly merge requests and helped Amanda with frontend auth. Slow day getting the backend finsihed and everyone caught up so we can work on frontend
+
+**AH-HA!💡**
+
+**🎉 Celebrations 🎉**
+We got front end auth working
+
+### Bugs encountered 🐛🐞🐜 :
+
+- ***
+
+## 10/18/23
+
+### Today I worked on:
+
+Worked on getting a list of all my tournaments as well as fixing our backend.. I found out that we couldn't delete things that had foreign key relationships because we used ON DELETE RESTRICT.
+
+**AH-HA!💡**
+We were able to fix the database deletion fiasco with ON DELETE CASCADE. Not entirely sure why we didn't do this in the first place. I believe we confused ourselves and mixed up what would get deleted if we used CASCADE but in the end it was the right choice
+
+**🎉 Celebrations 🎉**
+I was able to create tournament cards for the frontend tournament list! It looks really good!
+
+### Bugs encountered 🐛🐞🐜 :
+
+N/A
+🪲
+
+**\~Solution~**
+
+### References Used Today:
+
+N/A
+
+### Any Blockers:
+
+N/A
+
+### Tomorrow I'm working on:
+
+Create tournament form
+
+### References for Tomorrow:
+
+[Learn Unit Tests](https://learn-2.galvanize.com/cohorts/3733/blocks/1906/content_files/build/04-unit-tests/01-unit-tests.md)
+
+- ***
+
+## 10/19/23
+
+### Today I worked on:
+
+Create tournament form. I really just worked on styling. I think I'm getting lost in that and need to focus on the functionality more. Styling is so fun tho...
+
+**AH-HA!💡**
+Was having trouble getting my cards to show in columns. It was as simple as using a tailwind col class. Thanks Christopher. I looked at your code for that!
+
+**🎉 Celebrations 🎉**
+Finishing a long week.. Also getting more comfortable with React again
+
+### Bugs encountered 🐛🐞🐜 :
+
+For some reason Christopher can't get a location to create. He's logged in as an authorized user so her should be able to.. I think i'll probably run into that issue soon as well unless he solves it first
+🪲
+
+**\~Solution~**
+N/A
+
+### References Used Today:
+
+N/A
+
+### Any Blockers:
+
+Creating location is getting a 401 unathorized error
+
+### Tomorrow I'm working on:
+
+The react logic for my create tournament form
+
+### References for Tomorrow:
+
+- ***
+
+## 10/21/23
+
+### Today I worked on:
+
+Finished my create tournament form!
+**AH-HA!💡**
+The 401 unauthorized error was because I wasn't including the credentials in the fetch config! Also I had to look at stack overflow to get my checkbox to update its state and revert back to false once the form was entered
+
+**🎉 Celebrations 🎉**
+Very happy I got through the form without much trouble
+
+### Bugs encountered 🐛🐞🐜 :
+
+See Above
+🪲
+
+**\~Solution~**
+See above
+
+### References Used Today:
+
+N/A
+
+### Any Blockers:
+
+N/A
+
+### Tomorrow I'm working on:
+
+Unit Testing
+
+### References for Tomorrow:
 
 ## Week 5
 
