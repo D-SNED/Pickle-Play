@@ -4,7 +4,7 @@ const TournamentCard = ({ tournament }) => {
       <div className="p-0 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <div>
           <img
-            className="rounded-t-lg"
+            className="rounded-t-lg w-full h-48 object-cover"
             src={tournament.location.picture_url}
             alt=""
           />
@@ -16,7 +16,7 @@ const TournamentCard = ({ tournament }) => {
             </h5>
           </div>
           <div>
-            <p className="mb-1 font-bold">
+            <p className="mb-1 italic">
               {tournament.start_date} - {tournament.end_date}
             </p>
           </div>

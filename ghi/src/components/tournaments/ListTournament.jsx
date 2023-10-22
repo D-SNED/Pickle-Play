@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import TournamentCard from "./tournament_card";
+import TournamentCard from "./TournamentCard";
 
 export default function TournamentList() {
   const [tournaments, setTournaments] = useState([]);
@@ -19,9 +19,9 @@ export default function TournamentList() {
   }, []);
   return (
     <>
-      <div>
+      <div className="container mx-auto">
         <h1 className="text-3xl text-center text-white">Tournaments</h1>
-        <div className="px-4">
+        <div className="px-4 columns-3">
           {tournaments.map((tournament) => (
             <TournamentCard tournament={tournament} key={tournament.id} />
           ))}

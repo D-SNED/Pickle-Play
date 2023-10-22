@@ -8,8 +8,9 @@ import LoginForm from "./accounts/Login";
 import SignupForm from "./accounts/Signup";
 import Home from "./pages/Home";
 import ProfilePage from "./accounts/Profile";
-import TournamentList from "./components/tournaments/list_tournaments";
+import TournamentList from "./components/tournaments/ListTournament";
 import LocationList from "./components/locations/LocationList";
+import CreateTournament from "./components/tournaments/CreateTournament";
 
 // import { Navbar } from "./components";
 // import NotFoundPage from "./NotFoundPage.js";
@@ -41,7 +42,7 @@ function App() {
 
   return (
     <>
-      <div className="container">
+      <div className="object-fill">
         <BrowserRouter basename={basename}>
           <AuthProvider baseUrl={process.env.REACT_APP_API_HOST}>
             <div className="relative z-0 bg-success">
@@ -55,6 +56,7 @@ function App() {
                   <Route path="/profile" element={<ProfilePage />}></Route>
                   <Route path="/tournaments">
                     <Route index element={<TournamentList />} />
+                    <Route path="create" element={<CreateTournament />} />
                   </Route>
                   <Route path="/locations">
                     <Route index element={<LocationList />} />
