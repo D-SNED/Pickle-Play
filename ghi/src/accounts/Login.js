@@ -19,7 +19,6 @@ const LoginForm = () => {
     <div className="w-full max-w-xs">
       {/* <div className="offset-3 col-6">
                 <div className="shadow p-4 mt-4"> */}
-      <h1>Login</h1>
       {/* <div className="card-body"> */}
       <form
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
@@ -56,7 +55,10 @@ const LoginForm = () => {
           />
         </div>
         <div>
-          <input className="btn btn-primary" type="submit" value="Login" />
+          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" value="login">
+            Login
+            {/* <input className="btn btn-primary" type="submit" value="Login" /> */}
+          </button>
         </div>
       </form>
       {/* </div> */}

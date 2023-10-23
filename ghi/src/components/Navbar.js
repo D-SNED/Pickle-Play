@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { styles } from "../styles";
 import { navLinks } from "../constants";
-import { menu, close } from "../assets/icons";
-import pickleplay_logo from "../assets/images/pickleplay_logo.png";
+// import { menu, close } from "../assets/icons";
+// import pickleplay_logo from "../assets/images/pickleplay_logo.png";
 
 const Navbar = () => {
   const [active, setActive] = useState("");
@@ -44,7 +44,7 @@ const Navbar = () => {
             }}
           >
             <img
-              src={pickleplay_logo}
+              // src={pickleplay_logo}
               alt="logo"
               className="w-9 h-9 object-contain"
             />
@@ -67,7 +67,7 @@ const Navbar = () => {
           </ul>
           <div className="sm:hidden flex flex-1 justify-end items-center">
             <img
-              src={toggle ? close : menu}
+              // src={toggle ? close : menu}
               alt="menu"
               className="w-[28px] h-[28px] object-contain cursor-pointer"
               onClick={() => setToggle(!toggle)}

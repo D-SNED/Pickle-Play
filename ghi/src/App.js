@@ -1,6 +1,7 @@
 // import React, { useEffect, useState } from "react";
 import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
+// import useToken from "@galvanize-inc/jwtdown-for-react";
 
 // import ErrorNotification from "./ErrorNotification";
 import "./App.css";
@@ -18,36 +19,33 @@ import CreateTournament from "./components/tournaments/CreateTournament";
 function App() {
   const domain = /https:\/\/[^/]+/;
   const basename = process.env.PUBLIC_URL.replace(domain, "");
-  // const [launchInfo, setLaunchInfo] = useState([]);
-  // const [error, setError] = useState(null);
+
+  // const [playerId, setPlayerId] = useState("");
+  // const { fetchWithToken, token } = useToken();
+
+  // const getPlayerData = async () => {
+  //   console.log(token)
+  //   if (token) {
+  //     const response = await fetchWithToken(
+  //       `${process.env.REACT_APP_API_HOST}/api/playerdata`);
+  //     setPlayerId(response["id"]);
+  //   } else {
+  //     setPlayerId(null);
+  //   }
+  // };
 
   // useEffect(() => {
-  //   async function getData() {
-  //     let url = `${process.env.REACT_APP_API_HOST}/api/launch-details`;
-  //     console.log("fastapi url: ", url);
-  //     let response = await fetch(url);
-  //     console.log("------- hello? -------");
-  //     let data = await response.json();
-
-  //     if (response.ok) {
-  //       console.log("got launch data!");
-  //       setLaunchInfo(data.launch_details);
-  //     } else {
-  //       console.log("drat! something happened");
-  //       setError(data.message);
-  //     }
-  //   }
-  //   getData();
-  // }, []);
+  //   getPlayerData();
+  // }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
       <div className="object-fill">
         <BrowserRouter basename={basename}>
           <AuthProvider baseUrl={process.env.REACT_APP_API_HOST}>
-            <div className="relative z-0 bg-success">
-              <div className="bg-player-pattern bg-cover bg-no-repeat bg-center">
-                {/* <Navbar /> */}
+            {/* <div className="App-background-white"> */}
+              {/* <div className="App-background"> */}
+              {/* <Navbar /> */}
                 {/* <ErrorNotification error={error} /> */}
                 <Routes>
                   <Route path="/" element={<Home />}></Route>
@@ -67,8 +65,8 @@ function App() {
                   />
                   <Route path="*" component={NotFoundPage} /> */}
                 </Routes>
-              </div>
-            </div>
+              {/* </div> */}
+            {/* </div> */}
           </AuthProvider>
         </BrowserRouter>
       </div>
