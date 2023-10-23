@@ -119,7 +119,7 @@ class LocationRepository:
                         restrooms=updated_location[10],
                         water=updated_location[11],
                         lighted_courts=updated_location[12],
-                        wheelchair_accessible=updated_location[13]
+                        wheelchair_accessible=updated_location[13],
                     )
         except Exception as e:
             print(e)
@@ -163,49 +163,53 @@ class LocationRepository:
         return LocationOut(id=id, **old_data)
 
     def create_location(self, location: LocationIn) -> LocationOut:
-        with pool.connection() as conn:
-            with conn.cursor() as db:
-                result = db.execute(
-                    """
-                    INSERT INTO locations
-                        (
-                            name,
-                            address,
-                            phone_number,
-                            description,
-                            number_indoor_courts,
-                            number_outdoor_courts,
-                            surface,
-                            picture_url,
-                            locker_rooms,
-                            restrooms,
-                            water,
-                            lighted_courts,
-                            wheelchair_accessible
-                        )
-                    VALUES
-                        (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-                    RETURNING id;
-                    """,
-                    [
-                        location.name,
-                        location.address,
-                        location.phone_number,
-                        location.description,
-                        location.number_indoor_courts,
-                        location.number_outdoor_courts,
-                        location.surface,
-                        location.picture_url,
-                        location.locker_rooms,
-                        location.restrooms,
-                        location.water,
-                        location.lighted_courts,
-                        location.wheelchair_accessible,
-                    ],
-                )
-                id = result.fetchone()[0]
-                old_data = location.dict()
-                return LocationOut(id=id, **old_data)
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        INSERT INTO locations
+                            (
+                                name,
+                                address,
+                                phone_number,
+                                description,
+                                number_indoor_courts,
+                                number_outdoor_courts,
+                                surface,
+                                picture_url,
+                                locker_rooms,
+                                restrooms,
+                                water,
+                                lighted_courts,
+                                wheelchair_accessible
+                            )
+                        VALUES
+                            (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                        RETURNING id;
+                        """,
+                        [
+                            location.name,
+                            location.address,
+                            location.phone_number,
+                            location.description,
+                            location.number_indoor_courts,
+                            location.number_outdoor_courts,
+                            location.surface,
+                            location.picture_url,
+                            location.locker_rooms,
+                            location.restrooms,
+                            location.water,
+                            location.lighted_courts,
+                            location.wheelchair_accessible,
+                        ],
+                    )
+                    id = result.fetchone()[0]
+                    old_data = location.dict()
+                    return LocationOut(id=id, **old_data)
+        except Exception as e:
+            print(e)
+            return False
 
     def delete_location(self, location_id: int) -> bool:
         try:

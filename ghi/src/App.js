@@ -12,6 +12,7 @@ import ProfilePage from "./accounts/Profile";
 import TournamentList from "./components/tournaments/ListTournament";
 import LocationList from "./components/locations/LocationList";
 import CreateTournament from "./components/tournaments/CreateTournament";
+import LocationForm from "./components/locations/LocationForm";
 
 import "./App.css";
 
@@ -60,6 +61,7 @@ function App() {
               </Route>
               <Route path="/locations">
                 <Route index element={<LocationList />} />
+                <Route path="create" element={<LocationForm />} />
               </Route>
               <Route path="/signup" component={<SignupForm />}></Route>
               <Route path="/login" component={<LoginForm />}></Route>
