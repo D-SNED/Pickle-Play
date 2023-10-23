@@ -1,34 +1,42 @@
 export const navLinks = [
   {
-    name: "Home",
+    id: "Home",
     url: "/",
   },
   {
-    name: "About",
+    id: "About",
     url: "/about",
   },
   {
-    name: "Players",
+    id: "Profile",
+    url: "/profile",
+  },
+  {
+    id: "Players",
     url: "/players",
   },
   {
-    name: "Teams",
+    id: "Teams",
     url: "/teams",
   },
   {
-    name: "Teams",
-    url: "/players",
-  },
-  {
-    name: "Tournaments",
+    id: "Tournaments",
     url: "/tournaments",
   },
   {
-    name: "Locations",
+    id: "Locations",
     url: "/locations",
   },
   {
-    name: "Contact",
-    url: "/contact",
+    id: "Signup",
+    url: "/signup",
+  },
+  {
+    id: "Login",
+    url: "/login",
+  },
+  {
+    id: "Logout",
+    url: "/logout",
   },
 ];

@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { styles } from "../styles";
 import { navLinks } from "../constants";
-// import { menu, close } from "../assets/icons";
-// import pickleplay_logo from "../assets/images/pickleplay_logo.png";
+import menu from "../assets/icons/menu.svg";
+import close from "../assets/icons/close.svg";
+import pickleplay_logo from "../assets/logos/pickleplay_logo.png";
 
 const Navbar = () => {
   const [active, setActive] = useState("");
@@ -44,11 +45,11 @@ const Navbar = () => {
             }}
           >
             <img
-              // src={pickleplay_logo}
+              src={pickleplay_logo}
               alt="logo"
               className="w-9 h-9 object-contain"
             />
-            <p className="text-white text-[18px] font-bold cursor-pointer flex">
+            <p className="orange-text-gradient text-[18px] font-bold cursor-pointer flex">
               PicklePlay
             </p>
           </Link>
@@ -57,17 +58,19 @@ const Navbar = () => {
               <li
                 key={nav.id}
                 className={`${
-                  active === nav.title ? "text-white" : "text-secondary"
-                } hover:text-white text-[18px] font-medium cursor-pointer`}
-                onClick={() => setActive(nav.title)}
+                  active === nav.id
+                    ? "orange-text-gradient"
+                    : "blue-text-gradient"
+                } hover:orange-text-gradient text-[18px] font-medium cursor-pointer`}
+                onClick={() => setActive(nav.id)}
               >
-                <a href={`#${nav.id}`}>{nav.title}</a>
+                <a href={`${nav.url}`}>{nav.id}</a>
               </li>
             ))}
           </ul>
           <div className="sm:hidden flex flex-1 justify-end items-center">
             <img
-              // src={toggle ? close : menu}
+              src={toggle ? close : menu}
               alt="menu"
               className="w-[28px] h-[28px] object-contain cursor-pointer"
               onClick={() => setToggle(!toggle)}
@@ -82,14 +85,16 @@ const Navbar = () => {
                   <li
                     key={nav.id}
                     className={`${
-                      active === nav.title ? "text-white" : "text-secondary"
-                    } font-poppins font-medium cursor-pointer text-[16px]`}
+                      active === nav.id
+                        ? "orange-text-gradient"
+                        : "blue-text-gradient"
+                    } font-Roboto font-medium cursor-pointer text-[16px]`}
                     onClick={() => {
                       setToggle(!toggle);
-                      setActive(nav.title);
+                      setActive(nav.id);
                     }}
                   >
-                    <a href={`#${nav.id}`}>{nav.title}</a>
+                    <a href={`${nav.url}`}>{nav.id}</a>
                   </li>
                 ))}
               </ul>
