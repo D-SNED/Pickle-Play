@@ -7,7 +7,7 @@ import LoginForm from "./accounts/Login";
 import SignupForm from "./accounts/Signup";
 import Home from "./pages/Home";
 import About from "./pages/About";
-import NotFoundPage from "./pages/NotFoundPage.js";
+import NotFoundPage from "./pages/NotFoundPage";
 import ProfilePage from "./accounts/Profile";
 import TournamentList from "./components/tournaments/ListTournament";
 import LocationList from "./components/locations/LocationList";
