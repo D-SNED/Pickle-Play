@@ -16,6 +16,7 @@ import LocationForm from "./components/locations/LocationForm";
 import TournamentDetails from "./components/tournaments/TournamentDetails";
 
 import { Navbar } from "./components";
+// import NotFoundPage from "./NotFoundPage.js";
 
 function App() {
   const domain = /https:\/\/[^/]+/;
