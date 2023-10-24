@@ -31,8 +31,7 @@ class TestLocationQueries(TestCase):
                 "name": "Pickleball Palace",
                 "address": "456 Cool Drive",
                 "phone_number": "503-867-5309",
-                "description": "The Pickleball Palace has everything you need to host "
-                "your pickleball tournament",
+                "description": "The Pickleball Palace has everything",
                 "number_indoor_courts": 25,
                 "number_outdoor_courts": 8,
                 "surface": "hardcourg",
@@ -70,8 +69,7 @@ def test_get_all():
             "name": "Pickleball Palace",
             "address": "456 Cool Drive",
             "phone_number": "503-867-5309",
-            "description": "The Pickleball Palace has everything you need to host "
-            "your pickleball tournament",
+            "description": "The Pickleball Palace has everything",
             "number_indoor_courts": 25,
             "number_outdoor_courts": 8,
             "surface": "hardcourg",

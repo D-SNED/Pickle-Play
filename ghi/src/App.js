@@ -16,6 +16,7 @@ import EditProfile from "./accounts/EditProfile";
 import LocationForm from "./components/locations/LocationForm";
 import TournamentDetails from "./components/tournaments/TournamentDetails";
 import UpdateTournament from "./components/tournaments/UpdateTournament";
+import CreateTeam from "./components/teams/CreateTeam";
 
 import { Navbar } from "./components";
 // import NotFoundPage from "./NotFoundPage.js";
@@ -59,6 +60,7 @@ function App() {
               <Route path="/profile/update" element={<EditProfile />}></Route>
               {/* <Route path="/players" element={<PlayerList />}></Route> */}
               {/* <Route path="/teams" element={<TeamList />}></Route> */}
+              <Route path="/teams" element={<CreateTeam />}></Route>
 
               <Route path="/tournaments">
                 <Route index element={<TournamentList />} />
