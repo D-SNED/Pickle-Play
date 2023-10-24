@@ -15,6 +15,7 @@ import CreateTournament from "./components/tournaments/CreateTournament";
 import EditProfile from "./accounts/EditProfile";
 import LocationForm from "./components/locations/LocationForm";
 import TournamentDetails from "./components/tournaments/TournamentDetails";
+import UpdateTournament from "./components/tournaments/UpdateTournament";
 
 import { Navbar } from "./components";
 // import NotFoundPage from "./NotFoundPage.js";
@@ -63,6 +64,10 @@ function App() {
                 <Route index element={<TournamentList />} />
                 <Route path="create" element={<CreateTournament />} />
                 <Route path=":tournament_id" element={<TournamentDetails />} />
+                <Route
+                  path=":tournament_id/update"
+                  element={<UpdateTournament />}
+                />
               </Route>
               <Route path="/locations">
                 <Route index element={<LocationList />} />

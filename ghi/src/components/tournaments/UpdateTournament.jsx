@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 
-function CreateTournament() {
+function UpdateTournament() {
+  const { tournament_id } = useParams();
+  const navigate = useNavigate();
+
   const [name, setName] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
@@ -55,8 +59,8 @@ function CreateTournament() {
     const response = await fetch(locationUrl);
 
     if (response.ok) {
-      const data = await response.json();
-      setLocations(data);
+      const locationData = await response.json();
+      setLocations(locationData);
     }
   };
 
@@ -74,9 +78,9 @@ function CreateTournament() {
     data.max_teams = maxTeams;
     data.reached_max = reachedMax;
 
-    const tournamentUrl = "http://localhost:8000/api/tournaments";
+    const tournamentUrl = `http://localhost:8000/api/tournaments/${tournament_id}`;
     const fetchConfig = {
-      method: "post",
+      method: "put",
       credentials: "include",
       body: JSON.stringify(data),
       headers: {
@@ -85,7 +89,7 @@ function CreateTournament() {
     };
 
     const response = await fetch(tournamentUrl, fetchConfig);
-    console.log(response.ok);
+
     if (response.ok) {
       setName("");
       setStartDate("");
@@ -96,22 +100,34 @@ function CreateTournament() {
       setMaxTeams("");
       setReachedMax(false);
     }
+    navigate(-1);
   };
 
   useEffect(() => {
     fetchLocations();
-  }, []);
+    const fetchTournamentData = async () => {
+      const tournamentUrl = `http://localhost:8000/api/tournaments/${tournament_id}`;
+      const response = await fetch(tournamentUrl);
+      if (response.ok) {
+        const tournamentData = await response.json();
 
+        setName(tournamentData.name);
+        setStartDate(tournamentData.start_date);
+        setEndDate(tournamentData.end_date);
+        setCategory(tournamentData.category);
+        setLocation(tournamentData.location.name);
+        setDescription(tournamentData.description);
+        setMaxTeams(tournamentData.max_teams);
+        setReachedMax(tournamentData.reached_max);
+      }
+    };
+    fetchTournamentData();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        {/* <img
-          className="mx-auto h-10 w-auto"
-          src="ghi/public/pickleplay_logo.png"
-          alt="Your Company"
-        /> */}
         <h2 className="mt-10 text-center text-4xl font-bold leading-9 tracking-tight text-[#802d21]">
-          Create Tournament
+          Update Tournament
         </h2>
       </div>
 
@@ -119,7 +135,7 @@ function CreateTournament() {
         <form
           onSubmit={handleSubmit}
           className="space-y-6 bg-slate-50 p-4"
-          id="create-tournament-form"
+          id="update-tournament-form"
         >
           <div>
             <label
@@ -290,12 +306,14 @@ function CreateTournament() {
             </div>
           </div>
           <div>
+            {/* <Link to="/tournaments"> */}
             <button
               type="submit"
               className="flex w-full justify-center rounded-md bg-[#C14533] px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#d4402a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
-              Create
+              Update
             </button>
+            {/* </Link> */}
           </div>
         </form>
         <div>
@@ -308,4 +326,4 @@ function CreateTournament() {
   );
 }
 
-export default CreateTournament;
+export default UpdateTournament;

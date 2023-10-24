@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 const TournamentDetails = () => {
   const { tournament_id } = useParams();
@@ -11,6 +11,7 @@ const TournamentDetails = () => {
     if (response.ok) {
       const data = await response.json();
       setTournament(data);
+      console.log(data);
     }
   };
 
@@ -21,6 +22,13 @@ const TournamentDetails = () => {
   return (
     <div className="px-8 py-6">
       <div className="px-4 sm:px-0">
+        <div className="flex justify-end">
+          <Link to="update">
+            <button className="m-4 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#C14533] rounded-lg hover:bg-[#d4402a]">
+              Edit Tournament
+            </button>
+          </Link>
+        </div>
         <h1 className="text-3xl text-center font-semibold leading-7 text-gray-900">
           Tournament Details
         </h1>
@@ -49,6 +57,14 @@ const TournamentDetails = () => {
             </dt>
             <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
               {tournament.location?.name}
+            </dd>
+          </div>
+          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt className="text-sm font-medium leading-6 text-gray-900">
+              Address
+            </dt>
+            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+              {tournament.location?.address}
             </dd>
           </div>
           <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
