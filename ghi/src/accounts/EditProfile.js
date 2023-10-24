@@ -18,7 +18,7 @@ export default function EditProfile() {
     const [gender, setGender] = useState("");
     const [skillLevelSingles, setSkillLevelSingles] = useState("");
     const [skillLevelDoubles, setSkillLevelDoubles] = useState("");
-    const [isAdmin] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
     const [emergencyContactName, setEmergencyContactName] = useState("");
     const [emergencyContactNum, setEmergencyContactNum] = useState("");
     const [playerId, setPlayerId] = useState(0);
@@ -58,18 +58,20 @@ export default function EditProfile() {
 
         if (response.ok) {
             const data = await response.json();
+            console.log(data);
             setUsername(data["username"]);
             setEmail(data["email"]);
             setBirthdate(data["birthdate"]);
-            data["first_name"] !== "" ? setFirstName(data["first_name"]) : setFirstName("");
-            data["last_name"] !== "" ? setLastName(data["last_name"]) : setLastName("");
-            data["phone_number"] !== "" ? setPhoneNumber(data["phone_number"]) : setPhoneNumber("");
-            data["profile_picture"] !== "" ? setProfilePicture(data["profile_picture"]) : setProfilePicture("");
-            data["gender"] !== "" ? setGender(data["gender"]) : setGender("");
-            data["skill_level_singles"] !== "" ? setSkillLevelSingles(data["skill_level_singles"]) : setSkillLevelSingles("");
-            data["skill_level_doubles"] !== "" ? setSkillLevelDoubles(data["skill_level_doubles"]) : setSkillLevelDoubles("");
-            data["emergency_contact_fullname"] !== "" ? setEmergencyContactName(data["emergency_contact_fullname"]) : setEmergencyContactName("");
-            data["emergency_contact_phone_number"] !== "" ? setEmergencyContactNum(data["emergency_contact_phone_number"]) : setEmergencyContactNum("");
+            data["first_name"] !== null ? setFirstName(data["first_name"]) : setFirstName("");
+            data["last_name"] !== null ? setLastName(data["last_name"]) : setLastName("");
+            data["phone_number"] !== null ? setPhoneNumber(data["phone_number"]) : setPhoneNumber("");
+            data["profile_picture"] !== null ? setProfilePicture(data["profile_picture"]) : setProfilePicture("");
+            data["gender"] !== null ? setGender(data["gender"]) : setGender("");
+            data["skill_level_singles"] !== null ? setSkillLevelSingles(data["skill_level_singles"]) : setSkillLevelSingles(null);
+            data["skill_level_doubles"] !== null ? setSkillLevelDoubles(data["skill_level_doubles"]) : setSkillLevelDoubles(null);
+            setIsAdmin(data["is_admin"]);
+            data["emergency_contact_fullname"] !== null ? setEmergencyContactName(data["emergency_contact_fullname"]) : setEmergencyContactName("");
+            data["emergency_contact_phone_number"] !== null ? setEmergencyContactNum(data["emergency_contact_phone_number"]) : setEmergencyContactNum("");
         };
 
     };
@@ -146,8 +148,6 @@ export default function EditProfile() {
         event.preventDefault();
 
         const data = {}
-
-        console.log(data);
 
         data.username = username;
         data.password = password;
