@@ -65,10 +65,10 @@ function App() {
                 <Route index element={<LocationList />} />
                 <Route path="create" element={<LocationForm />} />
               </Route>
-              <Route path="/signup" component={<SignupForm />}></Route>
-              <Route path="/login" component={<LoginForm />}></Route>
+              <Route path="/signup" element={<SignupForm />}></Route>
+              <Route path="/login" element={<LoginForm />}></Route>
               {/* <Route path="/logout" component={<Logout />}></Route> */}
-              <Route path="*" component={NotFoundPage} />
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
             {/* </div> */}
             {/* </div> */}
