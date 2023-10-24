@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 
 const TournamentDetails = () => {
   const { tournament_id } = useParams();
   const [tournament, setTournament] = useState([]);
+  const navigate = useNavigate();
 
   const fetchTournamentData = async () => {
     const tournamentUrl = `http://localhost:8000/api/tournaments/${tournament_id}`;
@@ -11,8 +12,18 @@ const TournamentDetails = () => {
     if (response.ok) {
       const data = await response.json();
       setTournament(data);
-      console.log(data);
     }
+  };
+
+  const deleteTournament = async () => {
+    const deleteUrl = `http://localhost:8000/api/tournaments/${tournament_id}`;
+    const fetchConfig = {
+      method: "delete",
+      credentials: "include",
+    };
+    const response = await fetch(deleteUrl, fetchConfig);
+    console.log(response.ok);
+    navigate("/tournaments");
   };
 
   useEffect(() => {
@@ -100,6 +111,14 @@ const TournamentDetails = () => {
             </dd>
           </div>
         </dl>
+      </div>
+      <div className="flex justify-center m-8">
+        <button
+          onClick={() => deleteTournament()}
+          className="m-4 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#C14533] rounded-lg hover:bg-[#d4402a]"
+        >
+          Delete Tournament
+        </button>
       </div>
     </div>
   );
