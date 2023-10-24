@@ -135,7 +135,7 @@ async def create_player(
     return PlayerToken(account=account, **token.dict())
 
 
-@router.get("/api/players/", response_model=Union[List[PlayerOut], Error])
+@router.get("/api/players", response_model=Union[List[PlayerOut], Error])
 def get_all(
     repo: PlayerRepository = Depends(),
 ):

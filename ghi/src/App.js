@@ -12,6 +12,7 @@ import ProfilePage from "./accounts/Profile";
 import TournamentList from "./components/tournaments/ListTournament";
 import LocationList from "./components/locations/LocationList";
 import CreateTournament from "./components/tournaments/CreateTournament";
+import EditProfile from "./accounts/EditProfile";
 import LocationForm from "./components/locations/LocationForm";
 import TournamentDetails from "./components/tournaments/TournamentDetails";
 
@@ -54,6 +55,7 @@ function App() {
               <Route path="/" element={<Home />}></Route>
               <Route path="/about" element={<About />}></Route>
               <Route path="/profile" element={<ProfilePage />}></Route>
+              <Route path="/profile/update" element={<EditProfile />}></Route>
               {/* <Route path="/players" element={<PlayerList />}></Route> */}
               {/* <Route path="/teams" element={<TeamList />}></Route> */}
 
