@@ -13,8 +13,7 @@ import TournamentList from "./components/tournaments/ListTournament";
 import LocationList from "./components/locations/LocationList";
 import CreateTournament from "./components/tournaments/CreateTournament";
 import LocationForm from "./components/locations/LocationForm";
-
-import "./App.css";
+import TournamentDetails from "./components/tournaments/TournamentDetails";
 
 import { Navbar } from "./components";
 
@@ -47,7 +46,9 @@ function App() {
           <AuthProvider baseUrl={process.env.REACT_APP_API_HOST}>
             {/* <div className="App-background-white"> */}
             {/* <div className="App-background"> */}
-            <Navbar />
+            <div className="pb-16">
+              <Navbar />
+            </div>
             <Routes>
               <Route path="/" element={<Home />}></Route>
               <Route path="/about" element={<About />}></Route>
@@ -58,6 +59,7 @@ function App() {
               <Route path="/tournaments">
                 <Route index element={<TournamentList />} />
                 <Route path="create" element={<CreateTournament />} />
+                <Route path=":tournament_id" element={<TournamentDetails />} />
               </Route>
               <Route path="/locations">
                 <Route index element={<LocationList />} />
