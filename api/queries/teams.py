@@ -29,6 +29,7 @@ class AllTeamsOut(BaseModel):
     category: str
     age_bracket: str
     team_name: str
+    tournament_id: Optional[int]
 
 
 # ADDING PlayerOut Class to SpecificTeamOut to get proper shape
