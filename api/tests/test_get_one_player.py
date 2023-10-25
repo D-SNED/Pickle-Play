@@ -47,6 +47,7 @@ class TestPlayerQueries(TestCase):
             "gender": "other",
             "skill_level_singles": 4.00,
             "skill_level_doubles": 4.00,
+            "is_admin": False,
             "emergency_contact_fullname": "test",
             "emergency_contact_phone_number": "1234567890",
         }
@@ -64,6 +65,7 @@ class TestPlayerQueries(TestCase):
             "gender": "male",
             "skill_level_singles": 3.00,
             "skill_level_doubles": 3.00,
+            "is_admin": False,
             "emergency_contact_fullname": "test",
             "emergency_contact_phone_number": "1234567890",
         }
@@ -96,6 +98,7 @@ def test_get_one_player():
         "gender": "other",
         "skill_level_singles": 4.00,
         "skill_level_doubles": 4.00,
+        "is_admin": False,
         "emergency_contact_fullname": "test",
         "emergency_contact_phone_number": "1234567890",
     }

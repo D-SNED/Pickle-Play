@@ -20,7 +20,6 @@ import CreateTeam from "./components/teams/CreateTeam";
 import TeamsList from "./components/teams/TeamsList";
 
 import { Navbar } from "./components";
-// import NotFoundPage from "./NotFoundPage.js";
 
 function App() {
   const domain = /https:\/\/[^/]+/;
