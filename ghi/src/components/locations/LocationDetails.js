@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import DeleteLocationConfirm from "./DeleteLocationConfirm";
 
 const LocationDetails = () => {
@@ -9,7 +9,7 @@ const LocationDetails = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const Url = `http://localhost:8000/api/locations/${locationId}`;
+      const Url = `${process.env.REACT_APP_API_HOST}/api/locations/${locationId}`;
       const response = await fetch(Url);
       if (response.ok) {
         const data = await response.json();
@@ -22,7 +22,7 @@ const LocationDetails = () => {
 
   const deleteLocation = async () => {
     try {
-      const deletedUrl = `http://localhost:8000/api/locations/${locationId}`;
+      const deletedUrl = `${process.env.REACT_APP_API_HOST}/api/locations/${locationId}`;
       const fetchOptions = {
         method: "delete",
         credentials: "include",
@@ -71,6 +71,11 @@ const LocationDetails = () => {
           <p className="text-3xl font-semibold text-gray-600 mb-2">{address}</p>
           <p className="text-2xl font-semibold text-gray-600 mb-2">{phone_number}</p>
           <p className="text-l text-gray-600 mb-2"> {description}</p>
+          <Link to="update">
+            <button className="bg-green-500 text-white py-2 px-4 rounded-full float-left mt-4 mr-6">
+              Edit Location
+            </button>
+          </Link>
           <button
             onClick={handleDeleteClick}
             className="bg-green-500 text-white py-2 px-4 rounded-full float-left mt-4"
