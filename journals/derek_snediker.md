@@ -277,8 +277,85 @@ The 401 unauthorized error was because I wasn't including the credentials in the
 **🎉 Celebrations 🎉**
 Very happy I got through the form without much trouble
 
+## 10/22/23
+
+### Today I worked on:
+
+Get specific tournament unit test. Did some merge requests for Amanda and checked her code as well as helped her with her unit test. Started on the tournament details component as well.
+
+**AH-HA!💡**
+Unit tests need a mock query to test so the test doesn't actually interact with the database. It makes sense that you really don't want to interact with the database ever except for real requests.
+
+useParams() is a way to dynamically change a url and pass in something like a tournament_id in order to get the details for a specific instance.
+
+**🎉 Celebrations 🎉**
+I'm getting more familiar with useParams()
+
 ### Bugs encountered 🐛🐞🐜 :
 
+422 unprocessible entity. This was when the url would update to tournaments/undefined rather than tournament/3 for example. Im not entirely sure why when passing the tournament_id as a parameter into the fetch function was breaking it but once it was removed it worked.
+🪲
+
+**\~Solution~**
+Remove tournament_id as parameter in fetch function
+
+### References Used Today:
+
+N/A
+
+### Any Blockers:
+
+N/A
+
+### Tomorrow I'm working on:
+
+finishing details page
+
+### References for Tomorrow:
+
+N/A
+
+### Bugs encountered 🐛🐞🐜 :
+
+N/A
+
+- ***
+
+## Week 5
+
+## 10/23/23
+
+### Today I worked on:
+
+update tournament
+**AH-HA!💡**
+I had a hard time figuring out how to get the old data to populate in the form so user wouldn't need to type in the data they din't want changed.I solved the issue by fetching the data for the tournament being edited and set the state of the different fields to be the fetchedData. On page load it populates the old fields.
+**🎉 Celebrations 🎉**
+I got my update form to work!
+
+### Bugs encountered 🐛🐞🐜 :
+
+Couldn't figure out how to populate the dropdown menu with the location before updating
+🪲
+
+**\~Solution~**
+N/A
+
+### References Used Today:
+
+N/A
+
+### Any Blockers:
+
+The dropdown menu not populating with old data. Not sure how to fix that but overall the form still works and is 95% perfect
+
+### Tomorrow I'm working on:
+
+Delete tournament, fixing unittest, helping out other teammates
+
+### References for Tomorrow:
+
+N/A
 See Above
 🪲
 
@@ -295,11 +372,35 @@ N/A
 
 ### Tomorrow I'm working on:
 
-Unit Testing
+getting the teams that are playing in a specific tournament to show in tournament details page
 
 ### References for Tomorrow:
 
-## Week 5
+N/A
+
+- ***
+
+## Date
+
+### Today I worked on:
+
+**AH-HA!💡**
+
+**🎉 Celebrations 🎉**
+
+### Bugs encountered 🐛🐞🐜 :
+
+🪲
+
+**\~Solution~**
+
+### References Used Today:
+
+### Any Blockers:
+
+### Tomorrow I'm working on:
+
+### References for Tomorrow:
 
 ### Goals
 
