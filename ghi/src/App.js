@@ -16,7 +16,9 @@ import EditProfile from "./accounts/EditProfile";
 import LocationForm from "./components/locations/LocationForm";
 import TournamentDetails from "./components/tournaments/TournamentDetails";
 import UpdateTournament from "./components/tournaments/UpdateTournament";
+import TeamsList from "./components/teams/TeamsList";
 import CreateTeam from "./components/teams/CreateTeam";
+import TeamDetails from "./components/teams/TeamDetails";
 import LocationDetails from "./components/locations/LocationDetails";
 import UpdateLocation from "./components/locations/UpdateLocation";
 
@@ -60,8 +62,11 @@ function App() {
               <Route path="/profile" element={<ProfilePage />}></Route>
               <Route path="/profile/update" element={<EditProfile />}></Route>
               {/* <Route path="/players" element={<PlayerList />}></Route> */}
-              {/* <Route path="/teams" element={<TeamList />}></Route> */}
-              <Route path="/teams" element={<CreateTeam />}></Route>
+              <Route path="/teams">
+                <Route index element={<TeamsList />} />
+                <Route path="create" element={<CreateTeam />} />
+                <Route path=":team_id" element={<TeamDetails />} />
+              </Route>
               <Route path="/tournaments">
                 <Route index element={<TournamentList />} />
                 <Route path="create" element={<CreateTournament />} />
