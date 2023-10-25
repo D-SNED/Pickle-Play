@@ -20,6 +20,7 @@ class TestTournamentQueries(TestCase):
                 "id": 1,
                 "name": "test",
                 "picture_url": "something",
+                "address": "something"
             },
             "description": "description",
             "max_teams": 16,
@@ -45,6 +46,7 @@ def test_get_one_tournament():
             "id": 1,
             "name": "test",
             "picture_url": "something",
+            "address": "something",
         },
         "description": "description",
         "max_teams": 16,
