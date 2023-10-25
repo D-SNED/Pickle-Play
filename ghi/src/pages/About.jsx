@@ -3,12 +3,12 @@ import { styles } from "../styles";
 import { textVariant } from "../utils/motion";
 import { ourteams } from "../constants";
 import OurTeamCard from "./OurTeamCard";
-import { PlayCourt } from "../components";
+import { PlayPickleball } from "../components";
 
 const About = () => {
   return (
     <>
-      <PlayCourt />
+      <PlayPickleball />
       <div className={`mt-12 bg-black-100 rounded-[20px]`}>
         <div
           className={`bg-tertiary rounded-2xl ${styles.padding} min-h-[300px]`}

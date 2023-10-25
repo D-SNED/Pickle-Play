@@ -57,7 +57,7 @@ code {
   background: #804dee;
   background: -webkit-linear-gradient(
     180deg,
-    /* previously at -90deg, for line 41 and line 45 */ #804dee 0%,
+    #804dee 0%,
     rgba(60, 51, 80, 0) 100%
   );
   background: linear-gradient(180deg, #804dee 0%, rgba(60, 51, 80, 0) 100%);
