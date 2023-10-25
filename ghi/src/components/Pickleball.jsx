@@ -45,7 +45,7 @@ export function Pickleball(props) {
         <ambientLight intensity={0.5} />
         <group {...props} dispose={null}>
           <group
-            position={[0.5, -0.3, 0]}
+            position={[0.5, -0.1, -1]}
             rotation={[Math.PI / 2, 0.5, 0.5]}
             scale={36}
           >
