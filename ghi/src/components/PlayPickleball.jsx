@@ -20,7 +20,7 @@ const PlayPickleball = () => {
                 >
                   Passionate Software Engineers who enjoy pickleball!{" "}
                   <br className="sm:block hidden" /> Join us by signing up,
-                  creating teams, joining tournaments, finding locations to
+                  creating teams, joining tournaments, and finding locations to
                   play!
                 </p>
               </div>

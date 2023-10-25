@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 
 
 // Team Details
@@ -67,13 +67,13 @@ const TeamDetails = () => {
     <>
         <div className="px-8 py-6">
         <div className="px-4 sm:px-0">
-            {/* <div className="flex justify-end">
+            <div className="flex justify-end">
             <Link to="update">
                 <button className="m-4 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#C14533] rounded-lg hover:bg-[#d4402a]">
                 Edit Team
                 </button>
             </Link>
-            </div> */}
+            </div>
             <h1 className="mt-10 text-center text-4xl font-bold leading-9 tracking-tight text-[#802d21]">
             Team Details
             </h1>

@@ -19,6 +19,7 @@ import UpdateTournament from "./components/tournaments/UpdateTournament";
 import TeamsList from "./components/teams/TeamsList";
 import CreateTeam from "./components/teams/CreateTeam";
 import TeamDetails from "./components/teams/TeamDetails";
+import UpdateTeam from "./components/teams/UpdateTeam";
 import LocationDetails from "./components/locations/LocationDetails";
 import UpdateLocation from "./components/locations/UpdateLocation";
 
@@ -66,6 +67,10 @@ function App() {
                 <Route index element={<TeamsList />} />
                 <Route path="create" element={<CreateTeam />} />
                 <Route path=":team_id" element={<TeamDetails />} />
+                <Route
+                  path=":team_id/update"
+                  element={<UpdateTeam />}
+                />
               </Route>
               <Route path="/tournaments">
                 <Route index element={<TournamentList />} />
@@ -80,10 +85,7 @@ function App() {
                 <Route index element={<LocationList />} />
                 <Route path="create" element={<LocationForm />} />
                 <Route path=":locationId" element={<LocationDetails />} />
-                <Route
-                  path=":locationId/update"
-                  element={<UpdateLocation />}
-                />
+                <Route path=":locationId/update" element={<UpdateLocation />} />
               </Route>
 
               <Route path="/signup" element={<SignupForm />}></Route>
