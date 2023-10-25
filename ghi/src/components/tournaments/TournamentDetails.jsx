@@ -4,10 +4,11 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 const TournamentDetails = () => {
   const { tournament_id } = useParams();
   const [tournament, setTournament] = useState([]);
+  const [teams, setTeams] = useState([]);
   const navigate = useNavigate();
 
   const fetchTournamentData = async () => {
-    const tournamentUrl = `http://localhost:8000/api/tournaments/${tournament_id}`;
+    const tournamentUrl = `${process.env.REACT_APP_API_HOST}/api/tournaments/${tournament_id}`;
     const response = await fetch(tournamentUrl);
     if (response.ok) {
       const data = await response.json();
@@ -15,8 +16,20 @@ const TournamentDetails = () => {
     }
   };
 
+  const fetchTeamData = async () => {
+    const teamUrl = `${process.env.REACT_APP_API_HOST}/api/teams/`;
+    const response = await fetch(teamUrl);
+    if (response.ok) {
+      const teamData = await response.json();
+      const filteredTeams = teamData.filter(
+        (team) => team.tournament_id === tournament.id
+      );
+      setTeams(filteredTeams);
+    }
+  };
+
   const deleteTournament = async () => {
-    const deleteUrl = `http://localhost:8000/api/tournaments/${tournament_id}`;
+    const deleteUrl = `${process.env.REACT_APP_API_HOST}/api/tournaments/${tournament_id}`;
     const fetchConfig = {
       method: "delete",
       credentials: "include",
@@ -30,8 +43,12 @@ const TournamentDetails = () => {
     fetchTournamentData();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  useEffect(() => {
+    fetchTeamData();
+  }, [tournament]); // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
-    <div className="px-8 py-6">
+    <div className="mb-10 px-8 py-6">
       <div className="px-4 sm:px-0">
         <div className="flex justify-end">
           <Link to="update">
@@ -111,6 +128,43 @@ const TournamentDetails = () => {
             </dd>
           </div>
         </dl>
+      </div>
+      <div className="pt-4 font-bold text-center text-gray-900">
+        <h3>
+          Participants: {teams.length}/{tournament.max_teams} Teams
+        </h3>
+      </div>
+      <div className="my-10 relative overflow-x-auto">
+        <table className="table-fixed w-full text-sm text-center text-gray-500 dark:text-gray-400">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+              <th scope="col" className="px-6 py-3">
+                Team Name
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Category
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Age Bracket
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {teams.map((team) => {
+              return (
+                <tr
+                  key={team.id}
+                  value={team.id}
+                  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                >
+                  <td className="px-6 py-4">{team.team_name}</td>
+                  <td className="px-6 py-4">{team.category}</td>
+                  <td className="px-6 py-4">{team.age_bracket}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
       <div className="flex justify-center m-8">
         <button

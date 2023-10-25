@@ -55,7 +55,7 @@ function UpdateTournament() {
   };
 
   const fetchLocations = async () => {
-    const locationUrl = "http://localhost:8000/api/locations/";
+    const locationUrl = `${process.env.REACT_APP_API_HOST}/api/locations/`;
     const response = await fetch(locationUrl);
 
     if (response.ok) {
@@ -78,7 +78,7 @@ function UpdateTournament() {
     data.max_teams = maxTeams;
     data.reached_max = reachedMax;
 
-    const tournamentUrl = `http://localhost:8000/api/tournaments/${tournament_id}`;
+    const tournamentUrl = `${process.env.REACT_APP_API_HOST}/api/tournaments/${tournament_id}`;
     const fetchConfig = {
       method: "put",
       credentials: "include",
@@ -106,7 +106,7 @@ function UpdateTournament() {
   useEffect(() => {
     fetchLocations();
     const fetchTournamentData = async () => {
-      const tournamentUrl = `http://localhost:8000/api/tournaments/${tournament_id}`;
+      const tournamentUrl = `${process.env.REACT_APP_API_HOST}/api/tournaments/${tournament_id}`;
       const response = await fetch(tournamentUrl);
       if (response.ok) {
         const tournamentData = await response.json();

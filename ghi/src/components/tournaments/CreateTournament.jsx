@@ -51,7 +51,7 @@ function CreateTournament() {
   };
 
   const fetchLocations = async () => {
-    const locationUrl = "http://localhost:8000/api/locations/";
+    const locationUrl = `${process.env.REACT_APP_API_HOST}/api/locations/`;
     const response = await fetch(locationUrl);
 
     if (response.ok) {
@@ -74,7 +74,7 @@ function CreateTournament() {
     data.max_teams = maxTeams;
     data.reached_max = reachedMax;
 
-    const tournamentUrl = "http://localhost:8000/api/tournaments";
+    const tournamentUrl = `${process.env.REACT_APP_API_HOST}/api/tournaments`;
     const fetchConfig = {
       method: "post",
       credentials: "include",

@@ -6,7 +6,9 @@ export default function TournamentList() {
   const [tournaments, setTournaments] = useState([]);
 
   const fetchData = async () => {
-    const response = await fetch("http://localhost:8000/api/tournaments");
+    const response = await fetch(
+      `${process.env.REACT_APP_API_HOST}/api/tournaments`
+    );
 
     if (response.ok) {
       const data = await response.json();
