@@ -74,6 +74,7 @@ class PlayerOutSelf(BaseModel):
     gender: Optional[str]
     skill_level_singles: Optional[float]
     skill_level_doubles: Optional[float]
+    is_admin: Optional[bool]
     emergency_contact_fullname: Optional[str]
     emergency_contact_phone_number: Optional[str]
 
@@ -112,6 +113,7 @@ class PlayerRepository:
                             , gender
                             , skill_level_singles
                             , skill_level_doubles
+                            , is_admin
                             , emergency_contact_fullname
                             , emergency_contact_phone_number
                         FROM players
@@ -132,8 +134,9 @@ class PlayerRepository:
                         gender=player[8],
                         skill_level_singles=player[9],
                         skill_level_doubles=player[10],
-                        emergency_contact_fullname=player[11],
-                        emergency_contact_phone_number=player[12],
+                        is_admin=player[11],
+                        emergency_contact_fullname=player[12],
+                        emergency_contact_phone_number=player[13],
                     )
         except Exception as e:
             print(e)
@@ -319,7 +322,7 @@ class PlayerRepository:
                             info.gender,
                             info.skill_level_singles,
                             info.skill_level_doubles,
-                            info.is_admin,
+                            False,  # is_admin
                             info.emergency_contact_fullname,
                             info.emergency_contact_phone_number,
                         ],
@@ -329,6 +332,7 @@ class PlayerRepository:
                     old_data["hashed_password"] = old_data["password"]
                     del old_data["password"]
                     old_data["birthdate"] = str(old_data["birthdate"])
+                    old_data["is_admin"] = False
                     return PlayerOutWithPassword(id=id, **old_data)
 
         except Exception as e:

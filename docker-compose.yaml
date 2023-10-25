@@ -5,7 +5,7 @@ volumes:
 services:
   fastapi:
     environment:
-      SIGNING_KEY: ${SIGNING_KEY}
+      SIGNING_KEY: 48e707805c1ec301995dcad2d280a289ed65d934716269ae15a7ed831715bb4b
       CORS_HOST: http://localhost:3000
       DATABASE_URL: postgresql://pickle_rick:pickleplay@postgres/pickle_play_db
     build:
@@ -19,13 +19,13 @@ services:
   postgres:
     image: postgres:14.5-bullseye
     volumes:
-        - postgres-data:/var/lib/postgresql/data
+      - postgres-data:/var/lib/postgresql/data
     environment:
-        POSTGRES_PASSWORD: pickleplay
-        POSTGRES_USER: pickle_rick
-        POSTGRES_DB: pickle_play_db
+      POSTGRES_PASSWORD: pickleplay
+      POSTGRES_USER: pickle_rick
+      POSTGRES_DB: pickle_play_db
     ports:
-        - 15432:5432
+      - 15432:5432
 
   ghi:
     image: node:lts-bullseye
@@ -40,4 +40,4 @@ services:
       NODE_ENV: development
       HOST: "0.0.0.0"
       PUBLIC_URL: http://localhost:3000
-      REACT_APP_API_HOST: ${REACT_APP_API_HOST}
+      REACT_APP_API_HOST: http://localhost:8000

@@ -1,5 +1,13 @@
-from fastapi import APIRouter, Depends, Response, HTTPException, status
-from queries.teams import TeamRepository, Error, TeamIn, AllTeamsOut, TeamOut
+from fastapi import APIRouter, Depends, HTTPException, status
+from queries.teams import (
+    TeamRepository,
+    Error,
+    TeamIn,
+    AllTeamsOut,
+    TeamOut,
+    SpecificTeamOut
+)
+from authenticator import authenticator
 from typing import List, Union
 from pydantic import BaseModel
 
@@ -22,7 +30,9 @@ def get_all(
 # POST (create) a team
 @router.post("/api/teams/", response_model=Union[TeamOut, Error])
 def create_team(
-    team: TeamIn, response: Response, repo: TeamRepository = Depends()
+    team: TeamIn,
+    repo: TeamRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data)
 ):
     # COMMENTED OUT 'response.status_code = 400 BELOW BUT
     # CAN ADD FOR STATUS CODE IF NEEDED
@@ -37,9 +47,28 @@ def update_team(
     team_id: int,
     team: TeamIn,
     repo: TeamRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data)
 ) -> Union[TeamOut, Error]:
-    return repo.update_team(team_id, team)
 
+    t = repo.get_one(team_id)
+
+    if t is None:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Team not found"
+        )
+    else:
+        t_dict = t.dict()
+
+    if (account_data["id"] == t_dict["player_id_1"]["id"] or
+            (t_dict["player_id_2"] is not None
+                and account_data["id"] == t_dict["player_id_2"]["id"])):
+        return repo.update_team(team_id, team)
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Cannot update that team"
+        )
 
 # WILL NEED TO CREATE AN IF STATEMENT like below:
 # if player_id_2 is not null
@@ -48,12 +77,11 @@ def update_team(
 
 
 # GET specific team
-@router.get("/api/teams/{team_id}", response_model=TeamOut | HttpError)
+@router.get("/api/teams/{team_id}", response_model=SpecificTeamOut | HttpError)
 def get_one_team(
     team_id: int,
-    response: Response,
     repo: TeamRepository = Depends(),
-) -> TeamOut:
+) -> SpecificTeamOut:
     team = repo.get_one(team_id)
     if team is None:
         raise HTTPException(
@@ -68,11 +96,25 @@ def get_one_team(
 def delete_team(
     team_id: int,
     repo: TeamRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data)
 ) -> bool:
+
     team = repo.get_one(team_id)
+
     if team is None:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Team not found"
         )
-    return repo.delete(team_id)
+    else:
+        team_dict = team.dict()
+
+    if (account_data["id"] == team_dict["player_id_1"]["id"] or
+            (team_dict["player_id_2"] is not None and
+                account_data["id"] == team_dict["player_id_2"]["id"])):
+        return repo.delete(team_id)
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Cannot delete that team"
+        )

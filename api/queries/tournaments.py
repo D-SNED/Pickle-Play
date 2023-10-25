@@ -8,6 +8,8 @@ from typing import List, Union
 class LocationOut(BaseModel):
     id: int
     name: str
+    address: str
+    picture_url: str
 
 
 class TournamentIn(BaseModel):
@@ -118,7 +120,9 @@ class TournamentRepository:
                         t.description,
                         t.max_teams,
                         t.reached_max,
-                        l.name
+                        l.name,
+                        l.picture_url,
+                        l.address
                         FROM tournaments as t
                         INNER JOIN locations as l
                         ON t.location_id = l.id
@@ -135,6 +139,8 @@ class TournamentRepository:
                             location=LocationOut(
                                 id=record[5],
                                 name=record[9],
+                                picture_url=record[10],
+                                address=record[11]
                             ),
                             description=record[6],
                             max_teams=record[7],
@@ -216,7 +222,9 @@ class TournamentRepository:
                         t.description,
                         t.max_teams,
                         t.reached_max,
-                        l.name
+                        l.name,
+                        l.picture_url,
+                        l.address
                         FROM tournaments as t
                         INNER JOIN locations as l
                         ON t.location_id = l.id
@@ -236,6 +244,8 @@ class TournamentRepository:
                         location=LocationOut(
                             id=record[5],
                             name=record[9],
+                            picture_url=record[10],
+                            address=record[11]
                         ),
                         description=record[6],
                         max_teams=record[7],

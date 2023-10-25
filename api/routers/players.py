@@ -39,6 +39,14 @@ class HttpError(BaseModel):
 router = APIRouter()  # we hook up our router to the main.py
 
 
+@router.get("/api/playerdata", response_model=PlayerOut | None)
+async def get_player_data(
+    player: PlayerOut = Depends(authenticator.try_get_current_account_data)
+) -> PlayerOut | None:
+    if player:
+        return PlayerOut(**player)
+
+
 @router.get("/token", response_model=PlayerToken | None)
 async def get_token(
     request: Request,
@@ -127,7 +135,7 @@ async def create_player(
     return PlayerToken(account=account, **token.dict())
 
 
-@router.get("/api/players/", response_model=Union[List[PlayerOut], Error])
+@router.get("/api/players", response_model=Union[List[PlayerOut], Error])
 def get_all(
     repo: PlayerRepository = Depends(),
 ):

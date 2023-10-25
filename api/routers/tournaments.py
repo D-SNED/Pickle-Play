@@ -1,5 +1,7 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException, status
+from pydantic import BaseModel
 from typing import Union, List
+from authenticator import authenticator
 from queries.tournaments import (
     TournamentIn,
     TournamentOut,
@@ -9,15 +11,26 @@ from queries.tournaments import (
 )
 
 
+class HttpError(BaseModel):
+    detail: str
+
+
 router = APIRouter()
 
 
-@router.post("/api/tournaments", response_model=Union[TournamentOut, Error])
+@router.post("/api/tournaments", response_model=TournamentOut | HttpError)
 def create_tournament(
     tournament: TournamentIn,
     repo: TournamentRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ):
-    return repo.create(tournament)
+    if account_data["is_admin"] is True:
+        return repo.create(tournament)
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Cannot create tournament"
+        )
 
 
 @router.get(
@@ -32,14 +45,22 @@ def get_all(
 
 @router.put(
     "/api/tournaments/{tournament_id}",
-    response_model=Union[TournamentOut, Error],
+    response_model=TournamentOut | HttpError,
 )
 def update_tournament(
     tournament_id: int,
     tournament: TournamentIn,
     repo: TournamentRepository = Depends(),
-) -> Union[TournamentOut, Error]:
-    return repo.update(tournament_id, tournament)
+    account_data: dict = Depends(authenticator.get_current_account_data)
+) -> TournamentOut | Error:
+
+    if account_data["is_admin"] is True:
+        return repo.update(tournament_id, tournament)
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Cannot update tournament"
+        )
 
 
 @router.get(
@@ -55,10 +76,18 @@ def get_specific_tournament(
 
 @router.delete(
     "/api/tournaments/{tournament_id}",
-    response_model=bool,
+    response_model=bool | HttpError,
 )
 def delete_tournament(
     tournament_id: int,
     repo: TournamentRepository = Depends(),
-) -> bool:
-    return repo.delete_tournament(tournament_id)
+    account_data: dict = Depends(authenticator.get_current_account_data)
+) -> bool | HttpError:
+
+    if account_data["is_admin"] is True:
+        return repo.delete_tournament(tournament_id)
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Cannot delete tournament"
+        )
