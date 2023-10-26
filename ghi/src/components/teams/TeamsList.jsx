@@ -34,7 +34,9 @@ function TeamsList() {
 
   return (
     <>
-      <h1>Teams</h1>
+      <h1 className="mt-10 text-center text-4xl font-bold leading-9 tracking-tight text-[#802d21]">
+        Teams
+      </h1>
       <table className="table table-striped">
         <thead>
           <tr>
@@ -48,7 +50,9 @@ function TeamsList() {
         </thead>
         <tbody>
           {teams.map((team) => {
-            const tournament = tournaments.find(t => t.id === team.tournament_id);
+            const tournament = tournaments.find(
+              (t) => t.id === team.tournament_id
+            );
             return (
               <tr key={team.id} value={team.id}>
                 <td>{team.team_name}</td>
@@ -57,6 +61,28 @@ function TeamsList() {
                 <td>{tournament ? tournament.name : "Unregistered"}</td>
                 <td>{tournament ? tournament.start_date : "Null"}</td>
                 <td>{tournament ? tournament.end_date : "Null"}</td>
+                <td>
+                  <button className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#C14533] rounded-lg hover:bg-[#d4402a]">
+                    <Link to={`${team.id}`} className="flex items-center">
+                      Details
+                      <svg
+                        className="w-3.5 h-3.5 ml-2"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 14 10"
+                      >
+                        <path
+                          stroke="currentColor"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M1 5h12m0 0L9 1m4 4L9 9"
+                        />
+                      </svg>
+                    </Link>
+                  </button>
+                </td>
               </tr>
             );
           })}

@@ -87,7 +87,7 @@ export const ourteams = [
   },
   {
     quote:
-      "Never say never, because limits, like fears, are often just an illusion",
+      "Never say never, because limits, like fears, are often just an illusion.",
     name: "Anna Thorndike",
     designation: "Software Engineering Student",
     company: "Hack Reactor",

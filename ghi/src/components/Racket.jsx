@@ -47,7 +47,7 @@ export function Racket(props) {
         <group {...props} dispose={null}>
           <group
             position={[0.5, -1.9, 0]}
-            rotation={[Math.PI / 2, 0.5, 0.5]}
+            rotation={[Math.PI / 2, 0.2, 1.6]}
             scale={0.008}
           >
             <mesh>

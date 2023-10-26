@@ -58,8 +58,8 @@
 
 ### Plan for next week
 
--
-- ***
+- Starting front-end
+- Drafting pages and file structure, css, tailwindcss.
 
 ## Week 3
 
@@ -106,23 +106,40 @@
 
 ### Goals
 
--
--
+- Handle front-end setup, make components, implement unit test for get one player.
 
 ### Accomplishments
 
--
--
+- Adding front-end with create-react-app
+- Installed tailwindcss along with PostCSS and Autoprefixer as dependencies (see first command below).. the second command (see second command below) initializes a tailwind.config.js file in your project root directory, which you can use to customize the default Tailwind CSS configuration.
+- Set up the Tailwind directives inside the ./src/index.css file and added gradients, text-gradients, and shadow-boxes:
+  `@tailwind base;
+@tailwind components;
+@tailwind utilities;
+`
+- \*note for box-shadows: @keyframes mulShdSpin is a CSS rule used to define an animation that can be applied to an HTML element. The animation is called "mulShdSpin" and it specifies how the element should change over time.
+- Installed eslint and eslint-plugin-jsx-a11y for more consistent coding and using jsx files.
+- Installed react-router-dom for Navbar.jsx component. this file will be connected to constants/index.js.
+- Added css to index.css file
+- Created styles.js for additional styling.
+- Added file structure to src folder, created the following subdirectories to improve organization: accounts, assets, components, errors, and pages. Some of these subdirectories include empty files for future use. In assets folder made icons, images, and logos folders. In accounts folder, empty files include: Login.js, Profile.js, Signup.js. In pages folder, empty pages include: About.js, Contact.js, Home.js.
+- Added a greenbg.jpg and a notfoundpage.jpg for Home.js component (empty file) background and NotFoundPage.js component (not empty).
+- Created a constants folder with an index.js file so we can import text to whatever component we want. This will improve maintainability and make the rest of the code a template for future projects since you only really need to change what's in the constants folder (index.js) with different information to create a totally new application.
+- Added some comments based on documentation (see tops public/index.html and src/index.js)
+- Added meta description and keywords to public/index.html file
+- Made edits in src/Construct.js and check for changes on localhost:3000
+- Reviewed and merged many MRs.
 
 ### Challenges
 
--
--
+- Making sure styles and tailwindcss were working as intended.
+- Making sure everyone new how to use the styles and css.
+- Had issue with unit test create player, ended up getting help from SEIRs and switched to get one player instead.
 
 ### Plan for next week
 
--
-- ***
+- Interested in using framer motion and react 3d libraries.
+- Frequent check ins to ensure all team members are feeling good.
 
 ---
 
@@ -130,20 +147,21 @@
 
 ### Goals
 
--
--
+- Implement three 3d objects (racket, pickleball, court)
+- Implement navbar
+- Make some cards and other styling choices for home and about pages.
 
 ### Accomplishments
 
--
--
+- navbar was implemented
+- 2/3 3d objects have been correctly displayed and are interactive.
 
 ### Challenges
 
--
--
+- Had some glitching with the court object. The blue part got pixelated everytime a user would rotate it. I tried changing positioning and lighting but it wasn't helping. I haven't deleted the files out of the project in case I learn how to fix this at a later date.
+- May need to update my unit test if Amanda changes player query.
 
 ### Plan for next week
 
--
-- ***
+- Celebrate!
+- After instructor presentations, our team will take some time to work on styling for mod 3 presentations.

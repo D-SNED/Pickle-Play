@@ -73,9 +73,7 @@ function LocationForm() {
     locationData.lighted_courts = lightedCourts;
     locationData.wheelchair_accessible = wheelchairAccessible;
 
-    console.log("Location Details:", locationData);
-
-    const locationUrl = "http://localhost:8000/api/locations/";
+    const locationUrl = `${process.env.REACT_APP_API_HOST}/api/locations`;
     const fetchOptions = {
       method: "post",
       credentials: "include",

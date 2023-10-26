@@ -16,10 +16,17 @@ import EditProfile from "./accounts/EditProfile";
 import LocationForm from "./components/locations/LocationForm";
 import TournamentDetails from "./components/tournaments/TournamentDetails";
 import UpdateTournament from "./components/tournaments/UpdateTournament";
+import TeamsList from "./components/teams/TeamsList";
 import CreateTeam from "./components/teams/CreateTeam";
+import TeamDetails from "./components/teams/TeamDetails";
+import UpdateTeam from "./components/teams/UpdateTeam";
 import LocationDetails from "./components/locations/LocationDetails";
+import PlayerList from "./accounts/PlayerList";
+import UpdateLocation from "./components/locations/UpdateLocation";
 
 import { Navbar } from "./components";
+import PlayerDetail from "./accounts/PlayerDetail";
+
 
 function App() {
   const domain = /https:\/\/[^/]+/;
@@ -58,9 +65,20 @@ function App() {
               <Route path="/about" element={<About />}></Route>
               <Route path="/profile" element={<ProfilePage />}></Route>
               <Route path="/profile/update" element={<EditProfile />}></Route>
-              {/* <Route path="/players" element={<PlayerList />}></Route> */}
+              <Route path="/players" element={<PlayerList />}></Route>
+              <Route path="/players/:player_id" element={<PlayerDetail />}></Route>
               {/* <Route path="/teams" element={<TeamList />}></Route> */}
               <Route path="/teams" element={<CreateTeam />}></Route>
+              {/* <Route path="/players" element={<PlayerList />}></Route> */}
+              <Route path="/teams">
+                <Route index element={<TeamsList />} />
+                <Route path="create" element={<CreateTeam />} />
+                <Route path=":team_id" element={<TeamDetails />} />
+                <Route
+                  path=":team_id/update"
+                  element={<UpdateTeam />}
+                />
+              </Route>
               <Route path="/tournaments">
                 <Route index element={<TournamentList />} />
                 <Route path="create" element={<CreateTournament />} />
@@ -74,6 +92,7 @@ function App() {
                 <Route index element={<LocationList />} />
                 <Route path="create" element={<LocationForm />} />
                 <Route path=":locationId" element={<LocationDetails />} />
+                <Route path=":locationId/update" element={<UpdateLocation />} />
               </Route>
 
               <Route path="/signup" element={<SignupForm />}></Route>

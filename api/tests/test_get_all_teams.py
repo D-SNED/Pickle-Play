@@ -18,7 +18,7 @@ class TestTeamQueries(TestCase):
                 "number_of_players": "1",
                 "player_id_1": "1",
                 "player_id_2": "null",
-                "tournament_id": "1"
+                "tournament_id": "1",
             },
             {
                 "id": 2,
@@ -28,7 +28,7 @@ class TestTeamQueries(TestCase):
                 "number_of_players": "2",
                 "player_id_1": "1",
                 "player_id_2": "2",
-                "tournament_id": "1"
+                "tournament_id": "1",
             }
         ]
 
@@ -42,12 +42,14 @@ def test_get_all():
                 "category": "Mens Singles",
                 "age_bracket": "Adult",
                 "team_name": "Winners Club",
+                "tournament_id": 1,
             },
             {
                 "id": 2,
                 "category": "Mixed Doubles",
                 "age_bracket": "Adult",
                 "team_name": "Double Up",
+                "tournament_id": 1,
             }
         ]
 
@@ -57,6 +59,8 @@ def test_get_all():
     # Clean up
     app.dependency_overrides = {}
 
+    print(response.json())
+    print(expected)
     # Assert
     assert response.status_code == status.HTTP_200_OK
     assert response.json() == expected

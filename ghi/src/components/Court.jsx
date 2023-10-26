@@ -46,9 +46,10 @@ export function Court(props) {
         <group {...props} dispose={null}>
           <mesh>
             <hemisphereLight intensity={0.6} groundColor="black" />
-            <pointLight intensity={1} />
+            <directionalLight position={[10, 10, 10]} intensity={0.5} />
+            {/* <pointLight intensity={1} /> */}
             <spotLight
-              position={[-20, 50, 10]}
+              position={[0, 50, 0]} // change position to [0, 50, 0], [-20, 50, 10]
               angle={0.12}
               penumbra={1}
               intensity={1}

@@ -1,22 +1,22 @@
 .bg-green {
-    background-color: #687F5E;
+  background-color: #687f5e;
 }
 
 .bg-floral-white {
-    background-color: #FAF7EB;
+  background-color: #faf7eb;
 }
 
 .button {
-    background-color: #C14533;
-    color: #C14533;
+  background-color: #c14533;
+  color: #c14533;
 }
 
 h2 {
-    color: #FAF7EB;
+  color: #faf7eb;
 }
 
 .profile-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }

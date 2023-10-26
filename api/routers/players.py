@@ -77,23 +77,24 @@ def delete_player(
 
 @router.get(
     "/api/players/{player_id}",
-    response_model=PlayerOutSelf | PlayerOutOther | HttpError,
+    response_model=Union[PlayerOutSelf, PlayerOutOther, HttpError]
 )
 async def get_one(
     player_id: int,
     repo: PlayerRepository = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
-) -> PlayerOutSelf | PlayerOutOther:
+):
     if player_id == account_data["id"]:
         player = repo.get_one_self(player_id)
+        return player
     elif player_id != account_data["id"]:
         player = repo.get_one(player_id)
+        return player
     else:
         raise HTTPException(
             status_code=status.HTTP_404_BAD_REQUEST,
             detail="Player does not exist",
         )
-    return player
 
 
 @router.put("/api/players/{player_id}", response_model=PlayerOut | HttpError)
