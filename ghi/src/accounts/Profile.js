@@ -52,7 +52,9 @@ export default function ProfilePage() {
     if (playerId !== 0) {
       getPlayerData(playerId);
     }
+
   }, [playerId]); // eslint-disable-line react-hooks/exhaustive-deps
+
 
   return (
     <>

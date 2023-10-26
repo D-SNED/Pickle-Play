@@ -3,8 +3,11 @@ from routers import players, locations, teams, tournaments
 from fastapi.middleware.cors import CORSMiddleware
 from authenticator import authenticator
 import os
+from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()  # This app variable contains our FastAPI application
+
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 app.include_router(players.router)
 app.include_router(authenticator.router)

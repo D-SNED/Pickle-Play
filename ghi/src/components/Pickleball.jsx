@@ -9,7 +9,9 @@ import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
 import CanvasLoader from "./CanvasLoader";
 
 export function Pickleball(props) {
-  const { nodes, materials } = useGLTF("/pickleball.glb");
+  const { nodes, materials } = useGLTF(
+    `${process.env.REACT_APP_API_HOST}/static/pickleball.glb`
+  );
   const group = useRef();
 
   useEffect(() => {

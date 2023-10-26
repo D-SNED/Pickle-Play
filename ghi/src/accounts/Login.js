@@ -12,7 +12,7 @@ const LoginForm = () => {
     e.preventDefault();
     login(username, password);
     e.target.reset();
-    navigate("/profile");
+    navigate("/");
   };
 
   return (
@@ -27,13 +27,15 @@ const LoginForm = () => {
                   className="block text-gray-700 text-md font-bold mb-2 py-2"
                   htmlFor="username"
                 >
-                  Username:
+                  Username
+                  <span style={{ color: "red" }}> *</span>
                 </label>
                 <input
                   className="form-control block border border-grey-light w-full p-3 rounded mb-4"
                   id="username"
                   type="text"
                   placeholder="username"
+                  required
                   onChange={(e) => setUsername(e.target.value)}
                 />
               </div>
@@ -42,13 +44,15 @@ const LoginForm = () => {
                   className="block text-gray-700 text-md font-bold mb-2 py-2"
                   htmlFor="password"
                 >
-                  Password:
+                  Password
+                  <span style={{ color: "red" }}> *</span>
                 </label>
                 <input
                   className="form-control block border border-grey-light w-full p-3 rounded mb-4"
                   id="password"
                   type="password"
                   placeholder="password"
+                  required
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>

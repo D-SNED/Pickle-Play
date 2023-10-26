@@ -7,6 +7,8 @@ const SignupForm = () => {
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const [birthdate, setBirthdate] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
     const { register } = useToken();
     const navigate = useNavigate();
 
@@ -17,6 +19,8 @@ const SignupForm = () => {
             password: password,
             email: email,
             birthdate: birthdate,
+            first_name: firstName,
+            last_name: lastName
         };
         console.log(`${process.env.REACT_APP_API_HOST}/api/players`)
         register(
@@ -35,11 +39,15 @@ const SignupForm = () => {
                     <div className="card-body">
                         <form onSubmit={(e) => handleRegistration(e)}>
                         <div className="mb-3">
-                            <label className="block text-gray-700 text-md font-bold mb-2 py-2" htmlFor="username">Username:</label>
+                            <label className="block text-gray-700 text-md font-bold mb-2 py-2" htmlFor="username">
+                                Username
+                                <span style={{ color: "red" }}> *</span>
+                            </label>
                             <input
                             name="username"
                             type="text"
                             placeholder="username"
+                            required
                             className="form-control block border border-grey-light w-full p-3 rounded mb-4"
                             onChange={(e) => {
                                 setUsername(e.target.value);
@@ -47,11 +55,15 @@ const SignupForm = () => {
                             />
                         </div>
                         <div className="mb-3">
-                            <label className="block text-gray-700 text-md font-bold mb-2 py-2" htmlFor="password">Password:</label>
+                            <label className="block text-gray-700 text-md font-bold mb-2 py-2" htmlFor="password">
+                                Password
+                                <span style={{ color: "red" }}> *</span>
+                            </label>
                             <input
                             name="password"
                             type="password"
                             placeholder="password"
+                            required
                             className="form-control block border border-grey-light w-full p-3 rounded mb-4"
                             onChange={(e) => {
                                 setPassword(e.target.value);
@@ -59,11 +71,15 @@ const SignupForm = () => {
                             />
                         </div>
                         <div className="mb-3">
-                            <label className="block text-gray-700 text-md font-bold mb-2 py-2" htmlFor="password">Email:</label>
+                            <label className="block text-gray-700 text-md font-bold mb-2 py-2" htmlFor="email">
+                                Email
+                                <span style={{ color: "red" }}> *</span>
+                            </label>
                             <input
                             name="email"
                             type="email"
                             placeholder="email"
+                            required
                             className="form-control block border border-grey-light w-full p-3 rounded mb-4"
                             onChange={(e) => {
                                 setEmail(e.target.value);
@@ -71,14 +87,50 @@ const SignupForm = () => {
                             />
                         </div>
                         <div className="mb-3">
-                            <label className="block text-gray-700 text-md font-bold mb-2 py-2" htmlFor="password">Birthdate:</label>
+                            <label className="block text-gray-700 text-md font-bold mb-2 py-2" htmlFor="birthdate">
+                                Birthdate
+                                <span style={{ color: "red" }}> *</span>
+                            </label>
                             <input
                             name="birthdate"
                             type="date"
                             placeholder="birthdate"
+                            required
                             className="form-control block border border-grey-light w-full p-3 rounded mb-4"
                             onChange={(e) => {
                                 setBirthdate(e.target.value);
+                            }}
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label className="block text-gray-700 text-md font-bold mb-2 py-2" htmlFor="first-name">
+                                First Name
+                                <span style={{ color: "red" }}> *</span>
+                            </label>
+                            <input
+                            name="first-name"
+                            type="text"
+                            placeholder="first name"
+                            required
+                            className="form-control block border border-grey-light w-full p-3 rounded mb-4"
+                            onChange={(e) => {
+                                setFirstName(e.target.value);
+                            }}
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label className="block text-gray-700 text-md font-bold mb-2 py-2" htmlFor="last-name">
+                                Last Name
+                                <span style={{ color: "red" }}> *</span>
+                            </label>
+                            <input
+                            name="last-name"
+                            type="text"
+                            placeholder="last name"
+                            required
+                            className="form-control block border border-grey-light w-full p-3 rounded mb-4"
+                            onChange={(e) => {
+                                setLastName(e.target.value);
                             }}
                             />
                         </div>
