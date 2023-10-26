@@ -416,3 +416,38 @@ Read me and documentation. Merging journals.
 ### References for Tomorrow:
 
 - ***
+
+## Date: 10/26/23
+
+### Today I worked on:
+
+Deployment, testing deployed site, clean up, readMe and adding a dropdown to create/update form
+**AH-HA!💡**
+
+**🎉 Celebrations 🎉**
+
+Our deployment is working!
+
+### Bugs encountered 🐛🐞🐜 :
+
+N/A
+🪲
+
+**\~Solution~**
+N/A
+
+### References Used Today:
+
+N/A
+
+### Any Blockers:
+
+N/A
+
+### Tomorrow I'm working on:
+
+N/A
+
+### References for Tomorrow:
+
+N/A
