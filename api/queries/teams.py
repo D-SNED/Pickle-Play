@@ -1,8 +1,6 @@
 from pydantic import BaseModel
 from queries.pool import pool
 from typing import Optional, List, Union
-
-# from jwtdown_fastapi.authentication import Token
 from datetime import date
 
 
@@ -231,7 +229,6 @@ class TeamRepository:
                     record = result.fetchone()
                     if record is None:
                         return None
-                    # will need to update record_to_team_out
                     return self.record_to_team_out(record)
         except Exception:
             return {"message": "Could not get that specific team"}
@@ -293,4 +290,4 @@ class TeamRepository:
                     return True
         except Exception:
             return False
-    # deleting something that is not there is good
+    # deleting something that is not there returns success in HTTP

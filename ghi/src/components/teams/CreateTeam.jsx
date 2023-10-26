@@ -113,11 +113,7 @@ function CreateTeam() {
 
     const response = await fetch(teamUrl, fetchConfig);
     console.log(response.ok);
-    // if (!response.ok)
     {
-      // const errorData = await response.json(); // Assuming server returns error details in JSON format
-      // console.error(errorData);
-      // } else {
       setTeamName("");
       setPlayerOne("");
       setPlayerTwo("");
@@ -144,11 +140,6 @@ function CreateTeam() {
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        {/* <img
-            className="mx-auto h-10 w-auto"
-            src="ghi/public/pickleplay_logo.png"
-            alt="Your Company"
-            /> */}
         <h2 className="mt-10 text-center text-4xl font-bold leading-9 tracking-tight text-[#802d21]">
           Create Team
         </h2>

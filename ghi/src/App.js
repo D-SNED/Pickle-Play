@@ -1,7 +1,6 @@
 import React from "react";
 import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-// import useToken from "@galvanize-inc/jwtdown-for-react";
 
 import SignupForm from "./accounts/Signup";
 import LoginForm from "./accounts/Login";
@@ -40,31 +39,12 @@ function App() {
   const domain = /https:\/\/[^/]+/;
   const basename = process.env.PUBLIC_URL.replace(domain, "");
 
-  // const [playerId, setPlayerId] = useState("");
-  // const { fetchWithToken, token } = useToken();
-
-  // const getPlayerData = async () => {
-  //   console.log(token)
-  //   if (token) {
-  //     const response = await fetchWithToken(
-  //       `${process.env.REACT_APP_API_HOST}/api/playerdata`);
-  //     setPlayerId(response["id"]);
-  //   } else {
-  //     setPlayerId(null);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   getPlayerData();
-  // }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
       <div className="object-fill">
         <BrowserRouter basename={basename}>
           <AuthProvider baseUrl={process.env.REACT_APP_API_HOST}>
-            {/* <div className="App-background-white"> */}
-            {/* <div className="App-background"> */}
             <div className="pb-16">
               <Navbar />
             </div>
@@ -75,9 +55,6 @@ function App() {
               <Route path="/profile/update" element={<EditProfile />}></Route>
               <Route path="/players" element={<PlayerList />}></Route>
               <Route path="/players/:player_id" element={<PlayerDetail />}></Route>
-              {/* <Route path="/teams" element={<TeamList />}></Route> */}
-              <Route path="/teams" element={<CreateTeam />}></Route>
-              {/* <Route path="/players" element={<PlayerList />}></Route> */}
               <Route path="/teams">
                 <Route index element={<TeamsList />} />
                 <Route path="create" element={<CreateTeam />} />
@@ -108,8 +85,7 @@ function App() {
               <Route path="/logout" element={<Logout />}></Route>
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
-            {/* </div> */}
-            {/* </div> */}
+
           </AuthProvider>
         </BrowserRouter>
       </div>

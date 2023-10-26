@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-// import SuccessMessage from "./SuccessMessage";
 
 function UpdateTeam() {
     const { team_id } = useParams();
@@ -17,7 +16,6 @@ function UpdateTeam() {
     const [players, setPlayers] = useState([]);
     const [tournaments, setTournaments] = useState([]);
 
-    // const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
     const teamCategories = [
         { value: "Mens" },
@@ -115,11 +113,7 @@ function UpdateTeam() {
         };
 
         const response = await fetch(teamUrl, fetchConfig);
-        // if (!response.ok)
         if (response.ok) {
-        // const errorData = await response.json(); // Assuming server returns error details in JSON format
-        // console.error(errorData);
-        // } else {
         setTeamName("");
         setPlayerOne("");
         setPlayerTwo("");
@@ -127,14 +121,6 @@ function UpdateTeam() {
         setPlayerCount("");
         setAgeBracket("");
         setTournament("");
-        // setShowSuccessMessage(true);
-        // const hideTimeout = setTimeout(() => {
-        //     setShowSuccessMessage(false);
-        // }, 5000);
-
-        // // Clear the timeout on component unmount
-        // return () => clearTimeout(hideTimeout);
-        // }
         }
         navigate(-1);
     };
@@ -163,11 +149,6 @@ function UpdateTeam() {
     return (
         <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-            {/* <img
-                className="mx-auto h-10 w-auto"
-                src="ghi/public/pickleplay_logo.png"
-                alt="Your Company"
-                /> */}
             <h2 className="mt-10 text-center text-4xl font-bold leading-9 tracking-tight text-[#802d21]">
             Update Team
             </h2>
@@ -377,7 +358,6 @@ function UpdateTeam() {
                 </select>
                 </div>
             </div>
-
             <div>
                 <button
                 type="submit"
@@ -387,14 +367,6 @@ function UpdateTeam() {
                 </button>
             </div>
             </form>
-
-            {/* <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-            <SuccessMessage
-                show={showSuccessMessage}
-                onHide={() => setShowSuccessMessage(false)}
-            />
-            </div> */}
-
             <div>
             <p className="mt-10 text-center text-sm text-gray-500">
                 PicklePlay by GitJAACD

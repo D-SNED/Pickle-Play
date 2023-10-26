@@ -42,7 +42,6 @@ const TeamDetails = () => {
         setTournaments(data);
     }
     };
-    // end
 
     const deleteTeam = async () => {
     const deleteUrl = `${process.env.REACT_APP_API_HOST}/api/teams/${team_id}`;
@@ -124,11 +123,6 @@ const TeamDetails = () => {
                         player.first_name === team.player_id_1.first_name &&
                         player.last_name === team.player_id_1.last_name
                         ) {
-                        console.log("Player Data:", player);
-                        console.log("Team Data:", team);
-                        console.log("Player One Data:", player.id); // CONSOLE LOG
-                        console.log("Player_id_1:", team.player_id_1);
-                        console.log("Player_id_2:", team.player_id_2);
                         return (
                             <div key={player.id}>
                             {player.username} ({player.first_name}{" "}
@@ -191,7 +185,7 @@ const TeamDetails = () => {
                             </div>
                         );
                         }
-                        return null; // Return null if player.id doesn't match team.player_id_1
+                        return null; // Return null if player.id doesn't match team.player_id_2
                     })}
                     </div>
                 )}
@@ -219,7 +213,7 @@ const TeamDetails = () => {
                             </div>
                         );
                         }
-                        return null; // Return null if player.id doesn't match team.player_id_1
+                        return null; // Return null if player.id doesn't match team.player_id_2
                     })}
                     </div>
                 )}
@@ -235,11 +229,10 @@ const TeamDetails = () => {
                 {team.tournament_id ? (
                     <div>
                     {tournaments.map((tournament) => {
-                        console.log("Tournament:", tournament);
                         if (tournament.id === team.tournament_id.id) {
                         return <div key={tournament.id}>{tournament.name}</div>;
                         }
-                        return null; // Return null if player.id doesn't match team.player_id_1
+                        return null; // Return null if tournament.id doesn't match team.tournament_id.id
                     })}
                     </div>
                 ) : (

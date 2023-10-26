@@ -56,7 +56,6 @@ export default function EditProfile() {
 
     if (response.ok) {
         const data = await response.json();
-        console.log(data);
         setUsername(data["username"]);
         setEmail(data["email"]);
         setBirthdate(data["birthdate"]);

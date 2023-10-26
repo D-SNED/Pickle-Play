@@ -34,10 +34,6 @@ def create_team(
     repo: TeamRepository = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data)
 ):
-    # COMMENTED OUT 'response.status_code = 400 BELOW BUT
-    # CAN ADD FOR STATUS CODE IF NEEDED
-    # REWATCH "FastAPI - Response Models" video for clarification
-    # response.status_code = 400
     return repo.create_team(team)
 
 
@@ -69,11 +65,6 @@ def update_team(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Cannot update that team"
         )
-
-# WILL NEED TO CREATE AN IF STATEMENT like below:
-# if player_id_2 is not null
-    # player_id: int,
-    #
 
 
 # GET specific team

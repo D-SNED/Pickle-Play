@@ -23,7 +23,6 @@ function TeamsList() {
     if (response.ok) {
       const data = await response.json();
       setTournaments(data);
-      // console.log(data)
     }
   };
 
