@@ -3,91 +3,91 @@ import "./styles/styles.css";
 import { useNavigate } from "react-router-dom";
 
 export default function EditProfile() {
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
-  const [birthdate, setBirthdate] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [profilePicture, setProfilePicture] = useState("");
-  const [gender, setGender] = useState("");
-  const [skillLevelSingles, setSkillLevelSingles] = useState("");
-  const [skillLevelDoubles, setSkillLevelDoubles] = useState("");
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [emergencyContactName, setEmergencyContactName] = useState("");
-  const [emergencyContactNum, setEmergencyContactNum] = useState("");
-  const [playerId, setPlayerId] = useState(0);
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("");
+    const [birthdate, setBirthdate] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [profilePicture, setProfilePicture] = useState("");
+    const [gender, setGender] = useState("");
+    const [skillLevelSingles, setSkillLevelSingles] = useState("");
+    const [skillLevelDoubles, setSkillLevelDoubles] = useState("");
+    const [isAdmin, setIsAdmin] = useState(false);
+    const [emergencyContactName, setEmergencyContactName] = useState("");
+    const [emergencyContactNum, setEmergencyContactNum] = useState("");
+    const [playerId, setPlayerId] = useState(0);
 
-  const genderCategories = [
-    { value: "Male" },
-    { value: "Female" },
-    { value: "Non-Binary" },
-    { value: "Other" },
-  ];
+    const genderCategories = [
+        { value: "Male" },
+        { value: "Female" },
+        { value: "Non-Binary" },
+        { value: "Other" },
+    ];
 
-  const skillLevels = [
-    { value: "2.00" },
-    { value: "2.25" },
-    { value: "2.50" },
-    { value: "2.75" },
-    { value: "3.00" },
-    { value: "3.25" },
-    { value: "3.50" },
-    { value: "3.75" },
-    { value: "4.00" },
-    { value: "4.25" },
-    { value: "4.50" },
-    { value: "4.75" },
-    { value: "5.00" },
-    { value: "5.25" },
-    { value: "5.50" },
-    { value: "5.75" },
-    { value: "6.00" },
-  ];
+    const skillLevels = [
+        { value: "2.00" },
+        { value: "2.25" },
+        { value: "2.50" },
+        { value: "2.75" },
+        { value: "3.00" },
+        { value: "3.25" },
+        { value: "3.50" },
+        { value: "3.75" },
+        { value: "4.00" },
+        { value: "4.25" },
+        { value: "4.50" },
+        { value: "4.75" },
+        { value: "5.00" },
+        { value: "5.25" },
+        { value: "5.50" },
+        { value: "5.75" },
+        { value: "6.00" },
+    ];
 
-  const getPlayerData = async (playerId) => {
-    const response = await fetch(
-      `${process.env.REACT_APP_API_HOST}/api/players/${playerId}`,
-      { credentials: "include" }
-    );
+    const getPlayerData = async (playerId) => {
+        const response = await fetch(
+        `${process.env.REACT_APP_API_HOST}/api/players/${playerId}`,
+        { credentials: "include" }
+        );
 
     if (response.ok) {
-      const data = await response.json();
-      console.log(data);
-      setUsername(data["username"]);
-      setEmail(data["email"]);
-      setBirthdate(data["birthdate"]);
-      data["first_name"] !== null
-        ? setFirstName(data["first_name"])
-        : setFirstName("");
-      data["last_name"] !== null
-        ? setLastName(data["last_name"])
-        : setLastName("");
-      data["phone_number"] !== null
-        ? setPhoneNumber(data["phone_number"])
-        : setPhoneNumber("");
-      data["profile_picture"] !== null
-        ? setProfilePicture(data["profile_picture"])
-        : setProfilePicture("");
-      data["gender"] !== null ? setGender(data["gender"]) : setGender("");
-      data["skill_level_singles"] !== null
-        ? setSkillLevelSingles(data["skill_level_singles"])
-        : setSkillLevelSingles(null);
-      data["skill_level_doubles"] !== null
-        ? setSkillLevelDoubles(data["skill_level_doubles"])
-        : setSkillLevelDoubles(null);
-      setIsAdmin(data["is_admin"]);
-      data["emergency_contact_fullname"] !== null
-        ? setEmergencyContactName(data["emergency_contact_fullname"])
-        : setEmergencyContactName("");
-      data["emergency_contact_phone_number"] !== null
-        ? setEmergencyContactNum(data["emergency_contact_phone_number"])
-        : setEmergencyContactNum("");
-    }
-  };
+        const data = await response.json();
+        console.log(data);
+        setUsername(data["username"]);
+        setEmail(data["email"]);
+        setBirthdate(data["birthdate"]);
+        data["first_name"] !== null
+            ? setFirstName(data["first_name"])
+            : setFirstName("");
+        data["last_name"] !== null
+            ? setLastName(data["last_name"])
+            : setLastName("");
+        data["phone_number"] !== null
+            ? setPhoneNumber(data["phone_number"])
+            : setPhoneNumber("");
+        data["profile_picture"] !== null
+            ? setProfilePicture(data["profile_picture"])
+            : setProfilePicture("");
+        data["gender"] !== null ? setGender(data["gender"]) : setGender("");
+        data["skill_level_singles"] !== null
+            ? setSkillLevelSingles(data["skill_level_singles"])
+            : setSkillLevelSingles(null);
+        data["skill_level_doubles"] !== null
+            ? setSkillLevelDoubles(data["skill_level_doubles"])
+            : setSkillLevelDoubles(null);
+        setIsAdmin(data["is_admin"]);
+        data["emergency_contact_fullname"] !== null
+            ? setEmergencyContactName(data["emergency_contact_fullname"])
+            : setEmergencyContactName("");
+        data["emergency_contact_phone_number"] !== null
+            ? setEmergencyContactNum(data["emergency_contact_phone_number"])
+            : setEmergencyContactNum("");
+        }
+    };
 
   const handleUsernameChange = (e) => {
     const value = e.target.value;

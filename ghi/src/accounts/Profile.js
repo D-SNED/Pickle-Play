@@ -56,7 +56,6 @@ export default function ProfilePage() {
 
   return (
     <>
-      <head>
         <link
           rel="stylesheet"
           href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css"
@@ -65,7 +64,6 @@ export default function ProfilePage() {
           rel="stylesheet"
           href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css"
         />
-      </head>
 
       <main className="profile-page">
         <section className="relative block h-500-px">

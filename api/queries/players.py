@@ -54,6 +54,7 @@ class PlayerOutOther(BaseModel):
     id: int
     username: str
     email: str
+    birthdate: str
     first_name: Optional[str]
     last_name: Optional[str]
     profile_picture: Optional[str]
@@ -122,6 +123,7 @@ class PlayerRepository:
                         [player_id],
                     )
                     player = result.fetchone()
+                    print(player)
                     return PlayerOutSelf(
                         id=player[0],
                         username=player[1],
@@ -151,6 +153,7 @@ class PlayerRepository:
                         SELECT id
                             , username
                             , email
+                            , birthdate
                             , first_name
                             , last_name
                             , profile_picture
@@ -163,16 +166,18 @@ class PlayerRepository:
                         [player_id],
                     )
                     player = result.fetchone()
+                    print(player)
                     return PlayerOutOther(
                         id=player[0],
                         username=player[1],
                         email=player[2],
-                        first_name=player[3],
-                        last_name=player[4],
-                        profile_picture=player[5],
-                        gender=player[6],
-                        skill_level_singles=player[7],
-                        skill_level_doubles=player[8],
+                        birthdate=str(player[3]),
+                        first_name=player[4],
+                        last_name=player[5],
+                        profile_picture=player[6],
+                        gender=player[7],
+                        skill_level_singles=player[8],
+                        skill_level_doubles=player[9],
                     )
         except Exception as e:
             print(e)

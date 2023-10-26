@@ -1,0 +1,121 @@
+import React, { useEffect, useState} from "react";
+import '../index.css';
+import './styles/styles.css';
+import { useParams } from 'react-router-dom';
+
+
+export default function PlayerDetail() {
+
+    const [playerData, setPlayerData] = useState([]);
+    const [currentDate] = useState(new Date());
+    const { player_id } = useParams();
+
+
+    const getPlayerData = async () => {
+
+        const response = await fetch(
+            `${process.env.REACT_APP_API_HOST}/api/players/${player_id}`, {credentials: "include"});
+
+        if (response.ok) {
+            const data = await response.json();
+            setPlayerData(data);
+        };
+
+    };
+
+
+    const playerName = ((playerData.first_name === null && playerData.last_name === null) ? "Pickle Player" : `${playerData.first_name} ${playerData.last_name}`);
+
+    const defaultPic = "https://gitlab.com/uploads/-/system/project/avatar/50505030/pickleplay_logo.jpeg";
+    const profilePic = (playerData.profile_picture === null ? defaultPic : playerData.profile_picture);
+
+    const birthdate = new Date(playerData.birthdate);
+    const age = currentDate.getFullYear() - birthdate.getFullYear();
+
+    const hasBirthdayPassed = (
+        currentDate.getMonth() > birthdate.getMonth() ||
+        (currentDate.getMonth() === birthdate.getMonth() &&
+        currentDate.getDate() >= birthdate.getDate()));
+
+    const playerAge = (hasBirthdayPassed ? age : age - 1).toString();
+
+
+    useEffect(() => {
+
+        getPlayerData();
+
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+
+    return (
+        <>
+            <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css"/>
+            <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css"/>
+
+            <main className="profile-page">
+            <section className="relative block h-500-px">
+                <div className="absolute top-2 w-full h-full bg-center bg-cover bg-green">
+                    <img
+                        src='https://images.unsplash.com/photo-1499336315816-097655dcfbda?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=2710&amp;q=80'
+                        alt=""
+                    />
+                    <span className="w-full h-full absolute bg-floral-white"></span>
+                </div>
+            </section>
+            <section className="relative py-16 bg-floral-white">
+                <div className="container mx-auto px-4">
+                    <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
+                        <div className="px-6">
+                            <div className="flex flex-wrap justify-center">
+                                <img
+                                    alt="Pickle Player Profile"
+                                    src={profilePic}
+                                    className="h-40 w-40 rounded-full object-cover object-center shadow-xl rounded-full align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px">
+                                </img>
+                            </div>
+                            <div className="py-16 text-center mt-12">
+                                <h3 className="text-6xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2">
+                                    {playerName}
+                                </h3>
+                            </div>
+                            <div className="mt-10 py-10 border-t border-blueGray-200 text-center">
+                                <div className="flex flex-wrap justify-center">
+                                    <div className="w-full lg:w-9/12 px-4">
+                                        <div className="my-4 flex flex-col 2xl:flex-row space-y-4 2xl:space-y-0 2xl:space-x-4">
+                                            <div className="w-full flex flex-col 2xl:w-1/3">
+                                                    <h4 className="text-2xl text-gray-900 font-bold py-5 text-left">Player Info</h4>
+                                                    <ul className="mt-2 text-gray-700">
+                                                        <li className="flex border-y py-5 text-left">
+                                                            <span className="font-bold w-60">Email:</span>
+                                                            <span className="text-gray-700">{playerData["email"]}</span>
+                                                        </li>
+                                                        <li className="flex border-b py-5 text-left">
+                                                            <span className="font-bold w-60">Age:</span>
+                                                            <span className="text-gray-700">{playerAge}</span>
+                                                        </li>
+                                                        <li className="flex border-b py-5 text-left">
+                                                            <span className="font-bold w-60">Gender:</span>
+                                                            <span className="text-gray-700">{(playerData.gender !== null && playerData.gender !== undefined) ? playerData.gender : "N/A"}</span>
+                                                        </li>
+                                                        <li className="flex border-b py-5 text-left">
+                                                            <span className="font-bold w-60">Skill Level Singles:</span>
+                                                            <span className="text-gray-700">{(playerData.skill_level_singles !== null && playerData.skill_level_singles !== undefined) ? playerData.skill_level_singles : "N/A"}</span>
+                                                        </li>
+                                                        <li className="flex border-b py-5 text-left">
+                                                            <span className="font-bold w-60">Skill Level Doubles:</span>
+                                                            <span className="text-gray-700">{(playerData.skill_level_doubles !== null && playerData.skill_level_doubles !== undefined) ? playerData.skill_level_doubles : "N/A"}</span>
+                                                        </li>
+                                                    </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            </main>
+        </>
+    );
+}
