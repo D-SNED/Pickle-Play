@@ -116,7 +116,18 @@ const TeamDetails = () => {
                 Player One
                 </dt>
                 <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                {team.player_id_1 && (
+                    {players.map((player) => {
+                        if (team.player_id_1.id === player.id) {
+                            return(
+                                <div key={player.id}>
+                                {player.first_name} {player.last_name}
+                                </div>
+                            )
+                        } else {
+                            return null;
+                        };
+                    })}
+                {/* {team.player_id_1 && (
                     <div>
                     {players.map((player) => {
                         if (
@@ -133,7 +144,7 @@ const TeamDetails = () => {
                         return null; // Return null if player.id doesn't match team.player_id_1
                     })}
                     </div>
-                )}
+                )} */}
                 </dd>
             </div>
             {/* Player 1 Skill Level */}
@@ -142,18 +153,14 @@ const TeamDetails = () => {
                 Player One: Skill Levels, Singles/Doubles
                 </dt>
                 <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                {team.player_id_1 && (
                     <div>
-                    Skill Levels:{" "}
+                    Skill Levels:
                     {players.map((player) => {
-                        if (
-                        player.first_name === team.player_id_1.first_name &&
-                        player.last_name === team.player_id_1.last_name
-                        ) {
+                        if (team.player_id_1.id === player.id) {
                         return (
                             <div key={player.id}>
                             {player.skill_level_singles}
-                            {"/"}
+                            /
                             {player.skill_level_doubles}
                             </div>
                         );
@@ -161,7 +168,6 @@ const TeamDetails = () => {
                         return null; // Return null if player.id doesn't match team.player_id_1
                     })}
                     </div>
-                )}
                 </dd>
             </div>
 
@@ -171,7 +177,18 @@ const TeamDetails = () => {
                 Player Two
                 </dt>
                 <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                {team.player_id_2 && (
+                    {players.map((player) => {
+                        if (team.player_id_2.id === player.id) {
+                            return(
+                                <div key={player.id}>
+                                {player.first_name} {player.last_name}
+                                </div>
+                            )
+                        } else {
+                            return null;
+                        };
+                    })}
+                {/* {team.player_id_2 && (
                     <div>
                     {players.map((player) => {
                         if (
@@ -188,7 +205,7 @@ const TeamDetails = () => {
                         return null; // Return null if player.id doesn't match team.player_id_2
                     })}
                     </div>
-                )}
+                )} */}
                 </dd>
             </div>
             {/* Player 2 Skill Level */}
@@ -197,26 +214,21 @@ const TeamDetails = () => {
                 Player Two: Skill Levels, Singles/Doubles
                 </dt>
                 <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                {team.player_id_2 && (
                     <div>
-                    Skill Levels:{" "}
+                    Skill Levels:
                     {players.map((player) => {
-                        if (
-                        player.first_name === team.player_id_2.first_name &&
-                        player.last_name === team.player_id_2.last_name
-                        ) {
+                        if (team.player_id_2.id === player.id) {
                         return (
                             <div key={player.id}>
                             {player.skill_level_singles}
-                            {"/"}
+                            /
                             {player.skill_level_doubles}
                             </div>
                         );
                         }
-                        return null; // Return null if player.id doesn't match team.player_id_2
+                        return null; // Return null if player.id doesn't match team.player_id_1
                     })}
                     </div>
-                )}
                 </dd>
             </div>
 
