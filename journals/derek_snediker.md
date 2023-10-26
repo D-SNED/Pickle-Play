@@ -380,44 +380,39 @@ N/A
 
 - ***
 
-## Date
+## Date: 10/25/23
 
 ### Today I worked on:
 
+Getting teams entered in a tournament to show on the details of a specific tournament. Did many merge requests today. Did a little bit of styling and code clean up.
+
 **AH-HA!💡**
+Was running into an issue when I would get the teams data and filter that list so that it would be a list of teams that had the same tournament id as the id of the tournament. Initially on page load it wouldn't fetch the data. But on editing the code and saving it would fetch the data. The only thing I could think of was that the tournament data was being fetched and once that promise was completed it would render the page before the promise of the fetch for filtered teams. I was able to get around this by putting the fetchTeamData funciton into a second use effect and successfully rendering the team information for the tournament.
 
 **🎉 Celebrations 🎉**
+We have stopped coding to prepare for friday's presentation.
 
 ### Bugs encountered 🐛🐞🐜 :
+
+In Amanda's code she was using useParams to dynamically change the fetch for a specific player. We ended up getting a url that was like players/undefined. I was able to get it figured out but still unsure of what was wrong. Something about passing the payer_id into the fetch funciton as a parameter.
 
 🪲
 
 **\~Solution~**
+Still not entirely sure why it works but you can't pass the dynamically changing part into the funciton as a parameter. Also in app js her player_id was playerId and it didn't match
 
 ### References Used Today:
 
+N/A
+
 ### Any Blockers:
+
+Not really a blocker just wish we had been more on top of deployment this entire time
 
 ### Tomorrow I'm working on:
 
+Read me and documentation. Merging journals.
+
 ### References for Tomorrow:
 
-### Goals
-
--
--
-
-### Accomplishments
-
--
--
-
-### Challenges
-
--
--
-
-### Plan for next week
-
--
 - ***
