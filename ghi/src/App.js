@@ -3,29 +3,37 @@ import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 // import useToken from "@galvanize-inc/jwtdown-for-react";
 
-import LoginForm from "./accounts/Login";
 import SignupForm from "./accounts/Signup";
+import LoginForm from "./accounts/Login";
+import Logout from "./accounts/Logout";
+
 import Home from "./pages/Home";
 import About from "./pages/About";
-import NotFoundPage from "./pages/NotFoundPage";
+
 import ProfilePage from "./accounts/Profile";
-import TournamentList from "./components/tournaments/ListTournament";
-import LocationList from "./components/locations/LocationList";
-import CreateTournament from "./components/tournaments/CreateTournament";
 import EditProfile from "./accounts/EditProfile";
-import LocationForm from "./components/locations/LocationForm";
-import TournamentDetails from "./components/tournaments/TournamentDetails";
-import UpdateTournament from "./components/tournaments/UpdateTournament";
+import PlayerList from "./accounts/PlayerList";
+import PlayerDetail from "./accounts/PlayerDetail";
+
 import TeamsList from "./components/teams/TeamsList";
 import CreateTeam from "./components/teams/CreateTeam";
 import TeamDetails from "./components/teams/TeamDetails";
 import UpdateTeam from "./components/teams/UpdateTeam";
+
+import TournamentList from "./components/tournaments/ListTournament";
+import CreateTournament from "./components/tournaments/CreateTournament";
+import TournamentDetails from "./components/tournaments/TournamentDetails";
+import UpdateTournament from "./components/tournaments/UpdateTournament";
+
+import LocationList from "./components/locations/LocationList";
+import LocationForm from "./components/locations/LocationForm";
 import LocationDetails from "./components/locations/LocationDetails";
-import PlayerList from "./accounts/PlayerList";
 import UpdateLocation from "./components/locations/UpdateLocation";
 
+import NotFoundPage from "./pages/NotFoundPage";
+
 import { Navbar } from "./components";
-import PlayerDetail from "./accounts/PlayerDetail";
+
 
 
 function App() {
@@ -97,7 +105,7 @@ function App() {
 
               <Route path="/signup" element={<SignupForm />}></Route>
               <Route path="/login" element={<LoginForm />}></Route>
-              {/* <Route path="/logout" component={<Logout />}></Route> */}
+              <Route path="/logout" element={<Logout />}></Route>
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
             {/* </div> */}
