@@ -11,6 +11,12 @@ function CreateTournament() {
   const [maxTeams, setMaxTeams] = useState("");
   const [reachedMax, setReachedMax] = useState(false);
 
+  const tournamentCategories = [
+    { value: "Men's" },
+    { value: "Women's" },
+    { value: "Mixed" },
+  ];
+
   const handleNameChange = (event) => {
     const value = event.target.value;
     setName(value);
@@ -180,7 +186,7 @@ function CreateTournament() {
               Category
             </label>
             <div className="mt-2">
-              <input
+              <select
                 onChange={handleCategoryChange}
                 value={category}
                 id="category"
@@ -188,7 +194,16 @@ function CreateTournament() {
                 type="text"
                 required
                 className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-              />
+              >
+                <option value="">Choose a category</option>
+                {tournamentCategories.map((category) => {
+                  return (
+                    <option key={category.value} value={category.value}>
+                      {category.value}
+                    </option>
+                  );
+                })}
+              </select>
             </div>
           </div>
           <div>
@@ -292,11 +307,6 @@ function CreateTournament() {
             </button>
           </div>
         </form>
-        <div>
-          <p className="mt-10 text-center text-sm text-gray-500">
-            PicklePlay by GitJAACD
-          </p>
-        </div>
       </div>
     </div>
   );
