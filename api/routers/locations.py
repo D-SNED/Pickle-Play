@@ -19,7 +19,7 @@ class HttpError(BaseModel):
 
 # GET all locations
 @router.get(
-    "/api/locations/", response_model=Union[List[AllLocationsOut], Error]
+    "/api/locations", response_model=Union[List[AllLocationsOut], Error]
 )
 def get_all(
     repo: LocationRepository = Depends(),
@@ -28,7 +28,7 @@ def get_all(
 
 
 # POST create new location
-@router.post("/api/locations/", response_model=LocationOut | HttpError)
+@router.post("/api/locations", response_model=LocationOut | HttpError)
 def create_location(
     location: LocationIn,
     repo: LocationRepository = Depends(),

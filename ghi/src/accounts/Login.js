@@ -1,6 +1,6 @@
 import useToken from "@galvanize-inc/jwtdown-for-react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
@@ -16,54 +16,60 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="w-full max-w-xs">
-      {/* <div className="offset-3 col-6">
-                <div className="shadow p-4 mt-4"> */}
-      {/* <div className="card-body"> */}
-      <form
-        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
-        onSubmit={(e) => handleSubmit(e)}
-      >
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="username"
-          >
-            Username:
-          </label>
-          <input
-            className="form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="username"
-            type="text"
-            placeholder="Username"
-            onChange={(e) => setUsername(e.target.value)}
-          />
+    <div className="bg-green min-h-screen flex flex-col">
+      <div className="container max-w-md mx-auto flex-1 flex flex-col items-center justify-center px-2">
+        <div className="bg-white px-6 py-8 rounded-lg shadow-md text-black w-full">
+          <h5 className="mb-8 text-3xl text-center">Log In</h5>
+          <div className="card-body">
+            <form onSubmit={(e) => handleSubmit(e)}>
+              <div className="mb-3">
+                <label
+                  className="block text-gray-700 text-md font-bold mb-2 py-2"
+                  htmlFor="username"
+                >
+                  Username:
+                </label>
+                <input
+                  className="form-control block border border-grey-light w-full p-3 rounded mb-4"
+                  id="username"
+                  type="text"
+                  placeholder="username"
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </div>
+              <div className="mb-4">
+                <label
+                  className="block text-gray-700 text-md font-bold mb-2 py-2"
+                  htmlFor="password"
+                >
+                  Password:
+                </label>
+                <input
+                  className="form-control block border border-grey-light w-full p-3 rounded mb-4"
+                  id="password"
+                  type="password"
+                  placeholder="password"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+              <div>
+                <button
+                    className="w-full text-center py-3 rounded bg-green text-white hover:bg-green-dark focus:outline-none my-1"
+                    type="submit"
+                    value="login">
+                  Login
+                </button>
+              </div>
+            </form>
+          </div>
+          <div className="text-grey-dark text-center mt-6">
+            Don't have an account?
+            <Link to={{ pathname: "/signup" }} className="px-2 no-underline border-b border-blue text-blue">
+                Sign Up
+            </Link>
+          </div>
         </div>
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="password"
-          >
-            Password:
-          </label>
-          <input
-            className="form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="password"
-            type="password"
-            placeholder="**************"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <div>
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" value="login">
-            Login
-            {/* <input className="btn btn-primary" type="submit" value="Login" /> */}
-          </button>
-        </div>
-      </form>
-      {/* </div> */}
-      {/* </div>
-            </div> */}
+      </div>
     </div>
   );
 };

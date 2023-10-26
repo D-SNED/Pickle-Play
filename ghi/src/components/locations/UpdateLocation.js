@@ -285,7 +285,7 @@ function UpdateLocation() {
                 Picture URL
             </label>
             <div className="mb-4">
-              <input
+                <input
                 value={pictureUrl}
                 onChange={handlePictureUrlChange}
                 required
@@ -294,7 +294,7 @@ function UpdateLocation() {
                 id="Picture URL"
                 name="Surface"
                 className="w-full py-2 px-3 border rounded-md"
-              />
+                />
             </div>
             </div>
             <div>

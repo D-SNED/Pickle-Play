@@ -1,6 +1,6 @@
 import { useState } from "react";
 import useToken from "@galvanize-inc/jwtdown-for-react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignupForm = () => {
     const [username, setUsername] = useState("");
@@ -28,58 +28,76 @@ const SignupForm = () => {
     };
 
     return (
-        <div className="card text-bg-light mb-3">
-            <h5 className="card-header">Signup</h5>
-            <div className="card-body">
-                <form onSubmit={(e) => handleRegistration(e)}>
-                <div className="mb-3">
-                    <label className="form-label">username</label>
-                    <input
-                    name="username"
-                    type="text"
-                    className="form-control"
-                    onChange={(e) => {
-                        setUsername(e.target.value);
-                    }}
-                    />
+        <div className="bg-green min-h-screen flex flex-col">
+            <div className="container max-w-md mx-auto flex-1 flex flex-col items-center justify-center px-2">
+                <div className="bg-white px-6 py-8 rounded-lg shadow-md text-black w-full">
+                    <h5 className="mb-8 text-3xl text-center">Sign Up</h5>
+                    <div className="card-body">
+                        <form onSubmit={(e) => handleRegistration(e)}>
+                        <div className="mb-3">
+                            <label className="block text-gray-700 text-md font-bold mb-2 py-2" htmlFor="username">Username:</label>
+                            <input
+                            name="username"
+                            type="text"
+                            placeholder="username"
+                            className="form-control block border border-grey-light w-full p-3 rounded mb-4"
+                            onChange={(e) => {
+                                setUsername(e.target.value);
+                            }}
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label className="block text-gray-700 text-md font-bold mb-2 py-2" htmlFor="password">Password:</label>
+                            <input
+                            name="password"
+                            type="password"
+                            placeholder="password"
+                            className="form-control block border border-grey-light w-full p-3 rounded mb-4"
+                            onChange={(e) => {
+                                setPassword(e.target.value);
+                            }}
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label className="block text-gray-700 text-md font-bold mb-2 py-2" htmlFor="password">Email:</label>
+                            <input
+                            name="email"
+                            type="email"
+                            placeholder="email"
+                            className="form-control block border border-grey-light w-full p-3 rounded mb-4"
+                            onChange={(e) => {
+                                setEmail(e.target.value);
+                            }}
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label className="block text-gray-700 text-md font-bold mb-2 py-2" htmlFor="password">Birthdate:</label>
+                            <input
+                            name="birthdate"
+                            type="date"
+                            placeholder="birthdate"
+                            className="form-control block border border-grey-light w-full p-3 rounded mb-4"
+                            onChange={(e) => {
+                                setBirthdate(e.target.value);
+                            }}
+                            />
+                        </div>
+                        <div>
+                            <button
+                                type="submit"
+                                value="Register"
+                                className="w-full text-center py-3 rounded bg-green text-white hover:bg-green-dark focus:outline-none my-1"
+                            >Create Account</button>
+                        </div>
+                        </form>
+                    </div>
+                    <div className="text-grey-dark text-center mt-6">
+                        Already have an account?
+                        <Link to={{ pathname: "/login" }} className="px-2 no-underline border-b border-blue text-blue">
+                            Log in
+                        </Link>
+                    </div>
                 </div>
-                <div className="mb-3">
-                    <label className="form-label">password</label>
-                    <input
-                    name="password"
-                    type="password"
-                    className="form-control"
-                    onChange={(e) => {
-                        setPassword(e.target.value);
-                    }}
-                    />
-                </div>
-                <div className="mb-3">
-                    <label className="form-label">email</label>
-                    <input
-                    name="email"
-                    type="email"
-                    className="form-control"
-                    onChange={(e) => {
-                        setEmail(e.target.value);
-                    }}
-                    />
-                </div>
-                <div className="mb-3">
-                    <label className="form-label">birthdate</label>
-                    <input
-                    name="birthdate"
-                    type="birthdate"
-                    className="form-control"
-                    onChange={(e) => {
-                        setBirthdate(e.target.value);
-                    }}
-                    />
-                </div>
-                <div>
-                    <input className="btn btn-primary" type="submit" value="Register" />
-                </div>
-                </form>
             </div>
         </div>
     );

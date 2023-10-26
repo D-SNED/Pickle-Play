@@ -8,7 +8,7 @@ import players from "../assets/icons/players.svg";
 import trophy from "../assets/icons/trophy.svg";
 import world from "../assets/icons/world.svg";
 
-export const navLinks = [
+export const navLinksLoggedIn = [
   {
     id: "Home",
     url: "/",
@@ -38,16 +38,35 @@ export const navLinks = [
     url: "/locations",
   },
   {
+    id: "Logout",
+    url: "/logout",
+  },
+];
+
+export const navLinksNotLoggedIn = [
+  {
+    id: "Home",
+    url: "/",
+  },
+  {
+    id: "About",
+    url: "/about",
+  },
+  {
+    id: "Tournaments",
+    url: "/tournaments",
+  },
+  {
+    id: "Locations",
+    url: "/locations",
+  },
+  {
     id: "Signup",
     url: "/signup",
   },
   {
     id: "Login",
     url: "/login",
-  },
-  {
-    id: "Logout",
-    url: "/logout",
   },
 ];
 

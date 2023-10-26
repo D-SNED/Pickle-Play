@@ -1,4 +1,4 @@
-import { Navbar, PlayRacket } from "../components";
+import { PlayRacket } from "../components";
 import { motion } from "framer-motion";
 import { styles } from "../styles";
 import { services } from "../constants";
@@ -8,7 +8,6 @@ import ServiceCard from "./ServiceCard";
 const Home = () => {
   return (
     <>
-      <Navbar />
       <PlayRacket />
       <div className="flex justify-center">
         <motion.div variants={textVariant()}>

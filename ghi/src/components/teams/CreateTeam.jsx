@@ -66,7 +66,7 @@ function CreateTeam() {
 
   // Pulling Player Data for dropdown selection
   const fetchPlayers = async () => {
-    const playerUrl = "http://localhost:8000/api/players/";
+    const playerUrl = `${process.env.REACT_APP_API_HOST}/api/players`;
     const response = await fetch(playerUrl);
 
     if (response.ok) {
@@ -77,7 +77,7 @@ function CreateTeam() {
 
   // Pulling Tournament Data for dropdown selection
   const fetchTournaments = async () => {
-    const tournamentUrl = "http://localhost:8000/api/tournaments";
+    const tournamentUrl = `${process.env.REACT_APP_API_HOST}/api/tournaments`;
     const response = await fetch(tournamentUrl);
 
     if (response.ok) {
@@ -101,7 +101,7 @@ function CreateTeam() {
     data.number_of_players = playerCount;
     data.tournament_id = tournament ? parseInt(tournament) : null;
 
-    const teamUrl = "http://localhost:8000/api/teams/";
+    const teamUrl = `${process.env.REACT_APP_API_HOST}/api/teams`;
     const fetchConfig = {
       method: "post",
       credentials: "include",
@@ -113,11 +113,7 @@ function CreateTeam() {
 
     const response = await fetch(teamUrl, fetchConfig);
     console.log(response.ok);
-    // if (!response.ok)
     {
-      // const errorData = await response.json(); // Assuming server returns error details in JSON format
-      // console.error(errorData);
-      // } else {
       setTeamName("");
       setPlayerOne("");
       setPlayerTwo("");
@@ -144,11 +140,6 @@ function CreateTeam() {
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        {/* <img
-            className="mx-auto h-10 w-auto"
-            src="ghi/public/pickleplay_logo.png"
-            alt="Your Company"
-            /> */}
         <h2 className="mt-10 text-center text-4xl font-bold leading-9 tracking-tight text-[#802d21]">
           Create Team
         </h2>
