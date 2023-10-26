@@ -1,54 +1,52 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 
-
 // Team Details
 const TeamDetails = () => {
     const { team_id } = useParams();
     const [team, setTeam] = useState([]);
     const navigate = useNavigate();
 
-  // Player Data
+    // Player Data
     const [players, setPlayers] = useState([]);
 
-  // Tournament Data
+    // Tournament Data
     const [tournaments, setTournaments] = useState([]);
-
 
     // Fetch TeamDetails
     const fetchTeamData = async () => {
-        const teamUrl = `http://localhost:8000/api/teams/${team_id}`;
-        const response = await fetch(teamUrl);
-        if (response.ok) {
+    const teamUrl = `${process.env.REACT_APP_API_HOST}/api/teams/${team_id}`;
+    const response = await fetch(teamUrl);
+    if (response.ok) {
         const data = await response.json();
         setTeam(data);
-        }
+    }
     };
 
     // Fetch Player Data
     const fetchPlayerData = async () => {
-        const playerUrl = `http://localhost:8000/api/players/`;
-        const response = await fetch(playerUrl);
-        if (response.ok) {
+    const playerUrl = `${process.env.REACT_APP_API_HOST}/api/players`;
+    const response = await fetch(playerUrl);
+    if (response.ok) {
         const data = await response.json();
         setPlayers(data);
-        }
+    }
     };
 
     // Fetch Tournament Data
     const fetchTournamentData = async () => {
-        const tournamentUrl = `http://localhost:8000/api/tournaments/`;
-        const response = await fetch(tournamentUrl);
-        if (response.ok) {
+    const tournamentUrl = `${process.env.REACT_APP_API_HOST}/api/tournaments`;
+    const response = await fetch(tournamentUrl);
+    if (response.ok) {
         const data = await response.json();
         setTournaments(data);
-        }
+    }
     };
     // end
 
     const deleteTeam = async () => {
-        const deleteUrl = `http://localhost:8000/api/teams/${team_id}`;
-        const fetchConfig = {
+    const deleteUrl = `${process.env.REACT_APP_API_HOST}/api/teams/${team_id}`;
+    const fetchConfig = {
         method: "delete",
         credentials: "include",
     };
@@ -58,9 +56,9 @@ const TeamDetails = () => {
     };
 
     useEffect(() => {
-        fetchTeamData();
-        fetchTournamentData();
-        fetchPlayerData();
+    fetchTeamData();
+    fetchTournamentData();
+    fetchPlayerData();
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
@@ -123,8 +121,7 @@ const TeamDetails = () => {
                     <div>
                     {players.map((player) => {
                         if (
-                        player.first_name ===
-                            team.player_id_1.first_name &&
+                        player.first_name === team.player_id_1.first_name &&
                         player.last_name === team.player_id_1.last_name
                         ) {
                         console.log("Player Data:", player);
@@ -156,8 +153,7 @@ const TeamDetails = () => {
                     Skill Levels:{" "}
                     {players.map((player) => {
                         if (
-                        player.first_name ===
-                            team.player_id_1.first_name &&
+                        player.first_name === team.player_id_1.first_name &&
                         player.last_name === team.player_id_1.last_name
                         ) {
                         return (
@@ -181,12 +177,11 @@ const TeamDetails = () => {
                 Player Two
                 </dt>
                 <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                {team.player_id_2 ? (
+                {team.player_id_2 && (
                     <div>
                     {players.map((player) => {
                         if (
-                        player.first_name ===
-                            team.player_id_2.first_name &&
+                        player.first_name === team.player_id_2.first_name &&
                         player.last_name === team.player_id_2.last_name
                         ) {
                         return (
@@ -199,8 +194,6 @@ const TeamDetails = () => {
                         return null; // Return null if player.id doesn't match team.player_id_1
                     })}
                     </div>
-                ) : (
-                    <div>null</div>
                 )}
                 </dd>
             </div>
@@ -210,13 +203,12 @@ const TeamDetails = () => {
                 Player Two: Skill Levels, Singles/Doubles
                 </dt>
                 <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                {team.player_id_2 ? (
+                {team.player_id_2 && (
                     <div>
                     Skill Levels:{" "}
                     {players.map((player) => {
                         if (
-                        player.first_name ===
-                            team.player_id_2.first_name &&
+                        player.first_name === team.player_id_2.first_name &&
                         player.last_name === team.player_id_2.last_name
                         ) {
                         return (
@@ -230,8 +222,6 @@ const TeamDetails = () => {
                         return null; // Return null if player.id doesn't match team.player_id_1
                     })}
                     </div>
-                ) : (
-                    <div>null</div>
                 )}
                 </dd>
             </div>
@@ -247,9 +237,7 @@ const TeamDetails = () => {
                     {tournaments.map((tournament) => {
                         console.log("Tournament:", tournament);
                         if (tournament.id === team.tournament_id.id) {
-                        return (
-                            <div key={tournament.id}>{tournament.name}</div>
-                        );
+                        return <div key={tournament.id}>{tournament.name}</div>;
                         }
                         return null; // Return null if player.id doesn't match team.player_id_1
                     })}
@@ -272,6 +260,6 @@ const TeamDetails = () => {
         </div>
     </>
     );
-    };
+};
 
 export default TeamDetails;

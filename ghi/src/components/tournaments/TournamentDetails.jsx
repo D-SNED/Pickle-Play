@@ -17,7 +17,7 @@ const TournamentDetails = () => {
   };
 
   const fetchTeamData = async () => {
-    const teamUrl = `${process.env.REACT_APP_API_HOST}/api/teams/`;
+    const teamUrl = `${process.env.REACT_APP_API_HOST}/api/teams`;
     const response = await fetch(teamUrl);
     if (response.ok) {
       const teamData = await response.json();

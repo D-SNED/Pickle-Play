@@ -55,7 +55,7 @@ function UpdateTournament() {
   };
 
   const fetchLocations = async () => {
-    const locationUrl = `${process.env.REACT_APP_API_HOST}/api/locations/`;
+    const locationUrl = `${process.env.REACT_APP_API_HOST}/api/locations`;
     const response = await fetch(locationUrl);
 
     if (response.ok) {

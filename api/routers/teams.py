@@ -20,7 +20,7 @@ router = APIRouter()
 
 
 # GET all teams
-@router.get("/api/teams/", response_model=Union[List[AllTeamsOut], Error])
+@router.get("/api/teams", response_model=Union[List[AllTeamsOut], Error])
 def get_all(
     repo: TeamRepository = Depends(),
 ):
@@ -28,7 +28,7 @@ def get_all(
 
 
 # POST (create) a team
-@router.post("/api/teams/", response_model=Union[TeamOut, Error])
+@router.post("/api/teams", response_model=Union[TeamOut, Error])
 def create_team(
     team: TeamIn,
     repo: TeamRepository = Depends(),

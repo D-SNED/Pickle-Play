@@ -7,7 +7,7 @@ function TeamsList() {
 
   // Pulling Team Data
   const fetchTeams = async () => {
-    const response = await fetch("http://localhost:8000/api/teams/");
+    const response = await fetch(`${process.env.REACT_APP_API_HOST}/api/teams`);
 
     if (response.ok) {
       const data = await response.json();
@@ -17,7 +17,7 @@ function TeamsList() {
 
   // Pulling Tournament Data for Tournament Name
   const fetchTournaments = async () => {
-    const tournamentUrl = "http://localhost:8000/api/tournaments";
+    const tournamentUrl = `${process.env.REACT_APP_API_HOST}/api/tournaments`;
     const response = await fetch(tournamentUrl);
 
     if (response.ok) {
