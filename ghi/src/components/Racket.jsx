@@ -15,9 +15,13 @@ export function Racket(props) {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 768) {
-        group.current.scale.set(0.5, 0.5, 0.5);
+        if (group.current) {
+          group.current.scale.set(0.5, 0.5, 0.5);
+        }
       } else {
-        group.current.scale.set(1, 1, 1);
+        if (group.current) {
+          group.current.scale.set(1, 1, 1);
+        }
       }
     };
 
