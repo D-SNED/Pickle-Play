@@ -98,4 +98,4 @@ export function Racket(props) {
 
 export default Racket;
 
-useGLTF.preload("/racket.glb");
+useGLTF.preload(`${process.env.REACT_APP_API_HOST}/static/racket.glb`);
