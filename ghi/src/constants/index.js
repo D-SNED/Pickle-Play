@@ -98,22 +98,21 @@ export const services = [
 
 export const ourteams = [
   {
-    quote: "Inhale confidence, exhale doubt.",
+    quote: "Clear eyes, full hearts, can't lose.",
     name: "John Gordon",
     designation: "Software Engineering Student",
     company: "Hack Reactor",
     image: john,
   },
   {
-    quote:
-      "Never say never, because limits, like fears, are often just an illusion.",
+    quote: "Train like a savage, create like an artist.",
     name: "Anna Thorndike",
     designation: "Software Engineering Student",
     company: "Hack Reactor",
     image: anna,
   },
   {
-    quote: "Become the hardest working person you know.",
+    quote: "The due date is the do date.",
     name: "Amanda Taing",
     designation: "Software Engineering Student",
     company: "Hack Reactor",
@@ -127,7 +126,7 @@ export const ourteams = [
     image: derek,
   },
   {
-    quote: "If it doesn't challenge you, it won't change you.",
+    quote: "If I hear the music, I'm gonna dance.",
     name: "Christopher Bush",
     designation: "Software Engineering Student",
     company: "Hack Reactor",
