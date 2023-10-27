@@ -106,7 +106,7 @@ Began working on POST teams endpoint
 
 ### Challenges
 
-- Had to resolve 'null' issues
+- Had to resolve 'null' issues differing from 0 fields
 
 ### Plan for next week
 
@@ -183,6 +183,26 @@ Began working on POST teams endpoint
 - Completed TeamUpdate Component
 - Finished implementing edit/TeamUpdate Component into TeamDetails Component
 - updated Journal
+
+10/26/23 - W17D4
+
+- Need to use NavLink instead of Link
+- Need to uncomment out the 'api-unit-tests-job' in .gitlab-ci.yml
+- confirm the unit tests are being run in pipeline after
+- Change <a> tags and hrefs into Links or Navlinks! Cannot be anything else
+- Only using <a> tags if going to an external site
+- Remove navbar from Home.jsx
+- /racket.glb
+
+- removing console log statements and comments from our code
+- Beginning work on readme and making sure journals are up to date
+- Testing fully deployed site
+- Need to figure out with Amanda if we can include first and last name in Create Player frontend
+
+10/27/23
+
+- Finish Readme
+- Update Journals
 
 ### Accomplishments
 

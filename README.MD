@@ -86,11 +86,13 @@ UI Design
 
 ## Installation
 
-1. Open up your terminal to the desired directory on your local computer
+1. Open up your terminal to your desired directory on your local computer
 
-2. Fork the repository
+2. Fork the repository from the gitlab link below to your own gitlab account
 
-3. Clone the repository
+- https://gitlab.com/gitjaacd/pickle-play
+
+3. Clone the repository into your desired directory
 
 ```
 git clone https://gitlab.com/gitjaacd/pickle-play.git
