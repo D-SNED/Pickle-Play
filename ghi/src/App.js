@@ -1,6 +1,8 @@
 import React from "react";
 import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 import SignupForm from "./accounts/Signup";
 import LoginForm from "./accounts/Login";
@@ -85,7 +87,18 @@ function App() {
               <Route path="/logout" element={<Logout />}></Route>
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
-
+            <ToastContainer
+              position="bottom-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="light"
+            />
           </AuthProvider>
         </BrowserRouter>
       </div>

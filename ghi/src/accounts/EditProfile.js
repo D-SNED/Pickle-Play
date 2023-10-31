@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./styles/styles.css";
+import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 export default function EditProfile() {
@@ -199,7 +200,7 @@ export default function EditProfile() {
       setSkillLevelDoubles("");
       setEmergencyContactName("");
       setEmergencyContactNum("");
-
+      toast("Profile updated!");
       navigate("/profile");
     }
   };

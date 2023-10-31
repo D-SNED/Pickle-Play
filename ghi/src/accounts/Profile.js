@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
 import "../index.css";
 import "./styles/styles.css";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import Modal from "./Modal";
 
 export default function ProfilePage() {
@@ -42,6 +43,7 @@ export default function ProfilePage() {
     const response = await fetch(deleteUrl, fetchConfig);
     if (response.ok) {
       setOpen(false);
+      toast("We're sad to see you go 😢");
       navigate("/");
     }
   };

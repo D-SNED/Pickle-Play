@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "google-map-react": "^2.2.1"
+    "google-map-react": "^2.2.1",
+    "react-toastify": "^9.1.3"
   }
 }
