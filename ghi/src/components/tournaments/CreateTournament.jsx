@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function CreateTournament() {
   const [name, setName] = useState("");
@@ -10,6 +11,8 @@ function CreateTournament() {
   const [description, setDescription] = useState("");
   const [maxTeams, setMaxTeams] = useState("");
   const [reachedMax, setReachedMax] = useState(false);
+
+  const navigate = useNavigate();
 
   const tournamentCategories = [
     { value: "Men's" },
@@ -92,14 +95,7 @@ function CreateTournament() {
 
     const response = await fetch(tournamentUrl, fetchConfig);
     if (response.ok) {
-      setName("");
-      setStartDate("");
-      setEndDate("");
-      setCategory("");
-      setLocation("");
-      setDescription("");
-      setMaxTeams("");
-      setReachedMax(false);
+      navigate("/tournaments");
     }
   };
 
