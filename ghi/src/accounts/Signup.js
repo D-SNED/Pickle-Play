@@ -22,7 +22,6 @@ const SignupForm = () => {
             first_name: firstName,
             last_name: lastName
         };
-        console.log(`${process.env.REACT_APP_API_HOST}/api/players`)
         register(
             accountData,
             `${process.env.REACT_APP_API_HOST}/api/players`

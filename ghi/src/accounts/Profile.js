@@ -1,5 +1,6 @@
 import "../index.css";
 import "./styles/styles.css";
+import useToken from "@galvanize-inc/jwtdown-for-react";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -10,6 +11,7 @@ export default function ProfilePage() {
   const [playerId, setPlayerId] = useState(0);
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
+  const { logout } = useToken();
 
   const getPlayerId = async () => {
     const response = await fetch(`${process.env.REACT_APP_API_HOST}/token`, {
@@ -43,6 +45,7 @@ export default function ProfilePage() {
     const response = await fetch(deleteUrl, fetchConfig);
     if (response.ok) {
       setOpen(false);
+      logout();
       toast("We're sad to see you go 😢");
       navigate("/");
     }
