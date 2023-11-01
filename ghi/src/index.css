@@ -356,3 +356,9 @@ button:hover {
   align-items: center;
   z-index: 999;
 }
+
+
+/* custom card sizing */
+.max-w-custom {
+  max-width: 33rem;
+}
