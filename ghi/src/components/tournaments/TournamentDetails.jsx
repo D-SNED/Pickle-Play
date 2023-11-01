@@ -125,15 +125,31 @@ const TournamentDetails = () => {
                 Tournament Capacity Met?
               </dt>
               <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                {tournament.reached_max ? "true" : "false"}
+                {teams.length >= tournament.reached_max ? "true" : "false"}
               </dd>
             </div>
           </dl>
         </div>
         <div className="pt-4 font-bold text-center text-white">
-          <h3>
-            Participants: {teams.length}/{tournament.max_teams} Teams
-          </h3>
+          {teams.length >= tournament.max_teams ? (
+            <span>
+              <h3>
+                Tournament Full: {teams.length}/{tournament.max_teams} Teams
+              </h3>
+            </span>
+          ) : (
+            <span>
+              <h3>
+                Participants: {teams.length}/{tournament.max_teams} Teams
+              </h3>
+              <button
+                onClick={() => navigate("/teams/create")}
+                className="m-4 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#C14533] rounded-lg hover:bg-[#d4402a]"
+              >
+                Sign Up
+              </button>
+            </span>
+          )}
         </div>
         <div className="my-10 relative overflow-x-auto">
           <table className="table-fixed w-full text-sm text-center text-gray-500 dark:text-gray-400">
