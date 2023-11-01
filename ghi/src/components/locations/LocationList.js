@@ -20,14 +20,19 @@ export default function LocationList() {
 
   return (
     <>
-      <div>
-        <h1 className="text-3xl text-center text-white">Locations</h1>
-        <Link to={`${process.env.PUBLIC_URL}/locations/create`}>
-          <button className="bg-green-500 text-white px-4 py-2 rounded-md mt-4 mr-4 float-right">
-            Create New Location
-          </button>
-        </Link>
-        <div className="grid grid-cols-3 gap-4 px-4">
+    <div className="bg-green">
+      <div className="bg-green container mx-auto">
+        <div>
+          <div className="flex justify-end px-10 py-6">
+            <Link to={`${process.env.PUBLIC_URL}/locations/create`}>
+              <button className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#C14533] rounded-lg hover:bg-[#d4402a]">
+                  Create Location
+              </button>
+            </Link>
+          </div>
+          <h1 className="pb-4 text-5xl font-bold text-center text-[white]">Locations</h1>
+        </div>
+        <div className="px-4 lg:grid lg:grid-cols-3">
           {locations.map((location) => (
             <LocationCard
               name={location.name}
@@ -39,6 +44,7 @@ export default function LocationList() {
           ))}
         </div>
       </div>
-    </>
+    </div>
+  </>
   );
 }

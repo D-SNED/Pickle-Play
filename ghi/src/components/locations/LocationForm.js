@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 function LocationForm() {
   const [name, setName] = useState("");
@@ -14,7 +16,6 @@ function LocationForm() {
   const [water, setWater] = useState(false);
   const [lightedCourts, setLightedCourts] = useState(false);
   const [wheelchairAccessible, setWheelchairAccessible] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleNameChange = (event) => {
     const value = event.target.value;
@@ -56,6 +57,8 @@ function LocationForm() {
     setPictureUrl(value);
   };
 
+  const navigate = useNavigate();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const locationData = {};
@@ -85,6 +88,10 @@ function LocationForm() {
 
     const response = await fetch(locationUrl, fetchOptions);
     if (response.ok) {
+    const responseData = await response.json();
+    const id = responseData.id;
+
+      toast("Location Created", { type: "success" });
       setName("");
       setAddress("");
       setPhoneNumber("");
@@ -98,17 +105,20 @@ function LocationForm() {
       setWater(false);
       setLightedCourts(false);
       setWheelchairAccessible(false);
-      setIsSubmitted(true);
+      navigate(`/locations/${id}`);
     }
   };
 
   return (
-    <div className="my-5 container mx-auto">
+    <div className="bg-green min-h-screen flex flex-col">
       <div className="flex justify-center">
-        <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-          <h1 className="text-2xl font-bold mb-4">Submit a New Location</h1>
+        <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mt-12">
+          <h1 className="mb-8 text-3xl text-center">Submit a New Location</h1>
           <form onSubmit={handleSubmit} id="add-location-form">
             <div className="mb-4">
+              <label className="block text-gray-700 text-md font-bold mb-2 py-2" htmlFor="Name">
+                Name
+              </label>
               <input
                 value={name}
                 onChange={handleNameChange}
@@ -121,6 +131,9 @@ function LocationForm() {
               />
             </div>
             <div className="mb-4">
+              <label className="block text-gray-700 text-md font-bold mb-2 py-2" htmlFor="Address">
+                Address
+              </label>
               <input
                 value={address}
                 onChange={handleAddressChange}
@@ -133,18 +146,24 @@ function LocationForm() {
               />
             </div>
             <div className="mb-4">
+              <label className="block text-gray-700 text-md font-bold mb-2 py-2" htmlFor="PhoneNumber">
+                Phone Number
+              </label>
               <input
                 value={phoneNumber}
                 onChange={handlePhoneNumberChange}
                 required
                 placeholder="Phone Number"
                 type="text"
-                id="Phone Number"
-                name="Phone Number"
+                id="PhoneNumber"
+                name="PhoneNumber"
                 className="w-full py-2 px-3 border rounded-md"
               />
             </div>
             <div className="mb-4">
+              <label className="block text-gray-700 text-md font-bold mb-2 py-2" htmlFor="Description">
+                Description
+              </label>
               <textarea
                 value={description}
                 onChange={handleDescriptionChange}
@@ -157,143 +176,149 @@ function LocationForm() {
               />
             </div>
             <div className="mb-4">
+              <label className="block text-gray-700 text-md font-bold mb-2 py-2" htmlFor="Surface">
+                Playing Surface
+              </label>
               <input
                 value={surface}
                 onChange={handleSurfaceChange}
                 required
-                placeholder="Surface"
+                placeholder="Playing Surface"
                 type="text"
                 id="Surface"
-                name="Surface"
+                name="PlayingSurface"
                 className="w-full py-2 px-3 border rounded-md"
               />
             </div>
             <div className="mb-4">
+              <label className="block text-gray-700 text-md font-bold mb-2 py-2" htmlFor="PictureURL">
+                Picture URL
+              </label>
               <input
                 value={pictureUrl}
                 onChange={handlePictureUrlChange}
                 required
                 placeholder="Picture URL"
                 type="text"
-                id="Picture URL"
-                name="Surface"
+                id="PictureURL"
+                name="PictureURL"
                 className="w-full py-2 px-3 border rounded-md"
               />
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-semibold mb-2">
-                Amenities
+              <label className="block text-gray-700 text-md font-bold mb-2 py-2" htmlFor="NumberIndoorCourts">
+                Number of Indoor Courts
               </label>
-
-              <div className="mb-4 relative">
+              <input
+                value={numberIndoorCourts}
+                onChange={handleNumberIndoorCourtsChange}
+                required
+                type="number"
+                id="NumberIndoorCourts"
+                name="NumberIndoorCourts"
+                placeholder=" "
+                className="w-full py-2 px-3 border rounded-md"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700 text-md font-bold mb-2 py-2" htmlFor="NumberOutdoorCourts">
+                Number of Outdoor Courts
+              </label>
+              <input
+                value={numberOutdoorCourts}
+                onChange={handleNumberOutdoorCourtsChange}
+                required
+                type="number"
+                id="NumberOutdoorCourts"
+                name="NumberOutdoorCourts"
+                placeholder=" "
+                className="w-full py-2 px-3 border rounded-md"
+              />
+            </div>
+            <div className="border rounded-md p-3">
+              <div className="mb-2">
                 <input
-                  value={numberIndoorCourts}
-                  onChange={handleNumberIndoorCourtsChange}
-                  required
-                  type="number"
-                  id="NumberIndoorCourts"
-                  name="NumberIndoorCourts"
-                  placeholder=" "
-                  className="w-full py-6 px-3 border rounded-md"
+                  type="checkbox"
+                  checked={lockerRooms}
+                  onChange={() => setLockerRooms(!lockerRooms)}
+                  id="LockerRooms"
+                  className="mr-2"
                 />
                 <label
-                  htmlFor="NumberIndoorCourts"
-                  className="absolute top-1 left-3 text-gray-700 text-sm font"
+                  htmlFor="LockerRooms"
+                  className="text-sm text-gray-700 font"
                 >
-                  Number of Indoor Courts
+                  Locker Rooms
                 </label>
               </div>
-              <div className="mb-4 relative">
+              <div className="mb-2">
                 <input
-                  value={numberOutdoorCourts}
-                  onChange={handleNumberOutdoorCourtsChange}
-                  required
-                  type="number"
-                  id="NumberOutdoorCourts"
-                  name="NumberOutdoorCourts"
-                  placeholder=" "
-                  className="w-full py-6 px-3 border rounded-md"
+                  type="checkbox"
+                  checked={restrooms}
+                  onChange={() => setRestrooms(!restrooms)}
+                  id="Restrooms"
+                  className="mr-2"
                 />
                 <label
-                  htmlFor="NumberOutdoorCourts"
-                  className="absolute top-1 left-3 text-gray-700 text-sm font"
+                  htmlFor="Restrooms"
+                  className="text-sm text-gray-700 font"
                 >
-                  Number of Outdoor Courts
+                  Restrooms
                 </label>
               </div>
-              <div className="border rounded-md p-3">
-                <div className="mb-2">
-                  <input
-                    type="checkbox"
-                    checked={lockerRooms}
-                    onChange={() => setLockerRooms(!lockerRooms)}
-                    id="LockerRooms"
-                    className="mr-2"
-                  />
-                  <label htmlFor="LockerRooms" className="text-sm">
-                    Locker Rooms
-                  </label>
-                </div>
-                <div className="mb-2">
-                  <input
-                    type="checkbox"
-                    checked={restrooms}
-                    onChange={() => setRestrooms(!restrooms)}
-                    id="Restrooms"
-                    className="mr-2"
-                  />
-                  <label htmlFor="Restrooms" className="text-sm">
-                    Restrooms
-                  </label>
-                </div>
-                <div className="mb-2">
-                  <input
-                    type="checkbox"
-                    checked={water}
-                    onChange={() => setWater(!water)}
-                    id="Water"
-                    className="mr-2"
-                  />
-                  <label htmlFor="Water" className="text-sm">
-                    Water
-                  </label>
-                </div>
-                <div className="mb-2">
-                  <input
-                    type="checkbox"
-                    checked={lightedCourts}
-                    onChange={() => setLightedCourts(!lightedCourts)}
-                    id="LightedCourts"
-                    className="mr-2"
-                  />
-                  <label htmlFor="LightedCourts" className="text-sm">
-                    Lighted Courts
-                  </label>
-                </div>
-                <div className="mb-2">
-                  <input
-                    type="checkbox"
-                    checked={wheelchairAccessible}
-                    onChange={() =>
-                      setWheelchairAccessible(!wheelchairAccessible)
-                    }
-                    id="WheelchairAccessible"
-                    className="mr-2"
-                  />
-                  <label htmlFor="WheelchairAccessible" className="text-sm">
-                    Wheelchair Accessible
-                  </label>
-                </div>
+              <div className="mb-2">
+                <input
+                  type="checkbox"
+                  checked={water}
+                  onChange={() => setWater(!water)}
+                  id="Water"
+                  className="mr-2"
+                />
+                <label
+                  htmlFor="Water"
+                  className="text-sm text-gray-700 font"
+                >
+                  Water
+                </label>
+              </div>
+              <div className="mb-2">
+                <input
+                  type="checkbox"
+                  checked={lightedCourts}
+                  onChange={() => setLightedCourts(!lightedCourts)}
+                  id="LightedCourts"
+                  className="mr-2"
+                />
+                <label
+                  htmlFor="LightedCourts"
+                  className="text-sm text-gray-700 font"
+                >
+                  Lighted Courts
+                </label>
+              </div>
+              <div className="mb-2">
+                <input
+                  type="checkbox"
+                  checked={wheelchairAccessible}
+                  onChange={() => setWheelchairAccessible(!wheelchairAccessible)}
+                  id="WheelchairAccessible"
+                  className="mr-2"
+                />
+                <label
+                  htmlFor="WheelchairAccessible"
+                  className="text-sm text-gray-700 font"
+                >
+                  Wheelchair Accessible
+                </label>
               </div>
             </div>
-            <button className="bg-blue-500 text-white py-2 px-4 rounded-md">
+            <button
+              type="submit"
+              value="Register"
+              className="w-full text-center py-3 rounded bg-green text-white hover:bg-green-dark focus:outline-none my-1"
+            >
               Add Location
             </button>
-            {isSubmitted && (
-              <div className="bg-green-200 py-2 px-4 rounded-md mt-2">
-                <p>Location Added</p>
-              </div>
-            )}
           </form>
         </div>
       </div>

@@ -129,286 +129,221 @@ function UpdateLocation() {
         };
         fetchLocationData();
     }, [locationId]);
-    return (
-    <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <h2 className="mt-10 text-center text-4xl font-bold leading-9 tracking-tight text-[#802d21]">
-            Update Location
-        </h2>
-        </div>
-
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form
-            onSubmit={handleSubmit}
-            className="space-y-6 bg-slate-50 p-4"
-            id="update-location-form"
-        >
-            <div>
-            <label
-                htmlFor="name"
-                className="block text-sm font-medium leading-6 text-gray-900"
-            >
-                Name
-            </label>
-            <div className="mt-2">
-                <input
-                onChange={handleNameChange}
-                value={name}
-                id="name"
-                name="name"
-                type="text"
-                required
-                className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-            </div>
-            </div>
-            <div>
-            <label
-                htmlFor="address"
-                className="block text-sm font-medium leading-6 text-gray-900"
-            >
-                Address
-            </label>
-            <div className="mt-2">
-                <input
-                onChange={handleAddressChange}
-                value={address}
-                id="address"
-                name="address"
-                type="text"
-                required
-                className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-            </div>
-            </div>
-            <div>
-            <label
-                htmlFor="phone-number"
-                className="block text-sm font-medium leading-6 text-gray-900"
-            >
-                Phone Number
-            </label>
-            <div className="mt-2">
-                <input
-                onChange={handlePhoneNumberChange}
-                value={phoneNumber}
-                id="phone-number"
-                name="phone-number"
-                type="tel"
-                required
-                className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-            </div>
-            </div>
-            <div>
-            <label
-                htmlFor="description"
-                className="block text-sm font-medium leading-6 text-gray-900"
-            >
-                Description
-            </label>
-            <div className="mt-2">
-                <textarea
-                onChange={handleDescriptionChange}
-                value={description}
-                id="description"
-                name="description"
-                type="text"
-                rows="4"
-                required
-                className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-            </div>
-            </div>
-            <div>
-            <label
-                htmlFor="number-indoor-courts"
-                className="block text-sm font-medium leading-6 text-gray-900"
-            >
-                Number of Indoor Courts
-            </label>
-            <div className="mt-2">
-                <input
-                onChange={handleNumberIndoorCourtsChange}
-                value={numberIndoorCourts}
-                id="number-indoor-courts"
-                name="number-indoor-courts"
-                type="number"
-                required
-                className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-            </div>
-            </div>
-            <div>
-            <label
-                htmlFor="number-outdoor-courts"
-                className="block text-sm font-medium leading-6 text-gray-900"
-            >
-                Number of Outdoor Courts
-            </label>
-            <div className="mt-2">
-                <input
-                onChange={handleNumberOutdoorCourtsChange}
-                value={numberOutdoorCourts}
-                id="number-outdoor-courts"
-                name="number-outdoor-courts"
-                type="number"
-                required
-                className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-            </div>
-            </div>
-            <div>
-            <label
-                htmlFor="surface"
-                className="block text-sm font-medium leading-6 text-gray-900"
-            >
-                Surface
-            </label>
-            <div className="mt-2">
-                <input
-                onChange={handleSurfaceChange}
-                value={surface}
-                id="surface"
-                name="surface"
-                type="text"
-                required
-                className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-            </div>
-            </div>
-            <div>
-            <label
-                htmlFor="surface"
-                className="block text-sm font-medium leading-6 text-gray-900"
-            >
-                Picture URL
-            </label>
+  return (
+    <div className="bg-green min-h-screen flex flex-col">
+      <div className="flex justify-center">
+        <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mt-12">
+          <h1 className="mb-8 text-3xl text-center">Update Location</h1>
+          <form onSubmit={handleSubmit} id="add-location-form">
             <div className="mb-4">
-                <input
+              <label className="block text-gray-700 text-md font-bold mb-2 py-2" htmlFor="Name">
+                Name
+              </label>
+              <input
+                value={name}
+                onChange={handleNameChange}
+                required
+                placeholder="Name"
+                type="text"
+                id="Name"
+                name="Name"
+                className="w-full py-2 px-3 border rounded-md"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700 text-md font-bold mb-2 py-2" htmlFor="Address">
+                Address
+              </label>
+              <input
+                value={address}
+                onChange={handleAddressChange}
+                required
+                placeholder="Address"
+                type="text"
+                id="Address"
+                name="Address"
+                className="w-full py-2 px-3 border rounded-md"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700 text-md font-bold mb-2 py-2" htmlFor="PhoneNumber">
+                Phone Number
+              </label>
+              <input
+                value={phoneNumber}
+                onChange={handlePhoneNumberChange}
+                required
+                placeholder="Phone Number"
+                type="text"
+                id="PhoneNumber"
+                name="PhoneNumber"
+                className="w-full py-2 px-3 border rounded-md"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700 text-md font-bold mb-2 py-2" htmlFor="Description">
+                Description
+              </label>
+              <textarea
+                value={description}
+                onChange={handleDescriptionChange}
+                required
+                placeholder="Description"
+                id="Description"
+                name="Description"
+                className="w-full py-2 px-3 border rounded-md"
+                rows={4}
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700 text-md font-bold mb-2 py-2" htmlFor="Surface">
+                Playing Surface
+              </label>
+              <input
+                value={surface}
+                onChange={handleSurfaceChange}
+                required
+                placeholder="Playing Surface"
+                type="text"
+                id="Surface"
+                name="PlayingSurface"
+                className="w-full py-2 px-3 border rounded-md"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700 text-md font-bold mb-2 py-2" htmlFor="PictureURL">
+                Picture URL
+              </label>
+              <input
                 value={pictureUrl}
                 onChange={handlePictureUrlChange}
                 required
                 placeholder="Picture URL"
                 type="text"
-                id="Picture URL"
-                name="Surface"
+                id="PictureURL"
+                name="PictureURL"
                 className="w-full py-2 px-3 border rounded-md"
-                />
+              />
             </div>
+            <div className="mb-4">
+              <label className="block text-gray-700 text-md font-bold mb-2 py-2" htmlFor="NumberIndoorCourts">
+                Number of Indoor Courts
+              </label>
+              <input
+                value={numberIndoorCourts}
+                onChange={handleNumberIndoorCourtsChange}
+                required
+                type="number"
+                id="NumberIndoorCourts"
+                name="NumberIndoorCourts"
+                placeholder=" "
+                className="w-full py-2 px-3 border rounded-md"
+              />
             </div>
-            <div>
-            <label
-                htmlFor="locker-rooms"
-                className="block text-sm font-medium leading-6 text-gray-900"
-            >
-                Locker Rooms
-            </label>
-            <div className="mt-2">
+            <div className="mb-4">
+              <label className="block text-gray-700 text-md font-bold mb-2 py-2" htmlFor="NumberOutdoorCourts">
+                Number of Outdoor Courts
+              </label>
+              <input
+                value={numberOutdoorCourts}
+                onChange={handleNumberOutdoorCourtsChange}
+                required
+                type="number"
+                id="NumberOutdoorCourts"
+                name="NumberOutdoorCourts"
+                placeholder=" "
+                className="w-full py-2 px-3 border rounded-md"
+              />
+            </div>
+            <div className="border rounded-md p-3">
+              <div className="mb-2">
                 <input
-                onChange={() => setLockerRooms(!lockerRooms)}
-                checked={lockerRooms}
-                id="locker-rooms"
-                name="locker-rooms"
-                type="checkbox"
-                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+                  type="checkbox"
+                  checked={lockerRooms}
+                  onChange={() => setLockerRooms(!lockerRooms)}
+                  id="LockerRooms"
+                  className="mr-2"
                 />
-            </div>
-            </div>
-
-            <div>
-            <label
-                htmlFor="restrooms"
-                className="block text-sm font-medium leading-6 text-gray-900"
-            >
-                Restrooms
-            </label>
-            <div className="mt-2">
+                <label
+                  htmlFor="LockerRooms"
+                  className="text-sm text-gray-700 font"
+                >
+                  Locker Rooms
+                </label>
+              </div>
+              <div className="mb-2">
                 <input
-                onChange={() => setRestrooms(!restrooms)}
-                checked={restrooms}
-                id="restrooms"
-                name="restrooms"
-                type="checkbox"
-                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+                  type="checkbox"
+                  checked={restrooms}
+                  onChange={() => setRestrooms(!restrooms)}
+                  id="Restrooms"
+                  className="mr-2"
                 />
-            </div>
-            </div>
-
-            <div>
-            <label
-                htmlFor="water"
-                className="block text-sm font-medium leading-6 text-gray-900"
-            >
-                Water
-            </label>
-            <div className="mt-2">
+                <label
+                  htmlFor="Restrooms"
+                  className="text-sm text-gray-700 font"
+                >
+                  Restrooms
+                </label>
+              </div>
+              <div className="mb-2">
                 <input
-                onChange={() => setWater(!water)}
-                checked={water}
-                id="water"
-                name="water"
-                type="checkbox"
-                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+                  type="checkbox"
+                  checked={water}
+                  onChange={() => setWater(!water)}
+                  id="Water"
+                  className="mr-2"
                 />
-            </div>
-            </div>
-
-            <div>
-            <label
-                htmlFor="lighted-courts"
-                className="block text-sm font-medium leading-6 text-gray-900"
-            >
-                Lighted Courts
-            </label>
-            <div className="mt-2">
+                <label
+                  htmlFor="Water"
+                  className="text-sm text-gray-700 font"
+                >
+                  Water
+                </label>
+              </div>
+              <div className="mb-2">
                 <input
-                onChange={() => setLightedCourts(!lightedCourts)}
-                checked={lightedCourts}
-                id="lighted-courts"
-                name="lighted-courts"
-                type="checkbox"
-                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+                  type="checkbox"
+                  checked={lightedCourts}
+                  onChange={() => setLightedCourts(!lightedCourts)}
+                  id="LightedCourts"
+                  className="mr-2"
                 />
-            </div>
-            </div>
-
-            <div>
-            <label
-                htmlFor="wheelchair-accessible"
-                className="block text-sm font-medium leading-6 text-gray-900"
-            >
-                Wheelchair Accessible
-            </label>
-            <div className="mt-2">
+                <label
+                  htmlFor="LightedCourts"
+                  className="text-sm text-gray-700 font"
+                >
+                  Lighted Courts
+                </label>
+              </div>
+              <div className="mb-2">
                 <input
-                onChange={() => setWheelchairAccessible(!wheelchairAccessible)}
-                checked={wheelchairAccessible}
-                id="wheelchair-accessible"
-                name="wheelchair-accessible"
-                type="checkbox"
-                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+                  type="checkbox"
+                  checked={wheelchairAccessible}
+                  onChange={() => setWheelchairAccessible(!wheelchairAccessible)}
+                  id="WheelchairAccessible"
+                  className="mr-2"
                 />
+                <label
+                  htmlFor="WheelchairAccessible"
+                  className="text-sm text-gray-700 font"
+                >
+                  Wheelchair Accessible
+                </label>
+              </div>
             </div>
-            </div>
-
-            <div>
             <button
-                type="submit"
-                className="flex w-full justify-center rounded-md bg-[#C14533] px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#d4402a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              type="submit"
+              value="Register"
+              className="w-full text-center py-3 rounded bg-green text-white hover:bg-green-dark focus:outline-none my-1"
             >
-                Update
+              Update Location
             </button>
-            </div>
-        </form>
-        <div>
-            <p className="mt-10 text-center text-sm text-gray-500">
-            PicklePlay by GitJAACD
-            </p>
+          </form>
         </div>
-        </div>
+      </div>
     </div>
-    );
+  );
 }
 
 export default UpdateLocation

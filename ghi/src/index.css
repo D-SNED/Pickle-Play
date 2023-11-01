@@ -342,23 +342,3 @@ button:hover {
       -1.8em -1.8em 0 0em #ffffff;
   }
 }
-
-/* .delete-confirmation styles */
-.delete-confirmation {
-  background-color: rgba(255, 255, 255, 0.9);
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-}
-
-
-/* custom card sizing */
-.max-w-custom {
-  max-width: 33rem;
-}
