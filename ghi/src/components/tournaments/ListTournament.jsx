@@ -21,7 +21,7 @@ export default function TournamentList() {
   }, []);
   return (
     <>
-      <div className="container mx-auto">
+      <div className="bg-[#687F5E]">
         <div>
           <div className="flex justify-end px-10 py-6">
             <Link to="create">
@@ -30,11 +30,11 @@ export default function TournamentList() {
               </button>
             </Link>
           </div>
-          <h1 className="pb-4 text-5xl font-bold text-center text-[#C14533]">
+          <h1 className="pb-4 text-5xl font-bold text-center text-white">
             Tournaments
           </h1>
         </div>
-        <div className="px-4 lg:grid lg:grid-cols-3">
+        <div className="lg:grid lg:grid-cols-3 justify-items-center">
           {tournaments.map((tournament) => (
             <TournamentCard tournament={tournament} key={tournament.id} />
           ))}
