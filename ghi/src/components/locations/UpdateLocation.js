@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function UpdateLocation() {
     const { locationId } = useParams();
@@ -88,6 +89,8 @@ function UpdateLocation() {
         const response = await fetch(locationUrl, fetchOptions);
 
         if (response.ok) {
+
+        toast("Location Updated", { type: "success" });
         setName("");
         setAddress("");
         setPhoneNumber("");
