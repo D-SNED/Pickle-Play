@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import Modal from "../../accounts/Modal";
+import { toast } from "react-toastify";
 
 const TournamentDetails = () => {
   const { tournament_id } = useParams();
@@ -40,6 +41,7 @@ const TournamentDetails = () => {
     if (response.ok) {
       setOpen(false);
       navigate("/tournaments");
+      toast("Tournament Deleted", { type: "error" });
     }
   };
 
