@@ -1,6 +1,7 @@
 import React from "react";
 import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -32,6 +33,7 @@ import LocationDetails from "./components/locations/LocationDetails";
 import UpdateLocation from "./components/locations/UpdateLocation";
 
 import NotFoundPage from "./pages/NotFoundPage";
+import AdminErrorPage from "./pages/AdminErrorPage";
 
 import { Navbar } from "./components";
 
@@ -40,6 +42,23 @@ import { Navbar } from "./components";
 function App() {
   const domain = /https:\/\/[^/]+/;
   const basename = process.env.PUBLIC_URL.replace(domain, "");
+
+  const [adminStatus, setAdminStatus] = useState("");
+
+  const getAdminStatus = async () => {
+    const response = await fetch(`${process.env.REACT_APP_API_HOST}/token`, {
+      credentials: "include",
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      setAdminStatus(data["account"]["is_admin"]);
+    }
+  };
+
+  useEffect(() => {
+    getAdminStatus();
+  }, []);
 
 
   return (
@@ -57,6 +76,7 @@ function App() {
               <Route path="/profile/update" element={<EditProfile />}></Route>
               <Route path="/players" element={<PlayerList />}></Route>
               <Route path="/players/:player_id" element={<PlayerDetail />}></Route>
+
               <Route path="/teams">
                 <Route index element={<TeamsList />} />
                 <Route path="create" element={<CreateTeam />} />
@@ -66,20 +86,19 @@ function App() {
                   element={<UpdateTeam />}
                 />
               </Route>
+
               <Route path="/tournaments">
                 <Route index element={<TournamentList />} />
-                <Route path="create" element={<CreateTournament />} />
+                <Route path="create" element={adminStatus === true ? <CreateTournament /> : <AdminErrorPage />} />
                 <Route path=":tournament_id" element={<TournamentDetails />} />
-                <Route
-                  path=":tournament_id/update"
-                  element={<UpdateTournament />}
-                />
+                <Route path=":tournament_id/update" element={adminStatus === true ? <UpdateTournament /> : <AdminErrorPage />} />
               </Route>
+
               <Route path="/locations">
                 <Route index element={<LocationList />} />
-                <Route path="create" element={<LocationForm />} />
+                <Route path="create" element={adminStatus === true ? <LocationForm /> : <AdminErrorPage />} />
                 <Route path=":locationId" element={<LocationDetails />} />
-                <Route path=":locationId/update" element={<UpdateLocation />} />
+                <Route path=":locationId/update" element={adminStatus === true ? <UpdateLocation /> : <AdminErrorPage />} />
               </Route>
 
               <Route path="/signup" element={<SignupForm />}></Route>

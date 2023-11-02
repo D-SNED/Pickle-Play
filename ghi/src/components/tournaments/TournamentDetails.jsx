@@ -8,6 +8,7 @@ const TournamentDetails = () => {
   const [tournament, setTournament] = useState([]);
   const [teams, setTeams] = useState([]);
   const [open, setOpen] = useState(false);
+  const [adminStatus, setAdminStatus] = useState("");
   const navigate = useNavigate();
 
   const fetchTournamentData = async () => {
@@ -45,7 +46,19 @@ const TournamentDetails = () => {
     }
   };
 
+  const getAdminStatus = async () => {
+    const response = await fetch(`${process.env.REACT_APP_API_HOST}/token`, {
+      credentials: "include",
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      setAdminStatus(data["account"]["is_admin"]);
+    }
+  };
+
   useEffect(() => {
+    getAdminStatus();
     fetchTournamentData();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -57,19 +70,22 @@ const TournamentDetails = () => {
     <div className="min-h-screen bg-[#687F5E]">
       <div className="mb-10 px-8 py-6">
         <div className="px-4 sm:px-0">
-          <div className="flex justify-end">
-            <Link to="update">
-              <button className="m-4 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#C14533] rounded-lg hover:bg-[#d4402a]">
-                Edit Tournament
-              </button>
-            </Link>
-          </div>
+          { adminStatus === true ? (
+            <div className="flex justify-end">
+              <Link to="update">
+                <button className="m-4 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#C14533] rounded-lg hover:bg-[#d4402a]">
+                  Edit Tournament
+                </button>
+              </Link>
+            </div>
+            ) : <br></br>
+          }
           <h1 className="text-3xl text-center font-semibold leading-7 text-white">
             Tournament Details
           </h1>
         </div>
-        <div className="mt-6 border-t border-gray-100 bg-white p-4">
-          <dl className="divide-y divide-gray-100">
+        <div className="w-3/4 mx-auto mt-6 rounded-lg border border-gray-100 bg-white p-4">
+          <dl className="px-4 divide-y divide-gray-100">
             <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
               <dt className="text-sm font-medium leading-6 text-gray-900">
                 Tournament Name
@@ -126,14 +142,14 @@ const TournamentDetails = () => {
                 {tournament.max_teams}
               </dd>
             </div>
-            <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            {/* <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
               <dt className="text-sm font-medium leading-6 text-gray-900">
                 Tournament Capacity Met?
               </dt>
               <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
                 {teams.length >= tournament.reached_max ? "true" : "false"}
               </dd>
-            </div>
+            </div> */}
           </dl>
         </div>
         <div className="pt-4 font-bold text-center text-white">
@@ -157,7 +173,7 @@ const TournamentDetails = () => {
             </span>
           )}
         </div>
-        <div className="my-10 relative overflow-x-auto">
+        <div className="my-10 w-3/4 mx-auto rounded-lg border relative overflow-x-auto">
           <table className="table-fixed w-full text-sm text-center text-gray-500 dark:text-gray-400">
             <thead className="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
               <tr>
@@ -189,6 +205,7 @@ const TournamentDetails = () => {
             </tbody>
           </table>
         </div>
+        { adminStatus === true ? (
         <div className="flex justify-center m-8">
           <button
             onClick={() => setOpen(true)}
@@ -263,6 +280,8 @@ const TournamentDetails = () => {
             </div>
           </Modal>
         </div>
+        ) : null
+        }
       </div>
     </div>
   );

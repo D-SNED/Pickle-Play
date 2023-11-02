@@ -77,9 +77,10 @@ export default function PlayerList() {
                             const playerAge = (hasBirthdayPassed ? age : age - 1);
 
                             return (
-                                <tr onClick={() => playerDetail(player.id)} className="hover:bg-gray-50 bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={player.id}>
+                                <tr  className="hover:bg-gray-50 bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={player.id}>
                                     <th className="flex gap-3 px-6 py-4 font-normal text-gray-900">
                                         <img
+                                            onClick={() => playerDetail(player.id)}
                                             className="h-20 w-20 rounded-full object-cover object-center shadow-lg"
                                             src={profilePic}
                                             alt="Pickle Player"

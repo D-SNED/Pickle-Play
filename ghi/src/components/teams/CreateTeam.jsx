@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 
 function CreateTeam() {
@@ -13,6 +14,8 @@ function CreateTeam() {
 
   const [players, setPlayers] = useState([]);
   const [tournaments, setTournaments] = useState([]);
+
+  const navigate = useNavigate();
 
   const teamCategories = [
     { value: "Mens" },
@@ -120,6 +123,7 @@ function CreateTeam() {
       setAgeBracket("");
       setTournament("");
       toast("Team Created Successfully!");
+      navigate("/teams");
     }
   };
 
@@ -131,7 +135,7 @@ function CreateTeam() {
 
   return (
     <>
-      <div className="bg-green flex min-h-screen flex flex-col justify-center px-6 py-12 lg:px-8">
+      <div className="bg-green flex min-h-screen flex-col justify-center px-6 py-12 lg:px-8">
         <div className=" px-6 py-8 text-black w-full">
           <div className="container max-w-custom mx-auto flex-1 flex flex-col items-center card-body text-center bg-white px-6 py-8 rounded-lg shadow-md text-black w-full sm:max-w">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">

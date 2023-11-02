@@ -1,3 +1,4 @@
+import useToken from "@galvanize-inc/jwtdown-for-react";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -7,6 +8,8 @@ import Modal from "../../accounts/Modal";
 const TeamDetails = () => {
     const { team_id } = useParams();
     const [team, setTeam] = useState([]);
+    const [playerId, setPlayerId] = useState("");
+    const { token } = useToken();
     const navigate = useNavigate();
 
     // DeleteTeamConfirmationPrompt
@@ -17,6 +20,17 @@ const TeamDetails = () => {
 
     // Tournament Data
     const [tournaments, setTournaments] = useState([]);
+
+    const getPlayerId = async () => {
+      const response = await fetch(`${process.env.REACT_APP_API_HOST}/token`, {
+        credentials: "include",
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setPlayerId(data["account"]["id"]);
+      }
+    };
 
     // Fetch TeamDetails
     const fetchTeamData = async () => {
@@ -68,10 +82,11 @@ const TeamDetails = () => {
     };
 
     useEffect(() => {
+    getPlayerId();
     fetchTeamData();
     fetchTournamentData();
     fetchPlayerData();
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, [token]); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
       <>
@@ -137,8 +152,7 @@ const TeamDetails = () => {
                       <div>
                         {players.map((player) => {
                           if (
-                            player.first_name === team.player_id_1.first_name &&
-                            player.last_name === team.player_id_1.last_name
+                            player.id === team.player_id_1?.id
                           ) {
                             return (
                               <div key={player.id}>
@@ -164,8 +178,7 @@ const TeamDetails = () => {
                         Skill Levels:{" "}
                         {players.map((player) => {
                           if (
-                            player.first_name === team.player_id_1.first_name &&
-                            player.last_name === team.player_id_1.last_name
+                            player.id === team.player_id_1?.id
                           ) {
                             return (
                               <div key={player.id}>
@@ -192,8 +205,7 @@ const TeamDetails = () => {
                       <div>
                         {players.map((player) => {
                           if (
-                            player.first_name === team.player_id_2.first_name &&
-                            player.last_name === team.player_id_2.last_name
+                            player.id === team.player_id_2?.id
                           ) {
                             return (
                               <div key={player.id}>
@@ -219,8 +231,7 @@ const TeamDetails = () => {
                         Skill Levels:{" "}
                         {players.map((player) => {
                           if (
-                            player.first_name === team.player_id_2.first_name &&
-                            player.last_name === team.player_id_2.last_name
+                            player.id === team.player_id_2?.id
                           ) {
                             return (
                               <div key={player.id}>
@@ -246,7 +257,7 @@ const TeamDetails = () => {
                     {team.tournament_id ? (
                       <div>
                         {tournaments.map((tournament) => {
-                          if (tournament.id === team.tournament_id.id) {
+                          if (tournament.id === team.tournament_id?.id) {
                             return (
                               <div key={tournament.id}>{tournament.name}</div>
                             );
@@ -254,25 +265,28 @@ const TeamDetails = () => {
                           return null; // Return null if tournament.id doesn't match team.tournament_id.id
                         })}
                       </div>
-                    ) : (
-                      <div>null</div>
-                    )}
+                    ) : null
+                    }
                   </dd>
                 </div>
                 <div className="py-5 flex flex-wrap justify-center">
-                  <Link to="update">
-                    <button className="m-4 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#C14533] rounded-lg hover:bg-[#d4402a]">
-                      Edit Team
-                    </button>
-                  </Link>
-
-                  <button
-                    onClick={() => setOpen(true)}
-                    className="m-4 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#C14533] rounded-lg hover:bg-[#d4402a]"
-                    type="button"
-                  >
-                    Delete Team
-                  </button>
+                  { (playerId === team.player_id_1?.id || playerId === team.player_id_2?.id) ? (
+                    <>
+                      <Link to="update">
+                        <button className="m-4 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#C14533] rounded-lg hover:bg-[#d4402a]">
+                          Edit Team
+                        </button>
+                      </Link>
+                      <button
+                        onClick={() => setOpen(true)}
+                        className="m-4 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#C14533] rounded-lg hover:bg-[#d4402a]"
+                        type="button"
+                      >
+                        Delete Team
+                      </button>
+                    </>
+                    ) : null
+                  }
                   <Modal open={open} onClose={() => setOpen(false)}>
                     <div>
                       <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">

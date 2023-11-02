@@ -1,6 +1,7 @@
 import { useState } from "react";
 import useToken from "@galvanize-inc/jwtdown-for-react";
 import { Link, useNavigate } from "react-router-dom";
+import loginbackground from "../assets/images/loginbackground.jpg";
 
 const SignupForm = () => {
     const [username, setUsername] = useState("");
@@ -31,8 +32,14 @@ const SignupForm = () => {
     };
 
     return (
-        <div className="bg-green min-h-screen flex flex-col">
-            <div className="container max-w-md mx-auto flex-1 flex flex-col items-center justify-center px-2">
+        <div
+            className="bg-cover min-h-screen flex flex-col"
+            style={{
+                backgroundImage: `url(${loginbackground})`,
+                backgroundRepeat: "no-repeat",
+            }}
+        >
+            <div className="container py-6 max-w-md mx-auto flex-1 flex flex-col items-center justify-center px-2">
                 <div className="bg-white px-6 py-8 rounded-lg shadow-md text-black w-full">
                     <h5 className="mb-8 text-3xl text-center">Sign Up</h5>
                     <div className="card-body">

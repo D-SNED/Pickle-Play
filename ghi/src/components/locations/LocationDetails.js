@@ -9,7 +9,19 @@ const LocationDetails = () => {
   const [location, setLocation] = useState([]);
   const [mapError, setMapError] = useState(null);
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [adminStatus, setAdminStatus] = useState("");
   const navigate = useNavigate();
+
+  const getAdminStatus = async () => {
+    const response = await fetch(`${process.env.REACT_APP_API_HOST}/token`, {
+      credentials: "include",
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      setAdminStatus(data["account"]["is_admin"]);
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,8 +32,8 @@ const LocationDetails = () => {
         setLocation(data);
       }
     };
-
     fetchData();
+    getAdminStatus();
   }, [locationId]);
 
   const deleteLocation = async () => {
@@ -112,20 +124,25 @@ return (
     <div className="mx-auto w-2/3 p-4 grid grid-cols-2 grid-rows-2 gap-4">
       <div className="info-container p-4 border-0 max-w-2/3">
         <h1 className="text-6xl font-bold mb-2 text-white">{name}</h1>
-        <p className="text-3xl font-semibold text-gray-600 mb-2 text-white">{address}</p>
-        <p className="text-2xl font-semibold text-gray-600 mb-2 text-white">{phone_number}</p>
-        <p className="text-l text-gray-600 mb-2 text-white"> {description}</p>
-        <Link to="update">
-          <button className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#C14533] rounded-lg hover:bg-[#d4402a] mr-2">
-            Edit Location
+        <p className="text-3xl font-semibold mb-2 text-white">{address}</p>
+        <p className="text-2xl font-semibold mb-2 text-white">{phone_number}</p>
+        <p className="text-l mb-2 text-white"> {description}</p>
+        { adminStatus === true ? (
+          <>
+          <Link to="update">
+            <button className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#C14533] rounded-lg hover:bg-[#d4402a] mr-2">
+              Edit Location
+            </button>
+          </Link>
+          <button
+            onClick={handleDeleteClick}
+            className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#C14533] rounded-lg hover:bg-[#d4402a]">
+            Delete Location
           </button>
-        </Link>
-        <button
-          onClick={handleDeleteClick}
-          className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#C14533] rounded-lg hover:bg-[#d4402a]">
-          Delete Location
-        </button>
-         <Modal open={showConfirmation} onClose={() => setShowConfirmation(false)}>
+          </>
+          ): null
+        }
+        <Modal open={showConfirmation} onClose={() => setShowConfirmation(false)}>
           <div>
             <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
               <div className="sm:flex sm:items-start">

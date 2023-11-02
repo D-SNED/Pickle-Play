@@ -68,28 +68,28 @@ export default function ProfilePage() {
     <>
           <div className="top-auto w-full h-full object-fill">
             <img
-              src="https://images.unsplash.com/photo-1499336315816-097655dcfbda?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=2710&amp;q=80"
+              src="https://www.nswc.ca/wp-content/uploads/2021/01/Pickleball-banner-min.jpg"
               alt=""
               className="w-full h-full object-fill"
             />
           </div>
-        <section className="relative py-16 top-auto bg-floral-white">
+        <section className="relative -mt-32 py-16 bg-floral-white">
           <div className="container mx-auto px-4">
-            <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
+            <div className="relative flex flex-col min-w-0 break-words bg-white mx-auto w-3/4 mb-6 shadow-xl rounded-lg -mt-96">
               <div className="px-6">
                 <div className="flex flex-wrap justify-center">
                   <img
                     alt="..."
                     src={profilePic}
-                    className="h-80 w-80 rounded-full object-cover object-center shadow-xl align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
+                    className="h-48 w-48 rounded-full object-cover object-center shadow-xl align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
                   ></img>
                 </div>
-                <div className="py-16 text-center mt-60">
+                <div className="py-2 text-center mt-40">
                   <h3 className="text-6xl font-semibold leading-normal text-blueGray-700 mb-2">
                     {playerData["first_name"]} {playerData["last_name"]}
                   </h3>
                 </div>
-                <div className="mt-10 py-5 border-t border-blueGray-200 text-center">
+                <div className="mt-10 border-t border-blueGray-200 text-center">
                   <div className="flex flex-wrap justify-center">
                     <div className="w-full lg:w-9/12 px-4">
                       <div className="my-4 2xl:flex-row space-y-4 2xl:space-y-0 2xl:space-x-4">

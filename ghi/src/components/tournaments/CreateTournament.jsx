@@ -102,7 +102,9 @@ function CreateTournament() {
   };
 
   useEffect(() => {
+
     fetchLocations();
+
   }, []);
 
   return (
