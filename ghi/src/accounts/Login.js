@@ -18,7 +18,7 @@ export default function LoginForm () {
       if (!token) {
       setErrorMsg(true);
       }
-    }, 500)
+    }, 800)
   }
 
   useEffect(() => {

@@ -36,6 +36,9 @@ export default function ProfilePage() {
     }
   };
 
+  const defaultPic = "https://gitlab.com/uploads/-/system/project/avatar/50505030/pickleplay_logo.jpeg";
+  const profilePic = (playerData.profile_picture === null ? defaultPic : playerData.profile_picture);
+
   const deletePlayer = async (playerId) => {
     const deleteUrl = `${process.env.REACT_APP_API_HOST}/api/players/${playerId}`;
     const fetchConfig = {
@@ -77,7 +80,7 @@ export default function ProfilePage() {
                 <div className="flex flex-wrap justify-center">
                   <img
                     alt="..."
-                    src={playerData["profile_picture"]}
+                    src={profilePic}
                     className="h-80 w-80 rounded-full object-cover object-center shadow-xl align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
                   ></img>
                 </div>
