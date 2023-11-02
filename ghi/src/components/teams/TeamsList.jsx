@@ -34,7 +34,14 @@ function TeamsList() {
   return (
     <>
       <div className="bg-green flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-        <h1 className="pb-4 text-5xl font-bold text-center text-[white]">
+        <div className="flex justify-end px-10 py-1">
+          <Link to="/teams/create">
+            <button className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#C14533] rounded-lg hover:bg-[#d4402a]">
+              Create Team
+            </button>
+          </Link>
+        </div>
+        <h1 className="pb-2 text-5xl font-bold text-center text-[white]">
           Teams
         </h1>
         <div className="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5">
@@ -108,13 +115,6 @@ function TeamsList() {
               })}
             </tbody>
           </table>
-        </div>
-        <div className="flex justify-center">
-          <Link to="/teams/create">
-            <button className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#C14533] rounded-lg hover:bg-[#d4402a]">
-              Create a Team
-            </button>
-          </Link>
         </div>
       </div>
     </>
