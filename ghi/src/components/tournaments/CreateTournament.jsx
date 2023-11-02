@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function CreateTournament() {
   const [name, setName] = useState("");
@@ -96,6 +97,7 @@ function CreateTournament() {
     const response = await fetch(tournamentUrl, fetchConfig);
     if (response.ok) {
       navigate("/tournaments");
+      toast("Tournament Created", { type: "success" });
     }
   };
 

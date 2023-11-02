@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function UpdateTournament() {
   const { tournament_id } = useParams();
@@ -106,6 +107,7 @@ function UpdateTournament() {
       setMaxTeams("");
       setReachedMax(false);
     }
+    toast("Tournament Updated", { type: "success" });
     navigate(-1);
   };
 
