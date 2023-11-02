@@ -342,3 +342,8 @@ button:hover {
       -1.8em -1.8em 0 0em #ffffff;
   }
 }
+
+/* ~~~~~~~~~~~~~~~~ JG - custom card sizing ~~~~~~~~~~~~~~~~ */
+.max-w-custom {
+  max-width: 33rem;
+}

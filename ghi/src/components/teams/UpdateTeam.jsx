@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function UpdateTeam() {
   const { team_id } = useParams();
@@ -120,6 +121,7 @@ function UpdateTeam() {
       setPlayerCount("");
       setAgeBracket("");
       setTournament("");
+      toast("Team Updated Successfully!")
     }
     navigate(-1);
   };

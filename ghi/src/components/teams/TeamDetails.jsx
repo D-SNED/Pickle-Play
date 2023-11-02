@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import Modal from "../../accounts/Modal";
 
 // Team Details
@@ -62,7 +63,7 @@ const TeamDetails = () => {
         navigate("/teams");
     }
     // end of additions
-
+    toast("Team Deleted Successfully!");
     navigate("/teams");
     };
 

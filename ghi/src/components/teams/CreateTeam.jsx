@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import SuccessMessage from "./SuccessMessage";
+import { toast } from "react-toastify";
+
 
 function CreateTeam() {
   const [teamName, setTeamName] = useState("");
@@ -12,8 +13,6 @@ function CreateTeam() {
 
   const [players, setPlayers] = useState([]);
   const [tournaments, setTournaments] = useState([]);
-
-  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   const teamCategories = [
     { value: "Mens" },
@@ -112,8 +111,7 @@ function CreateTeam() {
     };
 
     const response = await fetch(teamUrl, fetchConfig);
-    console.log(response.ok);
-    {
+    if (response.ok) {
       setTeamName("");
       setPlayerOne("");
       setPlayerTwo("");
@@ -121,13 +119,7 @@ function CreateTeam() {
       setPlayerCount("");
       setAgeBracket("");
       setTournament("");
-      setShowSuccessMessage(true);
-        const hideTimeout = setTimeout(() => {
-          setShowSuccessMessage(false);
-        }, 8000);
-
-        // Clear the timeout on component unmount
-        return () => clearTimeout(hideTimeout);
+      toast("Team Created Successfully!");
     }
   };
 
@@ -367,13 +359,6 @@ function CreateTeam() {
                   </button>
                 </div>
               </form>
-            </div>
-
-            <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-              <SuccessMessage
-                show={showSuccessMessage}
-                onHide={() => setShowSuccessMessage(false)}
-              />
             </div>
 
             <div>
